@@ -11,10 +11,10 @@ grammar FoolProvaBis;
  * PARSER RULES
  *------------------------------------------------------------------*/
   
-prog   : exp SEMIC                 		#singleExp
-       | let exp SEMIC                 	#letInExp
-       | (classdec)+ SEMIC (let)? exp SEMIC	#classExp
-       | '{' exp '}'                    #block
+prog   : exp SEMIC                 		                #singleExp
+       | let exp SEMIC                 	                #letInExp
+       | (classdec)+ SEMIC (let)? exp SEMIC	            #classExp
+       | '{' exp '}'                                    #block
        ;
 
 classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;
@@ -33,7 +33,8 @@ dec   : varasm           #varAssignment
          
    
 type   : INT  
-        | BOOL 
+        | BOOL
+        | FLOAT
         | ID
       ;  
     
@@ -42,12 +43,13 @@ exp    :  ('-')? left=term ((PLUS | MINUS) right=exp)?
    
 term   : left=factor ((TIMES | DIV) right=term)?
       ;
-   
+
 factor : left=value (EQ right=value)?
       ;     
    
 value  :  INTEGER                        		      #intVal
-      | ( TRUE | FALSE )                  		      #boolVal
+      | BOOLEAN                 		                  #boolVal
+      | FLOATER                                         #floatVal
       | LPAR exp RPAR                      			  #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR  #ifExp
       | ID                                             #varExp
@@ -86,6 +88,7 @@ VAR    : 'var' ;
 FUN    : 'fun' ;
 INT    : 'int' ;
 BOOL   : 'bool' ;
+FLOAT  : 'float';
 CLASS   : 'class' ;
 IMPLEMENTS   : 'implements' ;
 THIS   : 'this' ;
@@ -96,6 +99,8 @@ DOT    : '.' ;
 //Numbers
 fragment DIGIT : '0'..'9';    
 INTEGER       : DIGIT+;
+FLOATER       : DIGIT+ '.' DIGIT+;
+BOOLEAN       : TRUE | FALSE;
 
 //IDs
 fragment CHAR  : 'a'..'z' |'A'..'Z' ;
