@@ -47,40 +47,46 @@ term   : left=factor ((TIMES | DIV) right=term)?
 factor : left=value (EQ right=value)?
       ;     
    
-value  :  INTEGER                        		      #intVal
-      | BOOLEAN                 		                  #boolVal
-      | FLOATER                                         #floatVal
-      | LPAR exp RPAR                      			  #baseExp
-      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR  #ifExp
-      | ID                                             #varExp
-      | THIS											  #thisExp
-      | ID ( LPAR (exp (COMMA exp)* )? RPAR )          #funExp
-      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	  #methodExp     
-      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			  #newExp 
+value  :
+        INTEGER                        		                                            #intVal
+      | BOOLEAN                 		                                                #boolVal
+      | FLOATER                                                                         #floatVal
+      | LPAR exp RPAR                      			                                    #baseExp
+      | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp
+      | ID                                                                              #varExp
+      | THIS											                                #thisExp
+      | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                           #funExp
+      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                        #methodExp
+      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp
       ; 
 
    
 /*------------------------------------------------------------------
  * LEXER RULES
  *------------------------------------------------------------------*/
-SEMIC  : ';' ;
-COLON  : ':' ;
-COMMA  : ',' ;
-EQ     : '==' ;
-ASM    : '=' ;
-PLUS   : '+' ;
-MINUS  : '-' ;
-TIMES  : '*' ;
-DIV    : '/' ;
-TRUE   : 'true' ;
-FALSE  : 'false' ;
-LPAR   : '(' ;
-RPAR   : ')' ;
-CLPAR  : '{' ;
-CRPAR  : '}' ;
-IF        : 'if' ;
-THEN   : 'then' ;
-ELSE   : 'else' ;
+SEMIC       : ';' ;
+COLON       : ':' ;
+COMMA       : ',' ;
+EQ          : '==' ;
+ASM         : '=' ;
+PLUS        : '+' ;
+MINUS       : '-' ;
+TIMES       : '*' ;
+DIV         : '/' ;
+MINUSEQ     : '<=' ;
+PLUSEQ      : '>=' ;
+AND         : '&&' ;
+OR          : '||' ;
+NOT         : 'not' ;
+TRUE        : 'true' ;
+FALSE       : 'false' ;
+LPAR        : '(' ;
+RPAR        : ')' ;
+CLPAR       : '{' ;
+CRPAR       : '}' ;
+IF          : 'if' ;
+THEN        : 'then' ;
+ELSE        : 'else' ;
 //PRINT : 'print' ; 
 LET    : 'let' ;
 IN     : 'in' ;
