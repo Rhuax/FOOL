@@ -46,7 +46,7 @@ type   :
 
 exp    : ('-')? term ;
 
-term   : left=factor (( operator ) right=term )? ;
+term   : left=factor (( operator ) right=exp )? ;
 
 factor : left=value (EQ right=value)?
       ;     
