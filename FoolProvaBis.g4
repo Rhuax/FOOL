@@ -19,11 +19,11 @@ prog   : exp SEMIC                 		                #singleExp
 
 classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;
 
-let       : LET (dec SEMIC)+ IN ;
+let     : LET (dec SEMIC)+ IN ;
 
 vardec  : type ID ;
 
-varasm     : vardec ASM exp ;
+varasm  : vardec ASM exp ;
 
 fun    : type ID LPAR ( vardec ( COMMA vardec)* )? RPAR (let)? exp ;
 
@@ -32,17 +32,21 @@ dec   : varasm           #varAssignment
       ;
          
    
-type   : INT  
+type   :
+          INT
+        | FLOAT
         | BOOL
         | FLOAT
         | ID
       ;  
     
-exp    :  ('-')? left=term ((PLUS | MINUS) right=exp)?
-      ;
+//exp    :  ('-')? left=term ((PLUS | MINUS) right=exp)? ;
    
-term   : left=factor ((TIMES | DIV) right=term)?
-      ;
+//term   : left=factor ((TIMES | DIV) right=term)? ;
+
+exp    : ('-')? term ;
+
+term   : left=factor (( operator ) right=term )? ;
 
 factor : left=value (EQ right=value)?
       ;     
@@ -60,6 +64,19 @@ value  :
       | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp
       ; 
 
+operator      :
+                 EQ
+               | PLUS
+               | MINUS
+               | TIMES
+               | DIV
+               | LESS
+               | GREATER
+               | LEQ
+               | GEQ
+               | AND
+               | OR
+               | NOT ;
    
 /*------------------------------------------------------------------
  * LEXER RULES
@@ -73,8 +90,10 @@ PLUS        : '+' ;
 MINUS       : '-' ;
 TIMES       : '*' ;
 DIV         : '/' ;
-MINUSEQ     : '<=' ;
-PLUSEQ      : '>=' ;
+LESS        : '<' ;
+GREATER     : '>' ;
+LEQ         : '<=' ;
+GEQ         : '>=' ;
 AND         : '&&' ;
 OR          : '||' ;
 NOT         : 'not' ;
@@ -107,6 +126,9 @@ fragment DIGIT : '0'..'9';
 INTEGER       : DIGIT+;
 FLOATER       : DIGIT+ '.' DIGIT+;
 BOOLEAN       : TRUE | FALSE;
+
+
+
 
 //IDs
 fragment CHAR  : 'a'..'z' |'A'..'Z' ;
