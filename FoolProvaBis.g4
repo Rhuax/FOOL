@@ -36,7 +36,6 @@ type   :
           INT
         | FLOAT
         | BOOL
-        | FLOAT
         | ID
       ;  
     
