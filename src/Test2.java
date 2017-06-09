@@ -70,7 +70,8 @@ public class Test2 {
 	        System.out.println(count_var(t)) ;
 
 			FoolVisitorImpl visitor = new FoolVisitorImpl();
-	        
+
+			
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
 /*
 	        Environment env = new Environment();
