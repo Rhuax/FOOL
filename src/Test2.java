@@ -8,16 +8,16 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import parser.ExecuteVM;
-import parser.FOOLLexer;
-import parser.FOOLParser;
+import parser.FoolProvaBisLexer;
+import parser.FoolProvaBisParser;
 import parser.SVMLexer;
 import parser.SVMParser;
-import parser.FOOLParser.DecContext;
-import parser.FOOLParser.FunContext;
-import parser.FOOLParser.FunDeclarationContext;
-import parser.FOOLParser.LetContext;
-import parser.FOOLParser.LetInExpContext;
-import parser.FOOLParser.ProgContext;
+import parser.FoolProvaBisParser.DecContext;
+import parser.FoolProvaBisParser.FunContext;
+import parser.FoolProvaBisParser.FunDeclarationContext;
+import parser.FoolProvaBisParser.LetContext;
+import parser.FoolProvaBisParser.LetInExpContext;
+import parser.FoolProvaBisParser.ProgContext;
 import util.Environment;
 import util.SemanticError;
 import ast.FoolVisitorImpl;
@@ -54,7 +54,7 @@ public class Test2 {
       
         FileInputStream is = new FileInputStream(fileName);
         ANTLRInputStream input = new ANTLRInputStream(is);
-        FOOLLexer lexer = new FOOLLexer(input);
+		FoolProvaBisLexer lexer = new FoolProvaBisLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         
         //SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
@@ -62,14 +62,14 @@ public class Test2 {
         	System.out.println("The program was not in the right format. Exiting the compilation process now");
         }else{
         
-	        FOOLParser parser = new FOOLParser(tokens);
+	        FoolProvaBisParser parser = new FoolProvaBisParser(tokens);
 	        
 	        ParseTree t = parser.prog() ;
 	        	        
 	        System.out.println(t.getText()) ;
 	        System.out.println(count_var(t)) ;
-	        
-	        FoolVisitorImpl visitor = new FoolVisitorImpl();
+
+			FoolVisitorImpl visitor = new FoolVisitorImpl();
 	        
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
 /*

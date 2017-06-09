@@ -21,13 +21,11 @@ import parser.FOOLParser.TypeContext;
 import parser.FOOLParser.VarExpContext;
 import parser.FOOLParser.VarasmContext;
 import parser.FOOLParser.VardecContext;
+import parser.FoolProvaBisBaseVisitor;
 import util.SemanticError;
 
-public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
-	
-	
-	
-	@Override
+public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
+
 	public Node visitLetInExp(LetInExpContext ctx) {
 		
 		//resulting node of the right type
@@ -52,7 +50,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		return res;
 	}
 	
-	@Override
+
 	public Node visitSingleExp(SingleExpContext ctx) {
 		
 		//simply return the result of the visit to the inner exp
@@ -60,8 +58,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 	}
 	
-	
-	@Override
+
 	public Node visitVarasm(VarasmContext ctx) {
 		
 		//declare the result node
@@ -77,7 +74,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
 	}
 	
-	@Override
+
 	public Node visitFun(FunContext ctx) {
 		
 		//initialize @res with the visits to the type and its ID
@@ -110,7 +107,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 	}
 	
-	@Override
+
 	public Node visitType(TypeContext ctx) {
 		if(ctx.getText().equals("int"))
 			return new IntTypeNode();
@@ -122,7 +119,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	}
 	
-	@Override
+
 	public Node visitExp(ExpContext ctx) {
 		
 		//this could be enhanced
@@ -139,7 +136,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		
 	}
 	
-	@Override
+
 	public Node visitTerm(TermContext ctx) {
 		//check whether this is a simple or binary expression
 		//notice here the necessity of having named elements in the grammar
@@ -153,7 +150,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 	}
 	
 	
-	@Override
+
 	public Node visitFactor(FactorContext ctx) {
 		//check whether this is a simple or binary expression
 		//notice here the necessity of having named elements in the grammar
@@ -167,7 +164,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 	}
 	
 	
-	@Override
+
 	public Node visitIntVal(IntValContext ctx) {
 		// notice that this method is not actually a rule but a named production #intVal
 		
@@ -175,14 +172,14 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		return new IntNode(Integer.parseInt(ctx.INTEGER().getText()));
 	}
 	
-	@Override
+
 	public Node visitBoolVal(BoolValContext ctx) {
 		
 		//there is no need to perform a check here, the lexer ensures this text is a boolean
 		return new BoolNode(Boolean.parseBoolean(ctx.getText())); 
 	}
 	
-	@Override
+
 	public Node visitBaseExp(BaseExpContext ctx) {
 		
 		//this is actually nothing in the sense that for the ast the parenthesis are not relevant
@@ -196,7 +193,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	}
 	
-	@Override
+
 	public Node visitIfExp(IfExpContext ctx) {
 		
 		//create the resulting node
@@ -218,7 +215,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 		return res;
 	}
 	
-	@Override
+
 	public Node visitVarExp(VarExpContext ctx) {
 		
 		//this corresponds to a variable access
@@ -226,7 +223,7 @@ public class FoolVisitorImpl extends FOOLBaseVisitor<Node> {
 
 	}
 	
-	@Override
+
 	public Node visitFunExp(FunExpContext ctx) {
 		//this corresponds to a function invocation
 		
