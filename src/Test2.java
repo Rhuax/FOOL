@@ -69,10 +69,10 @@ public class Test2 {
 	        System.out.println(t.getText()) ;
 	        System.out.println(count_var(t)) ;
 	        
-	        /*	        FoolVisitorImpl visitor = new FoolVisitorImpl();
+	        FoolVisitorImpl visitor = new FoolVisitorImpl();
 	        
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
-
+/*
 	        Environment env = new Environment();
 	        ArrayList<SemanticError> err = ast.checkSemantics(env);
 	        
@@ -112,8 +112,8 @@ public class Test2 {
 		        System.out.println("Starting Virtual Machine...");
 		        ExecuteVM vm = new ExecuteVM(parserASM.code);
 		        vm.cpu();
-	        }
-        */
+	        }*/
+
         }
        
         
