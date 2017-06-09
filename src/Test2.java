@@ -25,21 +25,21 @@ import ast.Node;
 
 public class Test2 {
 	static int count_var (ParseTree t){
-		if (t.getClass().getName().equals("parser.FOOLParser$LetContext")){
+		if (t.getClass().getName().equals("parser.FoolProvaBisParser$LetContext")){
 			LetContext s = (LetContext) t ;
 			int n = 0 ;
 			for (DecContext dc : s.dec()) {
-				if (dc.getClass().getName().equals("parser.FOOLParser$VarAssignmentContext")) {
+				if (dc.getClass().getName().equals("parser.FoolProvaBisParser$VarAssignmentContext")) {
 					n = n+1 ;
 				} else n = n + count_var(dc) ;
 			}		
 			return(n) ;	
 		}
-		else if (t.getClass().getName().equals("parser.FOOLParser$LetInExpContext")){
+		else if (t.getClass().getName().equals("parser.FoolProvaBisParser$LetInExpContext")){
 			LetInExpContext s = (LetInExpContext) t ;
 			return(count_var(s.let())) ;
 		} 
-		else if (t.getClass().getName().equals("parser.FOOLParser$FunDeclarationContext")){
+		else if (t.getClass().getName().equals("parser.FoolProvaBisParser$FunDeclarationContext")){
 			FunDeclarationContext s = (FunDeclarationContext) t ;
 			if (s.fun().let() == null){
 				return(1) ;
