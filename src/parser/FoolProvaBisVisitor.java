@@ -1,4 +1,4 @@
-// Generated from /home/crow/git/FOOL/src/parser/FoolProvaBis.g4 by ANTLR 4.7
+// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\FoolProvaBis.g4 by ANTLR 4.6
 package parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -31,13 +31,6 @@ public interface FoolProvaBisVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitClassExp(FoolProvaBisParser.ClassExpContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code block}
-	 * labeled alternative in {@link FoolProvaBisParser#prog}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBlock(FoolProvaBisParser.BlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FoolProvaBisParser#classdec}.
 	 * @param ctx the parse tree

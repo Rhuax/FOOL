@@ -1,25 +1,16 @@
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.util.ArrayList;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import parser.ExecuteVM;
-import parser.FoolProvaBisLexer;
-import parser.FoolProvaBisParser;
-import parser.SVMLexer;
-import parser.SVMParser;
 import parser.FoolProvaBisParser.DecContext;
 import parser.FoolProvaBisParser.FunContext;
 import parser.FoolProvaBisParser.FunDeclarationContext;
 import parser.FoolProvaBisParser.LetContext;
 import parser.FoolProvaBisParser.LetInExpContext;
+import parser.FoolProvaBisParser.ClassdecContext;
 import parser.FoolProvaBisParser.ProgContext;
-import util.Environment;
-import util.SemanticError;
 import ast.FoolVisitorImpl;
 import ast.Node;
 
@@ -38,7 +29,7 @@ public class Test2 {
 		else if (t.getClass().getName().equals("parser.FoolProvaBisParser$LetInExpContext")){
 			LetInExpContext s = (LetInExpContext) t ;
 			return(count_var(s.let())) ;
-		} 
+		}
 		else if (t.getClass().getName().equals("parser.FoolProvaBisParser$FunDeclarationContext")){
 			FunDeclarationContext s = (FunDeclarationContext) t ;
 			if (s.fun().let() == null){

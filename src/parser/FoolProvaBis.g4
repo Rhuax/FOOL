@@ -42,9 +42,9 @@ type   :
    
 //term   : left=factor ((TIMES | DIV) right=term)? ;
 
-exp    : ('-')? term ;
+exp    : ('-')? left=term ;
 
-term   : left=factor (( operator ) right=exp )? ;
+term   : left=factor (( op=operator ) right=exp )? ;
 
 factor : left=value (EQ right=value)?
       ;     

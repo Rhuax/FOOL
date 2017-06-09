@@ -1,1 +1,7 @@
-let int x = 1; in x + 1;
+class Prova
+(
+   int x
+)
+{
+    int getAttribute() x+1;
+}

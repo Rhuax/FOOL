@@ -1,28 +1,27 @@
 package ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
-import parser.*;
-import parser.FOOLParser.BaseExpContext;
-import parser.FOOLParser.BoolValContext;
-import parser.FOOLParser.DecContext;
-import parser.FOOLParser.ExpContext;
-import parser.FOOLParser.FactorContext;
-import parser.FOOLParser.FunContext;
-import parser.FOOLParser.FunExpContext;
-import parser.FOOLParser.IfExpContext;
-import parser.FOOLParser.IntValContext;
-import parser.FOOLParser.LetInExpContext;
-import parser.FOOLParser.SingleExpContext;
-import parser.FOOLParser.TermContext;
-import parser.FOOLParser.TypeContext;
-import parser.FOOLParser.VarExpContext;
-import parser.FOOLParser.VarasmContext;
-import parser.FOOLParser.VardecContext;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolProvaBisBaseVisitor;
-import util.SemanticError;
+import parser.FoolProvaBisLexer;
+import parser.FoolProvaBisParser.BaseExpContext;
+import parser.FoolProvaBisParser.BoolValContext;
+import parser.FoolProvaBisParser.DecContext;
+import parser.FoolProvaBisParser.ExpContext;
+import parser.FoolProvaBisParser.FactorContext;
+import parser.FoolProvaBisParser.FunContext;
+import parser.FoolProvaBisParser.FunExpContext;
+import parser.FoolProvaBisParser.IfExpContext;
+import parser.FoolProvaBisParser.IntValContext;
+import parser.FoolProvaBisParser.LetInExpContext;
+import parser.FoolProvaBisParser.SingleExpContext;
+import parser.FoolProvaBisParser.TermContext;
+import parser.FoolProvaBisParser.TypeContext;
+import parser.FoolProvaBisParser.VarExpContext;
+import parser.FoolProvaBisParser.VarasmContext;
+import parser.FoolProvaBisParser.VardecContext;
+
 
 public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
@@ -111,8 +110,12 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	public Node visitType(TypeContext ctx) {
 		if(ctx.getText().equals("int"))
 			return new IntTypeNode();
-		else if(ctx.getText().equals("bool"))
-			return new BoolTypeNode();
+		else
+			if(ctx.getText().equals("bool"))
+				return new BoolTypeNode();
+		else
+			if(ctx.getText().equals("float"))
+				return new FloatTypeNode();
 		
 		//this will never happen thanks to the parser
 		return null;
@@ -120,33 +123,73 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	}
 	
 
-	public Node visitExp(ExpContext ctx) {
-		
-		//this could be enhanced
-		
-		//check whether this is a simple or binary expression
-		//notice here the necessity of having named elements in the grammar
-		if(ctx.right == null){
-			//it is a simple expression
-			return visit( ctx.left );
+	public Node visitExp(ExpContext ctx)
+	{
+		return visit(ctx.left);
+	}
+		/*
 		}else{
 			//it is a binary expression, you should visit left and right
 			return new PlusNode(visit(ctx.left), visit(ctx.right));
 		}
-		
-	}
-	
+		*/
 
-	public Node visitTerm(TermContext ctx) {
+	public Node visitTerm(TermContext ctx)
+	{
 		//check whether this is a simple or binary expression
 		//notice here the necessity of having named elements in the grammar
 		if(ctx.right == null){
 			//it is a simple expression
 			return visit( ctx.left );
-		}else{
-			//it is a binary expression, you should visit left and right
-			return new MultNode(visit(ctx.left), visit(ctx.right));
+		}else
+		{
+			TerminalNode operator = (TerminalNode) ctx.operator().getChild(0);
+
+			switch(operator.getSymbol().getType())
+			{
+				case FoolProvaBisLexer.EQ:
+					return new EqualNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.PLUS:
+					return new PlusNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.MINUS:
+					return new MinusNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.TIMES:
+					return new MultNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.DIV:
+					return new DivNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.LESS:
+					return new LessNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.GREATER:
+					return new GreaterNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.LEQ:
+					return new LeqNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.GEQ:
+					return new GeqNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.AND:
+					return new AndNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.OR:
+					return new OrNode(visit(ctx.left), visit(ctx.right));
+					break;
+				case FoolProvaBisLexer.NOT:
+					return new NotNode(visit(ctx.left), visit(ctx.right));
+					break;
+				default:
+					System.out.println("Non valid operator token");
+					System.exit(0);
+					break;
+			}
 		}
+		return null;
 	}
 	
 	
