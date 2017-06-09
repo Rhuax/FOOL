@@ -67,7 +67,6 @@ public class Test2 {
 	        ParseTree t = parser.prog() ;
 	        	        
 	        System.out.println(t.getText()) ;
-	        
 	        System.out.println(count_var(t)) ;
 	        
 	        /*	        FoolVisitorImpl visitor = new FoolVisitorImpl();
