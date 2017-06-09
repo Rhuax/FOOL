@@ -14,7 +14,6 @@ grammar FoolProvaBis;
 prog   : exp SEMIC                 		                #singleExp
        | let exp SEMIC                 	                #letInExp
        | (classdec)+ SEMIC (let)? exp SEMIC	            #classExp
-       | '{' exp '}'                                    #block
        ;
 
 classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;

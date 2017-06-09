@@ -71,7 +71,7 @@ public class Test2 {
 
 			FoolVisitorImpl visitor = new FoolVisitorImpl();
 
-			
+
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
 /*
 	        Environment env = new Environment();
