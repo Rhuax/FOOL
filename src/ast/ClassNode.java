@@ -13,7 +13,7 @@ public class ClassNode implements Node {
     private String id;
     private ArrayList<Node> attributeList;
     private ArrayList<Node> methodList;
-    private String classExtended = "";
+    private Class classExtended = null;
 
     public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml) {
         id = i;
@@ -21,7 +21,7 @@ public class ClassNode implements Node {
         methodList = ml;
     }
 
-    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, String cex) {
+    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, Class cex) {
         id = i;
         attributeList = al;
         methodList = ml;
@@ -54,11 +54,18 @@ public class ClassNode implements Node {
             for (Node dec:attributeList)
                 dec.typeCheck();
 
-
-
         if (methodList!=null)
             for (Node dec:methodList)
-                dec.typeCheck();
+            {
+                boolean typechecked = dec.typeCheck();
+            }
+
+
+        if(classExtended != null)
+        {
+
+        }
+
     return null;
     }
 

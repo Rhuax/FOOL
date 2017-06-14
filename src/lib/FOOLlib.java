@@ -14,7 +14,12 @@ public class FOOLlib {
   public static boolean isSubtype (Node a, Node b) {
     return a.getClass().equals(b.getClass()) ||
     	   ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) ); //
-  } 
+  }
+
+  public static boolean isSupertype (Node a, Node b) {
+    return a.getClass().equals(b.getClass()) ||
+            ( (a instanceof FloatTypeNode) && (b instanceof IntTypeNode) ); //
+  }
   
   public static String freshLabel() { 
 	return "label"+(labCount++);

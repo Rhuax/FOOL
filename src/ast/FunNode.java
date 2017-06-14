@@ -139,5 +139,10 @@ public class FunNode implements Node {
 	    
 		return "push "+ funl +"\n";
   }
-  
+
+  Node getType()
+  {
+  	return type;
+  }
+
 }  
