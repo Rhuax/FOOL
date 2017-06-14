@@ -60,13 +60,7 @@ public class Test2 {
         ANTLRInputStream input = new ANTLRInputStream(is);
 		FoolProvaBisLexer lexer = new FoolProvaBisLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        //tokens.get(0, tokens.size() - 1);
 
-		tokens.consume();
-		while(!tokens.get(tokens.index()).getText().equals("EOF"))
-			tokens.consume();
-
-		tokens.reset();
         //SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
         if(lexer.lexicalErrors > 0){
         	System.out.println("The program was not in the right format. Exiting the compilation process now");
