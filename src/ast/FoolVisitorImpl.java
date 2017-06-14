@@ -182,7 +182,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
                     node = new OrNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.NOT:
-                    node = new NotNode(visit(ctx.left), visit(ctx.right));
+                    node = new NotNode(visit(ctx.left));
 					break;
 				default:
 					System.out.println("Non valid operator token");

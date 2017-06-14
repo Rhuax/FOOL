@@ -17,21 +17,18 @@ public class NotNode implements Node
     public NotNode(Node l, Node r)
     {
         left=l;
-        right=r;
     }
 
     @Override
     public String toPrint(String s)
     {
-        return s+"Not\n" + left.toPrint(s+"  ")
-                + right.toPrint(s+"  ") ;
+        return s+"Not\n" + left.toPrint(s+"  ");
     }
 
     @Override
     public Node typeCheck()
     {
-        if( FOOLlib.isSubtype(left.typeCheck(), new BoolTypeNode())
-                && FOOLlib.isSubtype(right.typeCheck(), new BoolTypeNode()) )
+        if( FOOLlib.isSubtype(left.typeCheck(), new BoolTypeNode()) )
         {
             return new BoolTypeNode();
         }
@@ -46,9 +43,7 @@ public class NotNode implements Node
     @Override
     public String codeGeneration()
     {
-        return left.codeGeneration()+
-                right.codeGeneration()+
-                "not\n";
+        return left.codeGeneration()+ "not\n";
     }
 
     @Override
