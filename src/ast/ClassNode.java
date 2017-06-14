@@ -59,7 +59,7 @@ public class ClassNode implements Node {
         if (methodList!=null)
             for (Node dec:methodList)
                 dec.typeCheck();
-
+    return null;
     }
 
     @Override
