@@ -12,7 +12,11 @@ import parser.FoolProvaBisParser.LetInExpContext;
 import parser.FoolProvaBisParser.ClassdecContext;
 import parser.FoolProvaBisParser.ProgContext;
 import ast.FoolVisitorImpl;
+import parser.*;
 import ast.Node;
+import util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Test2 {
 	static int count_var (ParseTree t){
@@ -64,10 +68,10 @@ public class Test2 {
 
 
 	        Node ast = visitor.visit(parser.prog()); //generazione AST 
-/*
+
 	        Environment env = new Environment();
 	        ArrayList<SemanticError> err = ast.checkSemantics(env);
-	        
+	/*
 	        if(err.size()>0){
 	        	System.out.println("You had: " +err.size()+" errors:");
 	        	for(SemanticError e : err)
