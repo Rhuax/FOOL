@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolProvaBisBaseVisitor;
 import parser.FoolProvaBisLexer;
+import parser.FoolProvaBisParser;
 import parser.FoolProvaBisParser.BaseExpContext;
 import parser.FoolProvaBisParser.BoolValContext;
 import parser.FoolProvaBisParser.DecContext;
@@ -292,5 +293,34 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		
 		return res;
 	}
-	
+
+	public Node visitClassExpContext(FoolProvaBisParser.ClassExpContext ctx)
+	{
+		Node res;
+
+		ArrayList<Node> classList = new ArrayList<Node>();
+		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
+			classList.add(visit(classdec));
+
+		res = new ProgClassNode(classList);
+
+		return res;
+	}
+
+	public Node visitClassdecContext (FoolProvaBisParser.ClassdecContext ctx)
+	{
+		Node res;
+		ArrayList<Node> attList = new ArrayList<Node>();
+		ArrayList<Node> methList = new ArrayList<Node>();
+
+		for(VardecContext vardec : ctx.vardec())
+			attList.add(visit(vardec));
+
+		for(FunContext fundec : ctx.fun())
+			methList.add(visit(fundec));
+
+		res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, ctx.ID().get(1).getText());
+
+		return res;
+	}
 }

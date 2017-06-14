@@ -4,6 +4,8 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import ast.FunNode;
+import lib.FOOLlib;
 
 /**
  * Created by crow on 14/06/17.
@@ -13,7 +15,7 @@ public class ClassNode implements Node {
     private String id;
     private ArrayList<Node> attributeList;
     private ArrayList<Node> methodList;
-    private Class classExtended = null;
+    private String classExtended = null;
 
     public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml) {
         id = i;
@@ -21,7 +23,7 @@ public class ClassNode implements Node {
         methodList = ml;
     }
 
-    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, Class cex) {
+    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, String cex) {
         id = i;
         attributeList = al;
         methodList = ml;
@@ -54,16 +56,30 @@ public class ClassNode implements Node {
             for (Node dec:attributeList)
                 dec.typeCheck();
 
-        if (methodList!=null)
-            for (Node dec:methodList)
-            {
-                boolean typechecked = dec.typeCheck();
-            }
-
-
         if(classExtended != null)
         {
+            if (methodList!=null)
+                for (Node dec:methodList)
+                {
+                    Node typechecked = dec.typeCheck();
+                    if(typechecked == null)
+                    {
+                        Node funType = ((FunNode) typechecked).getType();
 
+                        Node superFunType = ((FunNode)  )
+
+                        if(FOOLlib.isSubtype(funType, superFunType))
+                        {
+
+                        }
+                    }
+                }
+        }
+        else
+        {
+            if (methodList!=null)
+                for (Node dec:methodList)
+                    dec.typeCheck();
         }
 
     return null;
@@ -76,6 +92,9 @@ public class ClassNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
+
+        //Controllare se ci sono attributi e metodi duplicati
+
         return null;
     }
 }
