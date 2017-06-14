@@ -136,6 +136,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 	public Node visitTerm(TermContext ctx)
 	{
+        Node node = null;
 		//check whether this is a simple or binary expression
 		//notice here the necessity of having named elements in the grammar
 		if(ctx.right == null){
@@ -148,40 +149,40 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 			switch(operator.getSymbol().getType())
 			{
 				case FoolProvaBisLexer.EQ:
-					return new EqualNode(visit(ctx.left), visit(ctx.right));
+					node = new EqualNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.PLUS:
-					return new PlusNode(visit(ctx.left), visit(ctx.right));
+                    node = new PlusNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.MINUS:
-					return new MinusNode(visit(ctx.left), visit(ctx.right));
+                    node = new MinusNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.TIMES:
-					return new MultNode(visit(ctx.left), visit(ctx.right));
+                    node = new MultNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.DIV:
-					return new DivNode(visit(ctx.left), visit(ctx.right));
+                    node = new DivNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.LESS:
-					return new LessNode(visit(ctx.left), visit(ctx.right));
+                    node = new LessNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.GREATER:
-					return new GreaterNode(visit(ctx.left), visit(ctx.right));
+                    node = new GreaterNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.LEQ:
-					return new LeqNode(visit(ctx.left), visit(ctx.right));
+                    node = new LeqNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.GEQ:
-					return new GeqNode(visit(ctx.left), visit(ctx.right));
+                    node = new GeqNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.AND:
-					return new AndNode(visit(ctx.left), visit(ctx.right));
+                    node = new AndNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.OR:
-					return new OrNode(visit(ctx.left), visit(ctx.right));
+                    node = new OrNode(visit(ctx.left), visit(ctx.right));
 					break;
 				case FoolProvaBisLexer.NOT:
-					return new NotNode(visit(ctx.left), visit(ctx.right));
+                    node = new NotNode(visit(ctx.left), visit(ctx.right));
 					break;
 				default:
 					System.out.println("Non valid operator token");
@@ -189,7 +190,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 					break;
 			}
 		}
-		return null;
+		return node;
 	}
 	
 	
