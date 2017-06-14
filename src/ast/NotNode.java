@@ -12,9 +12,8 @@ import java.util.ArrayList;
 public class NotNode implements Node
 {
     private Node left;
-    private Node right;
 
-    public NotNode(Node l, Node r)
+    public NotNode(Node l)
     {
         left=l;
     }
@@ -55,7 +54,6 @@ public class NotNode implements Node
         //check semantics in the left and in the right exp
 
         res.addAll(left.checkSemantics(env));
-        res.addAll(right.checkSemantics(env));
 
         return res;
     }
