@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\FoolProvaBis.g4 by ANTLR 4.6
+// Generated from /home/crow/git/FOOL/src/parser/FoolProvaBis.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 

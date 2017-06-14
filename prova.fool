@@ -1,7 +1,9 @@
 class Prova
 (
-   int x
+   int x, int h
 )
 {
     int getAttribute() x+1;
 }
+;
+let int j = 1; in j+1 ;

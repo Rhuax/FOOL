@@ -40,6 +40,15 @@ public class Test2 {
 				return(1) ;
 			} else return (1 + count_var(s.fun().let()) );	
 		}
+		else if (t.getClass().getName().equals("parser.FoolProvaBisParser$ClassExpContext")){
+			FoolProvaBisParser.ClassExpContext c = (FoolProvaBisParser.ClassExpContext) t;
+			int n=0;
+			for(ClassdecContext cdec:c.classdec()){
+				n+=cdec.vardec().size();
+			}
+			return n + count_var(c.let());
+		}
+
 		else return(0) ;
 	}
 	
@@ -51,7 +60,13 @@ public class Test2 {
         ANTLRInputStream input = new ANTLRInputStream(is);
 		FoolProvaBisLexer lexer = new FoolProvaBisLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        
+        //tokens.get(0, tokens.size() - 1);
+
+		tokens.consume();
+		while(!tokens.get(tokens.index()).getText().equals("EOF"))
+			tokens.consume();
+
+		tokens.reset();
         //SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
         if(lexer.lexicalErrors > 0){
         	System.out.println("The program was not in the right format. Exiting the compilation process now");
@@ -71,14 +86,14 @@ public class Test2 {
 
 	        Environment env = new Environment();
 	        ArrayList<SemanticError> err = ast.checkSemantics(env);
-	/*
+
 	        if(err.size()>0){
 	        	System.out.println("You had: " +err.size()+" errors:");
 	        	for(SemanticError e : err)
 	        		System.out.println("\t" + e);
 	        }else{
 	        
-	        	
+	        	/*
 	
 		        System.out.println("Visualizing AST...");
 		        System.out.println(ast.toPrint(""));
@@ -108,7 +123,7 @@ public class Test2 {
 		        System.out.println("Starting Virtual Machine...");
 		        ExecuteVM vm = new ExecuteVM(parserASM.code);
 		        vm.cpu();
-	        }*/
+	        */}
 
         }
        

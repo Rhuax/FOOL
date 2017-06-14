@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\FoolProvaBis.g4 by ANTLR 4.6
+// Generated from /home/crow/git/FOOL/src/parser/FoolProvaBis.g4 by ANTLR 4.7
 package parser;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class FoolProvaBisParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.6", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.7", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -115,6 +115,7 @@ public class FoolProvaBisParser extends Parser {
 		public ExpContext exp() {
 			return getRuleContext(ExpContext.class,0);
 		}
+		public TerminalNode EOF() { return getToken(FoolProvaBisParser.EOF, 0); }
 		public List<ClassdecContext> classdec() {
 			return getRuleContexts(ClassdecContext.class);
 		}
@@ -125,6 +126,14 @@ public class FoolProvaBisParser extends Parser {
 			return getRuleContext(LetContext.class,0);
 		}
 		public ClassExpContext(ProgContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterClassExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitClassExp(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitClassExp(this);
@@ -139,7 +148,16 @@ public class FoolProvaBisParser extends Parser {
 			return getRuleContext(ExpContext.class,0);
 		}
 		public TerminalNode SEMIC() { return getToken(FoolProvaBisParser.SEMIC, 0); }
+		public TerminalNode EOF() { return getToken(FoolProvaBisParser.EOF, 0); }
 		public LetInExpContext(ProgContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterLetInExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitLetInExp(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitLetInExp(this);
@@ -151,7 +169,16 @@ public class FoolProvaBisParser extends Parser {
 			return getRuleContext(ExpContext.class,0);
 		}
 		public TerminalNode SEMIC() { return getToken(FoolProvaBisParser.SEMIC, 0); }
+		public TerminalNode EOF() { return getToken(FoolProvaBisParser.EOF, 0); }
 		public SingleExpContext(ProgContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterSingleExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitSingleExp(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitSingleExp(this);
@@ -164,7 +191,7 @@ public class FoolProvaBisParser extends Parser {
 		enterRule(_localctx, 0, RULE_prog);
 		int _la;
 		try {
-			setState(45);
+			setState(48);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case MINUS:
@@ -183,54 +210,60 @@ public class FoolProvaBisParser extends Parser {
 				exp();
 				setState(27);
 				match(SEMIC);
+				setState(28);
+				match(EOF);
 				}
 				break;
 			case LET:
 				_localctx = new LetInExpContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(29);
-				let();
 				setState(30);
-				exp();
+				let();
 				setState(31);
+				exp();
+				setState(32);
 				match(SEMIC);
+				setState(33);
+				match(EOF);
 				}
 				break;
 			case CLASS:
 				_localctx = new ClassExpContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(34); 
+				setState(36); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(33);
+					setState(35);
 					classdec();
 					}
 					}
-					setState(36); 
+					setState(38); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==CLASS );
-				setState(38);
-				match(SEMIC);
 				setState(40);
+				match(SEMIC);
+				setState(42);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==LET) {
 					{
-					setState(39);
+					setState(41);
 					let();
 					}
 				}
 
-				setState(42);
+				setState(44);
 				exp();
-				setState(43);
+				setState(45);
 				match(SEMIC);
+				setState(46);
+				match(EOF);
 				}
 				break;
 			default:
@@ -284,6 +317,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_classdec; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterClassdec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitClassdec(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitClassdec(this);
 			else return visitor.visitChildren(this);
@@ -297,76 +338,76 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
+			setState(50);
 			match(CLASS);
-			setState(48);
-			match(ID);
 			setState(51);
+			match(ID);
+			setState(54);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==IMPLEMENTS) {
 				{
-				setState(49);
+				setState(52);
 				match(IMPLEMENTS);
-				setState(50);
+				setState(53);
 				match(ID);
 				}
 			}
 
-			setState(64);
+			setState(67);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LPAR) {
 				{
-				setState(53);
+				setState(56);
 				match(LPAR);
-				setState(54);
+				setState(57);
 				vardec();
-				setState(59);
+				setState(62);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(55);
+					setState(58);
 					match(COMMA);
-					setState(56);
+					setState(59);
 					vardec();
 					}
 					}
-					setState(61);
+					setState(64);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(62);
+				setState(65);
 				match(RPAR);
 				}
 			}
 
-			setState(76);
+			setState(79);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==CLPAR) {
 				{
-				setState(66);
+				setState(69);
 				match(CLPAR);
-				setState(70); 
+				setState(73); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(67);
+					setState(70);
 					fun();
-					setState(68);
+					setState(71);
 					match(SEMIC);
 					}
 					}
-					setState(72); 
+					setState(75); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << FLOAT) | (1L << ID))) != 0) );
-				setState(74);
+				setState(77);
 				match(CRPAR);
 				}
 			}
@@ -402,6 +443,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_let; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterLet(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitLet(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitLet(this);
 			else return visitor.visitChildren(this);
@@ -415,25 +464,25 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(78);
+			setState(81);
 			match(LET);
-			setState(82); 
+			setState(85); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(79);
+				setState(82);
 				dec();
-				setState(80);
+				setState(83);
 				match(SEMIC);
 				}
 				}
-				setState(84); 
+				setState(87); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << FLOAT) | (1L << ID))) != 0) );
-			setState(86);
+			setState(89);
 			match(IN);
 			}
 		}
@@ -458,6 +507,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_vardec; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterVardec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitVardec(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitVardec(this);
 			else return visitor.visitChildren(this);
@@ -470,9 +527,9 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(91);
 			type();
-			setState(89);
+			setState(92);
 			match(ID);
 			}
 		}
@@ -500,6 +557,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_varasm; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterVarasm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitVarasm(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitVarasm(this);
 			else return visitor.visitChildren(this);
@@ -512,11 +577,11 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(91);
+			setState(94);
 			vardec();
-			setState(92);
+			setState(95);
 			match(ASM);
-			setState(93);
+			setState(96);
 			exp();
 			}
 		}
@@ -559,6 +624,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_fun; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterFun(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitFun(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitFun(this);
 			else return visitor.visitChildren(this);
@@ -572,51 +645,51 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(98);
 			type();
-			setState(96);
+			setState(99);
 			match(ID);
-			setState(97);
+			setState(100);
 			match(LPAR);
-			setState(106);
+			setState(109);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << FLOAT) | (1L << ID))) != 0)) {
 				{
-				setState(98);
+				setState(101);
 				vardec();
-				setState(103);
+				setState(106);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(99);
+					setState(102);
 					match(COMMA);
-					setState(100);
+					setState(103);
 					vardec();
 					}
 					}
-					setState(105);
+					setState(108);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(108);
+			setState(111);
 			match(RPAR);
-			setState(110);
+			setState(113);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==LET) {
 				{
-				setState(109);
+				setState(112);
 				let();
 				}
 			}
 
-			setState(112);
+			setState(115);
 			exp();
 			}
 		}
@@ -648,6 +721,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		public VarAssignmentContext(DecContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterVarAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitVarAssignment(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitVarAssignment(this);
 			else return visitor.visitChildren(this);
@@ -659,6 +740,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		public FunDeclarationContext(DecContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterFunDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitFunDeclaration(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitFunDeclaration(this);
 			else return visitor.visitChildren(this);
@@ -669,14 +758,14 @@ public class FoolProvaBisParser extends Parser {
 		DecContext _localctx = new DecContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_dec);
 		try {
-			setState(116);
+			setState(119);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				_localctx = new VarAssignmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(114);
+				setState(117);
 				varasm();
 				}
 				break;
@@ -684,7 +773,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new FunDeclarationContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(115);
+				setState(118);
 				fun();
 				}
 				break;
@@ -711,6 +800,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterType(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitType(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitType(this);
 			else return visitor.visitChildren(this);
@@ -724,7 +821,7 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(118);
+			setState(121);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << BOOL) | (1L << FLOAT) | (1L << ID))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -757,6 +854,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_exp; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitExp(this);
 			else return visitor.visitChildren(this);
@@ -770,17 +875,17 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(121);
+			setState(124);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==MINUS) {
 				{
-				setState(120);
+				setState(123);
 				match(MINUS);
 				}
 			}
 
-			setState(123);
+			setState(126);
 			((ExpContext)_localctx).left = term();
 			}
 		}
@@ -813,6 +918,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_term; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterTerm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitTerm(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitTerm(this);
 			else return visitor.visitChildren(this);
@@ -826,18 +939,18 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(128);
 			((TermContext)_localctx).left = factor();
-			setState(129);
+			setState(132);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ) | (1L << AND) | (1L << OR) | (1L << NOT))) != 0)) {
 				{
 				{
-				setState(126);
+				setState(129);
 				((TermContext)_localctx).op = operator();
 				}
-				setState(127);
+				setState(130);
 				((TermContext)_localctx).right = exp();
 				}
 			}
@@ -870,6 +983,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_factor; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterFactor(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitFactor(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitFactor(this);
 			else return visitor.visitChildren(this);
@@ -882,16 +1003,16 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(131);
-			((FactorContext)_localctx).left = value();
 			setState(134);
+			((FactorContext)_localctx).left = value();
+			setState(137);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 			case 1:
 				{
-				setState(132);
+				setState(135);
 				match(EQ);
-				setState(133);
+				setState(136);
 				((FactorContext)_localctx).right = value();
 				}
 				break;
@@ -928,6 +1049,14 @@ public class FoolProvaBisParser extends Parser {
 		public TerminalNode RPAR() { return getToken(FoolProvaBisParser.RPAR, 0); }
 		public BaseExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterBaseExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitBaseExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitBaseExp(this);
 			else return visitor.visitChildren(this);
@@ -937,6 +1066,14 @@ public class FoolProvaBisParser extends Parser {
 		public TerminalNode ID() { return getToken(FoolProvaBisParser.ID, 0); }
 		public VarExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterVarExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitVarExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitVarExp(this);
 			else return visitor.visitChildren(this);
@@ -945,6 +1082,14 @@ public class FoolProvaBisParser extends Parser {
 	public static class IntValContext extends ValueContext {
 		public TerminalNode INTEGER() { return getToken(FoolProvaBisParser.INTEGER, 0); }
 		public IntValContext(ValueContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterIntVal(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitIntVal(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitIntVal(this);
@@ -972,6 +1117,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		public MethodExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterMethodExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitMethodExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitMethodExp(this);
 			else return visitor.visitChildren(this);
@@ -993,6 +1146,14 @@ public class FoolProvaBisParser extends Parser {
 			return getToken(FoolProvaBisParser.COMMA, i);
 		}
 		public NewExpContext(ValueContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterNewExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitNewExp(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitNewExp(this);
@@ -1022,6 +1183,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		public IfExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterIfExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitIfExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitIfExp(this);
 			else return visitor.visitChildren(this);
@@ -1030,6 +1199,14 @@ public class FoolProvaBisParser extends Parser {
 	public static class ThisExpContext extends ValueContext {
 		public TerminalNode THIS() { return getToken(FoolProvaBisParser.THIS, 0); }
 		public ThisExpContext(ValueContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterThisExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitThisExp(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitThisExp(this);
@@ -1040,6 +1217,14 @@ public class FoolProvaBisParser extends Parser {
 		public TerminalNode FLOATER() { return getToken(FoolProvaBisParser.FLOATER, 0); }
 		public FloatValContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterFloatVal(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitFloatVal(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitFloatVal(this);
 			else return visitor.visitChildren(this);
@@ -1048,6 +1233,14 @@ public class FoolProvaBisParser extends Parser {
 	public static class BoolValContext extends ValueContext {
 		public TerminalNode BOOLEAN() { return getToken(FoolProvaBisParser.BOOLEAN, 0); }
 		public BoolValContext(ValueContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterBoolVal(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitBoolVal(this);
+		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitBoolVal(this);
@@ -1070,6 +1263,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		public FunExpContext(ValueContext ctx) { copyFrom(ctx); }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterFunExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitFunExp(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitFunExp(this);
 			else return visitor.visitChildren(this);
@@ -1081,14 +1282,14 @@ public class FoolProvaBisParser extends Parser {
 		enterRule(_localctx, 22, RULE_value);
 		int _la;
 		try {
-			setState(199);
+			setState(202);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 			case 1:
 				_localctx = new IntValContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(136);
+				setState(139);
 				match(INTEGER);
 				}
 				break;
@@ -1096,7 +1297,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new BoolValContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(137);
+				setState(140);
 				match(BOOLEAN);
 				}
 				break;
@@ -1104,7 +1305,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new FloatValContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(138);
+				setState(141);
 				match(FLOATER);
 				}
 				break;
@@ -1112,11 +1313,11 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new BaseExpContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(139);
+				setState(142);
 				match(LPAR);
-				setState(140);
+				setState(143);
 				exp();
-				setState(141);
+				setState(144);
 				match(RPAR);
 				}
 				break;
@@ -1124,25 +1325,25 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new IfExpContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(143);
-				match(IF);
-				setState(144);
-				((IfExpContext)_localctx).cond = exp();
-				setState(145);
-				match(THEN);
 				setState(146);
-				match(CLPAR);
+				match(IF);
 				setState(147);
-				((IfExpContext)_localctx).thenBranch = exp();
+				((IfExpContext)_localctx).cond = exp();
 				setState(148);
-				match(CRPAR);
+				match(THEN);
 				setState(149);
-				match(ELSE);
-				setState(150);
 				match(CLPAR);
+				setState(150);
+				((IfExpContext)_localctx).thenBranch = exp();
 				setState(151);
-				((IfExpContext)_localctx).elseBranch = exp();
+				match(CRPAR);
 				setState(152);
+				match(ELSE);
+				setState(153);
+				match(CLPAR);
+				setState(154);
+				((IfExpContext)_localctx).elseBranch = exp();
+				setState(155);
 				match(CRPAR);
 				}
 				break;
@@ -1150,7 +1351,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new VarExpContext(_localctx);
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(154);
+				setState(157);
 				match(ID);
 				}
 				break;
@@ -1158,7 +1359,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new ThisExpContext(_localctx);
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(155);
+				setState(158);
 				match(THIS);
 				}
 				break;
@@ -1166,38 +1367,38 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new FunExpContext(_localctx);
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(156);
+				setState(159);
 				match(ID);
 				{
-				setState(157);
+				setState(160);
 				match(LPAR);
-				setState(166);
+				setState(169);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << LPAR) | (1L << IF) | (1L << THIS) | (1L << NEW) | (1L << INTEGER) | (1L << FLOATER) | (1L << BOOLEAN) | (1L << ID))) != 0)) {
 					{
-					setState(158);
+					setState(161);
 					exp();
-					setState(163);
+					setState(166);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(159);
+						setState(162);
 						match(COMMA);
-						setState(160);
+						setState(163);
 						exp();
 						}
 						}
-						setState(165);
+						setState(168);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(168);
+				setState(171);
 				match(RPAR);
 				}
 				}
@@ -1206,7 +1407,7 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new MethodExpContext(_localctx);
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(169);
+				setState(172);
 				_la = _input.LA(1);
 				if ( !(_la==THIS || _la==ID) ) {
 				_errHandler.recoverInline(this);
@@ -1216,40 +1417,40 @@ public class FoolProvaBisParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(170);
+				setState(173);
 				match(DOT);
-				setState(171);
+				setState(174);
 				match(ID);
 				{
-				setState(172);
+				setState(175);
 				match(LPAR);
-				setState(181);
+				setState(184);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MINUS) | (1L << LPAR) | (1L << IF) | (1L << THIS) | (1L << NEW) | (1L << INTEGER) | (1L << FLOATER) | (1L << BOOLEAN) | (1L << ID))) != 0)) {
 					{
-					setState(173);
+					setState(176);
 					exp();
-					setState(178);
+					setState(181);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(174);
+						setState(177);
 						match(COMMA);
-						setState(175);
+						setState(178);
 						exp();
 						}
 						}
-						setState(180);
+						setState(183);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(183);
+				setState(186);
 				match(RPAR);
 				}
 				}
@@ -1258,36 +1459,36 @@ public class FoolProvaBisParser extends Parser {
 				_localctx = new NewExpContext(_localctx);
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(184);
+				setState(187);
 				match(NEW);
-				setState(185);
+				setState(188);
 				match(ID);
-				setState(197);
+				setState(200);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==LPAR) {
 					{
-					setState(186);
+					setState(189);
 					match(LPAR);
-					setState(187);
+					setState(190);
 					exp();
-					setState(192);
+					setState(195);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(188);
+						setState(191);
 						match(COMMA);
-						setState(189);
+						setState(192);
 						exp();
 						}
 						}
-						setState(194);
+						setState(197);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(195);
+					setState(198);
 					match(RPAR);
 					}
 				}
@@ -1325,6 +1526,14 @@ public class FoolProvaBisParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_operator; }
 		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).enterOperator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolProvaBisListener ) ((FoolProvaBisListener)listener).exitOperator(this);
+		}
+		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof FoolProvaBisVisitor ) return ((FoolProvaBisVisitor<? extends T>)visitor).visitOperator(this);
 			else return visitor.visitChildren(this);
@@ -1338,7 +1547,7 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(201);
+			setState(204);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ) | (1L << AND) | (1L << OR) | (1L << NOT))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1362,70 +1571,71 @@ public class FoolProvaBisParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3/\u00ce\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3/\u00d1\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
-		"\13\4\f\t\f\4\r\t\r\4\16\t\16\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\6\2%\n\2"+
-		"\r\2\16\2&\3\2\3\2\5\2+\n\2\3\2\3\2\3\2\5\2\60\n\2\3\3\3\3\3\3\3\3\5\3"+
-		"\66\n\3\3\3\3\3\3\3\3\3\7\3<\n\3\f\3\16\3?\13\3\3\3\3\3\5\3C\n\3\3\3\3"+
-		"\3\3\3\3\3\6\3I\n\3\r\3\16\3J\3\3\3\3\5\3O\n\3\3\4\3\4\3\4\3\4\6\4U\n"+
-		"\4\r\4\16\4V\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\7\7h\n\7\f\7\16\7k\13\7\5\7m\n\7\3\7\3\7\5\7q\n\7\3\7\3\7\3\b\3\b\5"+
-		"\bw\n\b\3\t\3\t\3\n\5\n|\n\n\3\n\3\n\3\13\3\13\3\13\3\13\5\13\u0084\n"+
-		"\13\3\f\3\f\3\f\5\f\u0089\n\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r"+
-		"\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\7\r\u00a4"+
-		"\n\r\f\r\16\r\u00a7\13\r\5\r\u00a9\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r"+
-		"\7\r\u00b3\n\r\f\r\16\r\u00b6\13\r\5\r\u00b8\n\r\3\r\3\r\3\r\3\r\3\r\3"+
-		"\r\3\r\7\r\u00c1\n\r\f\r\16\r\u00c4\13\r\3\r\3\r\5\r\u00c8\n\r\5\r\u00ca"+
-		"\n\r\3\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2\5\4\2 \""+
-		"++\4\2%%++\4\2\6\6\b\22\u00e0\2/\3\2\2\2\4\61\3\2\2\2\6P\3\2\2\2\bZ\3"+
-		"\2\2\2\n]\3\2\2\2\fa\3\2\2\2\16v\3\2\2\2\20x\3\2\2\2\22{\3\2\2\2\24\177"+
-		"\3\2\2\2\26\u0085\3\2\2\2\30\u00c9\3\2\2\2\32\u00cb\3\2\2\2\34\35\5\22"+
-		"\n\2\35\36\7\3\2\2\36\60\3\2\2\2\37 \5\6\4\2 !\5\22\n\2!\"\7\3\2\2\"\60"+
-		"\3\2\2\2#%\5\4\3\2$#\3\2\2\2%&\3\2\2\2&$\3\2\2\2&\'\3\2\2\2\'(\3\2\2\2"+
-		"(*\7\3\2\2)+\5\6\4\2*)\3\2\2\2*+\3\2\2\2+,\3\2\2\2,-\5\22\n\2-.\7\3\2"+
-		"\2.\60\3\2\2\2/\34\3\2\2\2/\37\3\2\2\2/$\3\2\2\2\60\3\3\2\2\2\61\62\7"+
-		"#\2\2\62\65\7+\2\2\63\64\7$\2\2\64\66\7+\2\2\65\63\3\2\2\2\65\66\3\2\2"+
-		"\2\66B\3\2\2\2\678\7\25\2\28=\5\b\5\29:\7\5\2\2:<\5\b\5\2;9\3\2\2\2<?"+
-		"\3\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\26\2\2AC\3\2\2\2"+
-		"B\67\3\2\2\2BC\3\2\2\2CN\3\2\2\2DH\7\27\2\2EF\5\f\7\2FG\7\3\2\2GI\3\2"+
-		"\2\2HE\3\2\2\2IJ\3\2\2\2JH\3\2\2\2JK\3\2\2\2KL\3\2\2\2LM\7\30\2\2MO\3"+
-		"\2\2\2ND\3\2\2\2NO\3\2\2\2O\5\3\2\2\2PT\7\34\2\2QR\5\16\b\2RS\7\3\2\2"+
-		"SU\3\2\2\2TQ\3\2\2\2UV\3\2\2\2VT\3\2\2\2VW\3\2\2\2WX\3\2\2\2XY\7\35\2"+
-		"\2Y\7\3\2\2\2Z[\5\20\t\2[\\\7+\2\2\\\t\3\2\2\2]^\5\b\5\2^_\7\7\2\2_`\5"+
-		"\22\n\2`\13\3\2\2\2ab\5\20\t\2bc\7+\2\2cl\7\25\2\2di\5\b\5\2ef\7\5\2\2"+
-		"fh\5\b\5\2ge\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2jm\3\2\2\2ki\3\2\2\2"+
-		"ld\3\2\2\2lm\3\2\2\2mn\3\2\2\2np\7\26\2\2oq\5\6\4\2po\3\2\2\2pq\3\2\2"+
-		"\2qr\3\2\2\2rs\5\22\n\2s\r\3\2\2\2tw\5\n\6\2uw\5\f\7\2vt\3\2\2\2vu\3\2"+
-		"\2\2w\17\3\2\2\2xy\t\2\2\2y\21\3\2\2\2z|\7\t\2\2{z\3\2\2\2{|\3\2\2\2|"+
-		"}\3\2\2\2}~\5\24\13\2~\23\3\2\2\2\177\u0083\5\26\f\2\u0080\u0081\5\32"+
-		"\16\2\u0081\u0082\5\22\n\2\u0082\u0084\3\2\2\2\u0083\u0080\3\2\2\2\u0083"+
-		"\u0084\3\2\2\2\u0084\25\3\2\2\2\u0085\u0088\5\30\r\2\u0086\u0087\7\6\2"+
-		"\2\u0087\u0089\5\30\r\2\u0088\u0086\3\2\2\2\u0088\u0089\3\2\2\2\u0089"+
-		"\27\3\2\2\2\u008a\u00ca\7(\2\2\u008b\u00ca\7*\2\2\u008c\u00ca\7)\2\2\u008d"+
-		"\u008e\7\25\2\2\u008e\u008f\5\22\n\2\u008f\u0090\7\26\2\2\u0090\u00ca"+
-		"\3\2\2\2\u0091\u0092\7\31\2\2\u0092\u0093\5\22\n\2\u0093\u0094\7\32\2"+
-		"\2\u0094\u0095\7\27\2\2\u0095\u0096\5\22\n\2\u0096\u0097\7\30\2\2\u0097"+
-		"\u0098\7\33\2\2\u0098\u0099\7\27\2\2\u0099\u009a\5\22\n\2\u009a\u009b"+
-		"\7\30\2\2\u009b\u00ca\3\2\2\2\u009c\u00ca\7+\2\2\u009d\u00ca\7%\2\2\u009e"+
-		"\u009f\7+\2\2\u009f\u00a8\7\25\2\2\u00a0\u00a5\5\22\n\2\u00a1\u00a2\7"+
-		"\5\2\2\u00a2\u00a4\5\22\n\2\u00a3\u00a1\3\2\2\2\u00a4\u00a7\3\2\2\2\u00a5"+
-		"\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00a9\3\2\2\2\u00a7\u00a5\3\2"+
-		"\2\2\u00a8\u00a0\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa"+
-		"\u00ca\7\26\2\2\u00ab\u00ac\t\3\2\2\u00ac\u00ad\7\'\2\2\u00ad\u00ae\7"+
-		"+\2\2\u00ae\u00b7\7\25\2\2\u00af\u00b4\5\22\n\2\u00b0\u00b1\7\5\2\2\u00b1"+
-		"\u00b3\5\22\n\2\u00b2\u00b0\3\2\2\2\u00b3\u00b6\3\2\2\2\u00b4\u00b2\3"+
-		"\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b7"+
-		"\u00af\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00ca\7\26"+
-		"\2\2\u00ba\u00bb\7&\2\2\u00bb\u00c7\7+\2\2\u00bc\u00bd\7\25\2\2\u00bd"+
-		"\u00c2\5\22\n\2\u00be\u00bf\7\5\2\2\u00bf\u00c1\5\22\n\2\u00c0\u00be\3"+
-		"\2\2\2\u00c1\u00c4\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2\u00c3\3\2\2\2\u00c3"+
-		"\u00c5\3\2\2\2\u00c4\u00c2\3\2\2\2\u00c5\u00c6\7\26\2\2\u00c6\u00c8\3"+
-		"\2\2\2\u00c7\u00bc\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\u00ca\3\2\2\2\u00c9"+
-		"\u008a\3\2\2\2\u00c9\u008b\3\2\2\2\u00c9\u008c\3\2\2\2\u00c9\u008d\3\2"+
-		"\2\2\u00c9\u0091\3\2\2\2\u00c9\u009c\3\2\2\2\u00c9\u009d\3\2\2\2\u00c9"+
-		"\u009e\3\2\2\2\u00c9\u00ab\3\2\2\2\u00c9\u00ba\3\2\2\2\u00ca\31\3\2\2"+
-		"\2\u00cb\u00cc\t\4\2\2\u00cc\33\3\2\2\2\31&*/\65=BJNVilpv{\u0083\u0088"+
-		"\u00a5\u00a8\u00b4\u00b7\u00c2\u00c7\u00c9";
+		"\13\4\f\t\f\4\r\t\r\4\16\t\16\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
+		"\6\2\'\n\2\r\2\16\2(\3\2\3\2\5\2-\n\2\3\2\3\2\3\2\3\2\5\2\63\n\2\3\3\3"+
+		"\3\3\3\3\3\5\39\n\3\3\3\3\3\3\3\3\3\7\3?\n\3\f\3\16\3B\13\3\3\3\3\3\5"+
+		"\3F\n\3\3\3\3\3\3\3\3\3\6\3L\n\3\r\3\16\3M\3\3\3\3\5\3R\n\3\3\4\3\4\3"+
+		"\4\3\4\6\4X\n\4\r\4\16\4Y\3\4\3\4\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\7\3\7"+
+		"\3\7\3\7\3\7\3\7\7\7k\n\7\f\7\16\7n\13\7\5\7p\n\7\3\7\3\7\5\7t\n\7\3\7"+
+		"\3\7\3\b\3\b\5\bz\n\b\3\t\3\t\3\n\5\n\177\n\n\3\n\3\n\3\13\3\13\3\13\3"+
+		"\13\5\13\u0087\n\13\3\f\3\f\3\f\5\f\u008c\n\f\3\r\3\r\3\r\3\r\3\r\3\r"+
+		"\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
+		"\r\3\r\7\r\u00a7\n\r\f\r\16\r\u00aa\13\r\5\r\u00ac\n\r\3\r\3\r\3\r\3\r"+
+		"\3\r\3\r\3\r\3\r\7\r\u00b6\n\r\f\r\16\r\u00b9\13\r\5\r\u00bb\n\r\3\r\3"+
+		"\r\3\r\3\r\3\r\3\r\3\r\7\r\u00c4\n\r\f\r\16\r\u00c7\13\r\3\r\3\r\5\r\u00cb"+
+		"\n\r\5\r\u00cd\n\r\3\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30"+
+		"\32\2\5\4\2 \"++\4\2%%++\4\2\6\6\b\22\2\u00e3\2\62\3\2\2\2\4\64\3\2\2"+
+		"\2\6S\3\2\2\2\b]\3\2\2\2\n`\3\2\2\2\fd\3\2\2\2\16y\3\2\2\2\20{\3\2\2\2"+
+		"\22~\3\2\2\2\24\u0082\3\2\2\2\26\u0088\3\2\2\2\30\u00cc\3\2\2\2\32\u00ce"+
+		"\3\2\2\2\34\35\5\22\n\2\35\36\7\3\2\2\36\37\7\2\2\3\37\63\3\2\2\2 !\5"+
+		"\6\4\2!\"\5\22\n\2\"#\7\3\2\2#$\7\2\2\3$\63\3\2\2\2%\'\5\4\3\2&%\3\2\2"+
+		"\2\'(\3\2\2\2(&\3\2\2\2()\3\2\2\2)*\3\2\2\2*,\7\3\2\2+-\5\6\4\2,+\3\2"+
+		"\2\2,-\3\2\2\2-.\3\2\2\2./\5\22\n\2/\60\7\3\2\2\60\61\7\2\2\3\61\63\3"+
+		"\2\2\2\62\34\3\2\2\2\62 \3\2\2\2\62&\3\2\2\2\63\3\3\2\2\2\64\65\7#\2\2"+
+		"\658\7+\2\2\66\67\7$\2\2\679\7+\2\28\66\3\2\2\289\3\2\2\29E\3\2\2\2:;"+
+		"\7\25\2\2;@\5\b\5\2<=\7\5\2\2=?\5\b\5\2><\3\2\2\2?B\3\2\2\2@>\3\2\2\2"+
+		"@A\3\2\2\2AC\3\2\2\2B@\3\2\2\2CD\7\26\2\2DF\3\2\2\2E:\3\2\2\2EF\3\2\2"+
+		"\2FQ\3\2\2\2GK\7\27\2\2HI\5\f\7\2IJ\7\3\2\2JL\3\2\2\2KH\3\2\2\2LM\3\2"+
+		"\2\2MK\3\2\2\2MN\3\2\2\2NO\3\2\2\2OP\7\30\2\2PR\3\2\2\2QG\3\2\2\2QR\3"+
+		"\2\2\2R\5\3\2\2\2SW\7\34\2\2TU\5\16\b\2UV\7\3\2\2VX\3\2\2\2WT\3\2\2\2"+
+		"XY\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\7\35\2\2\\\7\3\2\2\2]^\5\20"+
+		"\t\2^_\7+\2\2_\t\3\2\2\2`a\5\b\5\2ab\7\7\2\2bc\5\22\n\2c\13\3\2\2\2de"+
+		"\5\20\t\2ef\7+\2\2fo\7\25\2\2gl\5\b\5\2hi\7\5\2\2ik\5\b\5\2jh\3\2\2\2"+
+		"kn\3\2\2\2lj\3\2\2\2lm\3\2\2\2mp\3\2\2\2nl\3\2\2\2og\3\2\2\2op\3\2\2\2"+
+		"pq\3\2\2\2qs\7\26\2\2rt\5\6\4\2sr\3\2\2\2st\3\2\2\2tu\3\2\2\2uv\5\22\n"+
+		"\2v\r\3\2\2\2wz\5\n\6\2xz\5\f\7\2yw\3\2\2\2yx\3\2\2\2z\17\3\2\2\2{|\t"+
+		"\2\2\2|\21\3\2\2\2}\177\7\t\2\2~}\3\2\2\2~\177\3\2\2\2\177\u0080\3\2\2"+
+		"\2\u0080\u0081\5\24\13\2\u0081\23\3\2\2\2\u0082\u0086\5\26\f\2\u0083\u0084"+
+		"\5\32\16\2\u0084\u0085\5\22\n\2\u0085\u0087\3\2\2\2\u0086\u0083\3\2\2"+
+		"\2\u0086\u0087\3\2\2\2\u0087\25\3\2\2\2\u0088\u008b\5\30\r\2\u0089\u008a"+
+		"\7\6\2\2\u008a\u008c\5\30\r\2\u008b\u0089\3\2\2\2\u008b\u008c\3\2\2\2"+
+		"\u008c\27\3\2\2\2\u008d\u00cd\7(\2\2\u008e\u00cd\7*\2\2\u008f\u00cd\7"+
+		")\2\2\u0090\u0091\7\25\2\2\u0091\u0092\5\22\n\2\u0092\u0093\7\26\2\2\u0093"+
+		"\u00cd\3\2\2\2\u0094\u0095\7\31\2\2\u0095\u0096\5\22\n\2\u0096\u0097\7"+
+		"\32\2\2\u0097\u0098\7\27\2\2\u0098\u0099\5\22\n\2\u0099\u009a\7\30\2\2"+
+		"\u009a\u009b\7\33\2\2\u009b\u009c\7\27\2\2\u009c\u009d\5\22\n\2\u009d"+
+		"\u009e\7\30\2\2\u009e\u00cd\3\2\2\2\u009f\u00cd\7+\2\2\u00a0\u00cd\7%"+
+		"\2\2\u00a1\u00a2\7+\2\2\u00a2\u00ab\7\25\2\2\u00a3\u00a8\5\22\n\2\u00a4"+
+		"\u00a5\7\5\2\2\u00a5\u00a7\5\22\n\2\u00a6\u00a4\3\2\2\2\u00a7\u00aa\3"+
+		"\2\2\2\u00a8\u00a6\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u00ac\3\2\2\2\u00aa"+
+		"\u00a8\3\2\2\2\u00ab\u00a3\3\2\2\2\u00ab\u00ac\3\2\2\2\u00ac\u00ad\3\2"+
+		"\2\2\u00ad\u00cd\7\26\2\2\u00ae\u00af\t\3\2\2\u00af\u00b0\7\'\2\2\u00b0"+
+		"\u00b1\7+\2\2\u00b1\u00ba\7\25\2\2\u00b2\u00b7\5\22\n\2\u00b3\u00b4\7"+
+		"\5\2\2\u00b4\u00b6\5\22\n\2\u00b5\u00b3\3\2\2\2\u00b6\u00b9\3\2\2\2\u00b7"+
+		"\u00b5\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00bb\3\2\2\2\u00b9\u00b7\3\2"+
+		"\2\2\u00ba\u00b2\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb\u00bc\3\2\2\2\u00bc"+
+		"\u00cd\7\26\2\2\u00bd\u00be\7&\2\2\u00be\u00ca\7+\2\2\u00bf\u00c0\7\25"+
+		"\2\2\u00c0\u00c5\5\22\n\2\u00c1\u00c2\7\5\2\2\u00c2\u00c4\5\22\n\2\u00c3"+
+		"\u00c1\3\2\2\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c5\u00c6\3\2"+
+		"\2\2\u00c6\u00c8\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9\7\26\2\2\u00c9"+
+		"\u00cb\3\2\2\2\u00ca\u00bf\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb\u00cd\3\2"+
+		"\2\2\u00cc\u008d\3\2\2\2\u00cc\u008e\3\2\2\2\u00cc\u008f\3\2\2\2\u00cc"+
+		"\u0090\3\2\2\2\u00cc\u0094\3\2\2\2\u00cc\u009f\3\2\2\2\u00cc\u00a0\3\2"+
+		"\2\2\u00cc\u00a1\3\2\2\2\u00cc\u00ae\3\2\2\2\u00cc\u00bd\3\2\2\2\u00cd"+
+		"\31\3\2\2\2\u00ce\u00cf\t\4\2\2\u00cf\33\3\2\2\2\31(,\628@EMQYlosy~\u0086"+
+		"\u008b\u00a8\u00ab\u00b7\u00ba\u00c5\u00ca\u00cc";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
