@@ -1,1 +1,1 @@
-let int x; in print(1);
+let int x = 1; in print(x+1);
