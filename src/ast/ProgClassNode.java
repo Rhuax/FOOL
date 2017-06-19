@@ -47,6 +47,11 @@ public class ProgClassNode implements Node {
         checkDuplicatedClasses(res);
         checkImplementedClasses(res);
 
+        for( Node classdec: classList)
+        {
+            res.addAll(classdec.checkSemantics(env));
+        }
+
         return res;
     }
 
