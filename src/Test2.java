@@ -1,3 +1,4 @@
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -15,6 +16,8 @@ import ast.FoolVisitorImpl;
 import parser.*;
 import ast.Node;
 import util.*;
+
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -64,7 +67,9 @@ public class Test2 {
         //SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
         if(lexer.lexicalErrors > 0){
         	System.out.println("The program was not in the right format. Exiting the compilation process now");
-        }else{
+        }
+        else
+        	{
         
 	        FoolProvaBisParser parser = new FoolProvaBisParser(tokens);
 	        
@@ -76,8 +81,9 @@ public class Test2 {
 			FoolVisitorImpl visitor = new FoolVisitorImpl();
 
 
-	        Node ast = visitor.visit(t); //generazione AST 
+	        Node ast = visitor.visit(t); //generazione AST
 
+			/*
 	        Environment env = new Environment();
 	        ArrayList<SemanticError> err = ast.checkSemantics(env);
 
@@ -87,18 +93,18 @@ public class Test2 {
 	        		System.out.println("\t" + e);
 	        }else{
 	        
-	        	/*
+
 	
 		        System.out.println("Visualizing AST...");
 		        System.out.println(ast.toPrint(""));
-		
+		*/
 		        Node type = ast.typeCheck(); //type-checking bottom-up 
 		        System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 		        
 		      
 		        // CODE GENERATION  prova.fool.asm
 		        String code=ast.codeGeneration(); 
-		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm")); 
+		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
 		        out.write(code);
 		        out.close(); 
 		        System.out.println("Code generated! Assembling and running generated code.");
@@ -117,10 +123,10 @@ public class Test2 {
 		        System.out.println("Starting Virtual Machine...");
 		        ExecuteVM vm = new ExecuteVM(parserASM.code);
 		        vm.cpu();
-	        */}
+	        }
 
         }
        
         
     }
-}
+

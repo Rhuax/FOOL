@@ -6,4 +6,5 @@ class Prova
     int getAttribute() x+1;
 }
 ;
-let int j = 1; in j+1;
+
+print(3);
