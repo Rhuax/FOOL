@@ -294,6 +294,14 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		return res;
 	}
 
+	public Node visitVardec(VardecContext ctx)
+	{
+		VarNode result;
+
+		Node typeNode = visit(ctx.type());
+		return new VardecNode(ctx.ID().getText(), typeNode);
+	}
+
 	public Node visitClassExp(FoolProvaBisParser.ClassExpContext ctx)
 	{
 		ProgClassNode res;
