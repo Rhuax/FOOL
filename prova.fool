@@ -1,2 +1,33 @@
-let int x = 1;
-in x + 1;
+class Prova
+(
+    int x, int h
+)
+{
+    int getx() x;
+}
+
+class Prova2 implements cazzo
+(
+    int y
+)
+{
+    int gety() y;
+}
+
+class Prova
+(
+    int z
+)
+{
+    int getz() z;
+}
+
+class Prova2
+(
+    int k
+)
+{
+    int getk() k;
+};
+
+let int x = 1; in x+1;

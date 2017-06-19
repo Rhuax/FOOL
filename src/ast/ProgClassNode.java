@@ -43,8 +43,42 @@ public class ProgClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env)
     {
+        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+        checkDuplicatedClasses(res);
+        checkImplementedClasses(res);
+
+        return res;
+    }
+
+    private void checkDuplicatedClasses(ArrayList<SemanticError> errors)
+    {
         //Vedere se ci sono classi con nomi duplicati
-        return null;
+        for(int i = 0; i < classList.size(); i++)
+        {
+            for(int j = i+1; j < classList.size(); j++)
+            {
+                if( ((ClassNode) classList.get(i)).getId().compareTo(((ClassNode) classList.get(j)).getId()) == 0 )
+                {
+                    errors.add(new SemanticError("Class " + ((ClassNode) classList.get(i)).getId() + " already defined!"));
+                }
+            }
+        }
+    }
+
+    private void checkImplementedClasses(ArrayList<SemanticError> errors)
+    {
+        for(Node classdec: classList)
+        {
+            String extClass = ((ClassNode) classdec).getExtendedClass();
+            if( extClass != null)
+            {
+                ClassNode superClass = getClassFromList(extClass);
+                if(superClass == null)
+                {
+                    errors.add(new SemanticError("Extended class " + extClass + " not in class list! "));
+                }
+            }
+        }
     }
 
     private ClassNode getClassFromList(String className)
@@ -77,25 +111,17 @@ public class ProgClassNode implements Node {
             if( extClass != null)
             {
                 ClassNode superClass = getClassFromList(extClass);
-                if (superClass != null)
+                ArrayList<Node> methodList = ((ClassNode) classdec).getMethodsList();
+                for (Node methoddec : methodList)
                 {
-                    ArrayList<Node> methodList = ((ClassNode) classdec).getMethodsList();
-                    for (Node methoddec : methodList)
+                    Node superMethod = superClass.getMethodFromList(((FunNode) methoddec).getId());
+                    if (superMethod != null)
                     {
-                        Node superMethod = superClass.getMethodFromList(((FunNode) methoddec).getId());
-                        if (superMethod != null)
-                        {
-                            Node curMethodType = ((FunNode) methoddec).getType();
-                            Node superMethodType = ((FunNode) superMethod).getType();
-                            checkReturnType(curMethodType, superMethodType);
-                            checkMethodParametersType((FunNode) methoddec, (FunNode) superMethod);
-                        }
+                        Node curMethodType = ((FunNode) methoddec).getType();
+                        Node superMethodType = ((FunNode) superMethod).getType();
+                        checkReturnType(curMethodType, superMethodType);
+                        checkMethodParametersType((FunNode) methoddec, (FunNode) superMethod);
                     }
-                }
-                else
-                {
-                    System.out.println("Extended class not in class list! ");
-                    System.exit(0);
                 }
             }
         }
@@ -141,10 +167,5 @@ public class ProgClassNode implements Node {
             System.out.println("Method return type in class is not subtype of method return type in super class ");
             System.exit(0);
         }
-    }
-
-    private void checkDuplicateClasses()
-    {
-
     }
 }

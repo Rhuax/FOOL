@@ -4,6 +4,8 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import ast.FunNode;
 import lib.FOOLlib;
 
@@ -72,7 +74,13 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         //Controllare se ci sono attributi e metodi duplicati
+        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        env.symTable.add(hm);
 
+        //declare resulting list
+        ArrayList<SemanticError> res = new ArrayList<SemanticError>();
+
+        
         return null;
     }
 
