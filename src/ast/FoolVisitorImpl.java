@@ -314,7 +314,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		ArrayList<Node> methList = new ArrayList<Node>();
 
 		for(VardecContext vardec : ctx.vardec())
-			attList.add(visit(vardec.type()));
+			attList.add(visit(vardec));
 
 		for(FunContext fundec : ctx.fun())
 			methList.add(visit(fundec));
