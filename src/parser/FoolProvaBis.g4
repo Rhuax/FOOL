@@ -12,9 +12,9 @@ grammar FoolProvaBis;
  *------------------------------------------------------------------*/
 
 
-prog   : exp SEMIC  EOF                		                #singleExp
-       | let exp SEMIC  EOF               	                #letInExp
-       | (classdec)+ SEMIC (let)? exp SEMIC	  EOF          #classExp
+prog   : exp SEMIC                  		            #singleExp
+       | let exp SEMIC                 	                #letInExp
+       | (classdec)+ SEMIC (let)? exp SEMIC	            #classExp
        ;
 
 classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)?  (CLPAR (fun SEMIC)+ CRPAR)? ;

@@ -294,9 +294,9 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		return res;
 	}
 
-	public Node visitClassExpContext(FoolProvaBisParser.ClassExpContext ctx)
+	public Node visitClassExp(FoolProvaBisParser.ClassExpContext ctx)
 	{
-		Node res;
+		ProgClassNode res;
 
 		ArrayList<Node> classList = new ArrayList<Node>();
 		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
@@ -307,7 +307,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		return res;
 	}
 
-	public Node visitClassdecContext (FoolProvaBisParser.ClassdecContext ctx)
+	public Node visitClassdec(FoolProvaBisParser.ClassdecContext ctx)
 	{
 		Node res;
 		ArrayList<Node> attList = new ArrayList<Node>();

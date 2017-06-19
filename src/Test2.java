@@ -79,8 +79,6 @@ public class Test2 {
 	        //System.out.println(count_var(t)) ;
 
 			FoolVisitorImpl visitor = new FoolVisitorImpl();
-
-
 	        Node ast = visitor.visit(t); //generazione AST
 
 			/*
@@ -101,7 +99,7 @@ public class Test2 {
 		        Node type = ast.typeCheck(); //type-checking bottom-up 
 		        System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 		        
-		      
+		     /*
 		        // CODE GENERATION  prova.fool.asm
 		        String code=ast.codeGeneration(); 
 		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
@@ -123,6 +121,7 @@ public class Test2 {
 		        System.out.println("Starting Virtual Machine...");
 		        ExecuteVM vm = new ExecuteVM(parserASM.code);
 		        vm.cpu();
+		       }*/
 	        }
 
         }
