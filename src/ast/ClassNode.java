@@ -74,14 +74,25 @@ public class ClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env) {
 
         //Controllare se ci sono attributi e metodi duplicati
+        env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        
-        return null;
+        //check semantics in the dec list
+        if(attributeList.size() > 0)
+        {
+            env.offset = -2;
+            //if there are children then check semantics for every child and save the results
+            for (Node attribute : attributeList)
+                res.addAll(attribute.checkSemantics(env));
+        }
+
+
+
+        return res;
     }
 
     public String getExtendedClass()
