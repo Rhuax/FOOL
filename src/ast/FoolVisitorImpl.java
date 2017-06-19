@@ -319,7 +319,10 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		for(FunContext fundec : ctx.fun())
 			methList.add(visit(fundec));
 
-		res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, ctx.ID().get(1).getText());
+		if(ctx.ID().size() > 1)
+			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, ctx.ID().get(1).getText());
+		else
+			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList);
 
 		return res;
 	}
