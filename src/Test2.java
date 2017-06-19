@@ -70,13 +70,13 @@ public class Test2 {
 	        
 	        ParseTree t = parser.prog() ;
 	        	        
-	        System.out.println(t.getText()) ;
-	        System.out.println(count_var(t)) ;
+	        //System.out.println(t.getText()) ;
+	        //System.out.println(count_var(t)) ;
 
 			FoolVisitorImpl visitor = new FoolVisitorImpl();
 
 
-	        Node ast = visitor.visit(parser.prog()); //generazione AST 
+	        Node ast = visitor.visit(t); //generazione AST 
 
 	        Environment env = new Environment();
 	        ArrayList<SemanticError> err = ast.checkSemantics(env);

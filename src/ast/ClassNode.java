@@ -15,7 +15,7 @@ public class ClassNode implements Node {
     private String id;
     private ArrayList<Node> attributeList;
     private ArrayList<Node> methodList;
-    private String classExtended = null;
+    private String extendedClass = null;
 
     public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml) {
         id = i;
@@ -27,7 +27,7 @@ public class ClassNode implements Node {
         id = i;
         attributeList = al;
         methodList = ml;
-        classExtended = cex;
+        extendedClass = cex;
     }
 
 
@@ -56,31 +56,9 @@ public class ClassNode implements Node {
             for (Node dec:attributeList)
                 dec.typeCheck();
 
-        if(classExtended != null)
-        {
-            if (methodList!=null)
-                for (Node dec:methodList)
-                {
-                    Node typechecked = dec.typeCheck();
-                    if(typechecked == null)
-                    {
-                        Node funType = ((FunNode) typechecked).getType();
-
-                        Node superFunType = ((FunNode)  )
-
-                        if(FOOLlib.isSubtype(funType, superFunType))
-                        {
-
-                        }
-                    }
-                }
-        }
-        else
-        {
-            if (methodList!=null)
-                for (Node dec:methodList)
-                    dec.typeCheck();
-        }
+        if (methodList!=null)
+            for (Node dec:methodList)
+                dec.typeCheck();
 
     return null;
     }
@@ -96,5 +74,36 @@ public class ClassNode implements Node {
         //Controllare se ci sono attributi e metodi duplicati
 
         return null;
+    }
+
+    public String getExtendedClass()
+    {
+        return extendedClass;
+    }
+
+    public String getId()
+    {
+        return id;
+    }
+
+    public ArrayList<Node> getMethodsList()
+    {
+        return methodList;
+    }
+
+    public Node getMethodFromList(String methodName)
+    {
+        FunNode methodNode = null;
+
+        for (Node methoddec:methodList)
+        {
+            if( ((FunNode) methoddec).getId().compareTo(methodName) == 0)
+            {
+                methodNode = (FunNode) methoddec;
+                break;
+            }
+        }
+
+        return methodNode;
     }
 }
