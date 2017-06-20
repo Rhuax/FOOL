@@ -4,6 +4,7 @@ class Prova
 )
 {
     int getx() x;
+    Prova() x=3;
 }
 
 class Prova2
