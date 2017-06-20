@@ -106,7 +106,10 @@ public class Test2 {
 		        SVMParser parserASM = new SVMParser(tokensASM);
 		        
 		        parserASM.assembly();
-		        
+		        ========================================
+		        QUI BISOGNA ISTANZIARE UN VISITOR CHE GIRA L'ALBERO E PER OGNI NODO CREA L'ISTRUZIONE CORRISPONDENTE
+		        E POPOLA parserASM.code
+		        ========================================
 		        System.out.println("You had: "+lexerASM.lexicalErrors+" lexical errors and "+parserASM.getNumberOfSyntaxErrors()+" syntax errors.");
 		        if (lexerASM.lexicalErrors>0 || parserASM.getNumberOfSyntaxErrors()>0) System.exit(1);
 		

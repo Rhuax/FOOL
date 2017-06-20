@@ -22,7 +22,7 @@ public int lexicalErrors=0;
  *------------------------------------------------------------------*/
   
 assembly: 
-    ( PUSH n=NUMBER   {code[i++] = PUSH; 
+    ( PUSH n=NUMBER   {code[i++] = PUSH;
 			                 code[i++] = Integer.parseInt($n.text);}
 	  | PUSH l=LABEL    {code[i++] = PUSH; //
 	    		             labelRef.put(i++,$l.text);} 		     
