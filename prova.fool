@@ -1,23 +1,22 @@
-class Prova
+class Prova implements Prova3
 (
     int x, int y
 )
 {
     int getx() x;
-    Prova() x=3;
 }
 
-class Prova2
+class Prova2 implements Prova
 (
-    int x, int x
+    int x, int y
 )
 {
     int getx() x;
 }
 
-class Prova2
+class Prova3 implements Prova2
 (
-    int z, int z
+    int x, int y
 )
 {
     int getx() x;

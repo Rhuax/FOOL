@@ -237,8 +237,8 @@ public class SVMParser extends Parser {
 					match(PUSH);
 					setState(3);
 					((AssemblyContext)_localctx).n = match(NUMBER);
-					code[i++] = PUSH; 
-								                 code[i++] = Integer.parseInt((((AssemblyContext)_localctx).n!=null?((AssemblyContext)_localctx).n.getText():null));
+					code[i++] = PUSH;
+					code[i++] = Integer.parseInt((((AssemblyContext)_localctx).n!=null?((AssemblyContext)_localctx).n.getText():null));
 					}
 					break;
 				case 2:
@@ -248,7 +248,7 @@ public class SVMParser extends Parser {
 					setState(6);
 					((AssemblyContext)_localctx).l = match(LABEL);
 					code[i++] = PUSH; //
-						    		             labelRef.put(i++,(((AssemblyContext)_localctx).l!=null?((AssemblyContext)_localctx).l.getText():null));
+					labelRef.put(i++,(((AssemblyContext)_localctx).l!=null?((AssemblyContext)_localctx).l.getText():null));
 					}
 					break;
 				case 3:

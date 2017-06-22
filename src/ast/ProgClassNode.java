@@ -5,7 +5,9 @@ import util.Environment;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Created by suri9 on 14/06/2017.
@@ -46,6 +48,7 @@ public class ProgClassNode implements Node {
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
         checkDuplicatedClasses(res);
         checkImplementedClasses(res);
+        checkCyclicInheritance(res);
 
         for( Node classdec: classList)
         {
@@ -84,6 +87,27 @@ public class ProgClassNode implements Node {
                 }
             }
         }
+    }
+
+    private void checkCyclicInheritance(ArrayList<SemanticError> errors)
+    {
+        Set<String> inheritedClasses;
+
+        for(Node classdec: classList)
+        {
+            inheritedClasses = new HashSet<>();
+
+            inheritedClasses.add(((ClassNode) classdec).getId());
+            String extClass = ((ClassNode) classdec).getExtendedClass();
+
+                while( extClass != null && inheritedClasses.add(extClass) )
+                {
+                    extClass = getClassFromList(extClass).getExtendedClass();
+                }
+
+                if(extClass != null)
+                    errors.add(new SemanticError("Cyclic inheritance in class " + ((ClassNode) classdec).getId() + "!" ));
+            }
     }
 
     private ClassNode getClassFromList(String className)
