@@ -1,18 +1,15 @@
-class Prova
-(
-    int x
-)
+class a implements b(int y)
 {
-    int getx() x;
+float gety() y;
 }
 
 
-class aaaa(
-int porcodio
-)
-{
-int gettuamadreapecora() x;
-}
-;
+class b implements a
+(int nuovoparametro)
 
-let int x = 1;in 3;
+{
+    float getsumpar() nuovoparametro;
+};
+
+
+let int u =22; in print(u);

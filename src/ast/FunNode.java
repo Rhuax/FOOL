@@ -11,7 +11,7 @@ public class FunNode implements Node {
   private String id;
   private Node type;
 
-	public ArrayList<Node> getParlist()
+	ArrayList<Node> getParlist()
 	{
 		return parlist;
 	}
@@ -20,12 +20,12 @@ public class FunNode implements Node {
   private ArrayList<Node> declist; 
   private Node body;
   
-  public FunNode (String i, Node t) {
+  FunNode(String i, Node t) {
     id=i;
     type=t;
   }
   
-  public void addDecBody (ArrayList<Node> d, Node b) {
+  void addDecBody(ArrayList<Node> d, Node b) {
     declist=d;
     body=b;
   }
@@ -83,7 +83,7 @@ public class FunNode implements Node {
       return res;
 	}
   
-  public void addPar (Node p) {
+  void addPar(Node p) {
     parlist.add(p);
   }  
   

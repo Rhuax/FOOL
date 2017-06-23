@@ -11,16 +11,16 @@ import java.util.*;
  */
 public class ProgClassNode implements Node {
 
-    private ArrayList<Node> classList;
+    public static ArrayList<ClassNode> classList;
 
-    ProgClassNode(ArrayList<Node> cl)
+    ProgClassNode(ArrayList<ClassNode> cl)
     {
         classList = cl;
     }
 
     public String toPrint(String s) {
         String classstr = "";
-        for (Node classdec:classList)
+        for (ClassNode classdec:classList)
             classstr+=classdec.toPrint(s+"  ");
         return s+"ClassLetIn\n" + classstr ;
     }
@@ -50,7 +50,7 @@ public class ProgClassNode implements Node {
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
                if(checkCyclicInheritance(res))
-                   for( Node classdec: classList)
+                   for( ClassNode classdec: classList)
                        res.addAll(classdec.checkSemantics(env));
 
         return res;
@@ -73,11 +73,11 @@ public class ProgClassNode implements Node {
             }
         }
 */
-        for(Node classNode: classList)
+        for(ClassNode classNode: classList)
         {
-            if(!classSet.add( ((ClassNode) classNode).getId()))
+            if(!classSet.add(  classNode.getId()))
             {
-                errors.add(new SemanticError("Class " + ((ClassNode) classNode).getId() + " already defined!"));
+                errors.add(new SemanticError("Class " +  classNode.getId() + " already defined!"));
                 check = false;
             }
         }
@@ -89,9 +89,9 @@ public class ProgClassNode implements Node {
     {
         boolean check = true;
 
-        for(Node classdec: classList)
+        for(ClassNode classdec: classList)
         {
-            ClassNode extClass =( ((ClassNode) classdec).getExtendedClass());
+            ClassNode extClass =classdec.getExtendedClass();
             if( extClass != null)
             {
                 ClassNode superClass = getClassFromList(extClass.getId());
@@ -111,12 +111,12 @@ public class ProgClassNode implements Node {
         boolean check = true;
         Set<String> inheritedClasses;
 
-        for(Node classdec: classList)
+        for(ClassNode classdec: classList)
         {
             inheritedClasses = new HashSet<>();
 
-            inheritedClasses.add(((ClassNode) classdec).getId());
-            ClassNode extClass =( ((ClassNode) classdec).getExtendedClass());
+            inheritedClasses.add(classdec.getId());
+            ClassNode extClass = classdec.getExtendedClass();
 
                 while( extClass != null && inheritedClasses.add(extClass.getId()) )
                 {
@@ -125,7 +125,7 @@ public class ProgClassNode implements Node {
 
                 if(extClass != null)
                 {
-                    errors.add(new SemanticError("Cyclic inheritance in class " + ((ClassNode) classdec).getId() + "!" ));
+                    errors.add(new SemanticError("Cyclic inheritance in class " +  classdec.getId() + "!" ));
                     check = false;
                 }
         }
@@ -137,11 +137,11 @@ public class ProgClassNode implements Node {
     {
         ClassNode clNode = null;
 
-        for (Node classdec:classList)
+        for (ClassNode classdec:classList)
         {
-            if( ((ClassNode) classdec).getId().compareTo(className) == 0)
+            if(  classdec.getId().compareTo(className) == 0)
             {
-                clNode = (ClassNode) classdec;
+                clNode =  classdec;
                 break;
             }
         }
@@ -151,28 +151,28 @@ public class ProgClassNode implements Node {
 
     private void checkClasses()
     {
-        for (Node classdec:classList)
+        for (ClassNode classdec:classList)
             classdec.typeCheck();
     }
 
     private void checkMethods()
     {
-        for (Node classdec:classList)
+        for (ClassNode classdec:classList)
         {
-            String extClass = ( ((ClassNode) classdec).getExtendedClass()).getId();
+            String extClass =  classdec.getExtendedClass().getId();
             if( extClass != null)
             {
                 ClassNode superClass = getClassFromList(extClass);
-                ArrayList<Node> methodList = ((ClassNode) classdec).getMethodsList();
-                for (Node methoddec : methodList)
+                ArrayList<FunNode> methodList =  classdec.getMethodsList();
+                for (FunNode methoddec : methodList)
                 {
-                    Node superMethod = superClass.getMethodFromList(((FunNode) methoddec).getId());
+                    FunNode superMethod = superClass.getMethodFromList( methoddec.getId());
                     if (superMethod != null)
                     {
-                        Node curMethodType = ((FunNode) methoddec).getType();
-                        Node superMethodType = ((FunNode) superMethod).getType();
+                        Node curMethodType =  methoddec.getType();
+                        Node superMethodType =  superMethod.getType();
                         checkReturnType(curMethodType, superMethodType);
-                        checkMethodParametersType((FunNode) methoddec, (FunNode) superMethod);
+                        checkMethodParametersType( methoddec, superMethod);
                     }
                 }
             }

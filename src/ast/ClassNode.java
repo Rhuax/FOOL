@@ -16,17 +16,17 @@ import lib.FOOLlib;
 public class ClassNode implements Node {
 
     private String id;
-    private ArrayList<Node> attributeList;
-    private ArrayList<Node> methodList;
+    private ArrayList<VardecNode> attributeList;
+    private ArrayList<FunNode> methodList;
     private ClassNode extendedClass = null;
 
-    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml) {
+    ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml) {
         id = i;
         attributeList = al;
         methodList = ml;
     }
 
-    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, ClassNode cex) {
+    ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml, ClassNode cex) {
         id = i;
         attributeList = al;
         methodList = ml;
@@ -39,12 +39,12 @@ public class ClassNode implements Node {
 
         String attList="";
         if (attributeList!=null)
-            for (Node dec:attributeList)
+            for (VardecNode dec:attributeList)
                 attList+=dec.toPrint(s+"  ");
 
         String methList="";
         if (methodList!=null)
-            for (Node dec:methodList)
+            for (FunNode dec:methodList)
                 methList+=dec.toPrint(s+"  ");
 
         return s+"Class:" + id +"\n"
@@ -56,11 +56,11 @@ public class ClassNode implements Node {
     public Node typeCheck() {
 
         if (attributeList!=null)
-            for (Node dec:attributeList)
+            for (VardecNode dec:attributeList)
                 dec.typeCheck();
 
         if (methodList!=null)
-            for (Node dec:methodList)
+            for (FunNode dec:methodList)
                 dec.typeCheck();
 
     return null;
@@ -76,6 +76,7 @@ public class ClassNode implements Node {
         MapClassNestLevel.setCurrentAnalyzedClass(this);
         //Controllare se ci sono attributi e metodi duplicati
         env.nestingLevel++;
+        MapClassNestLevel.putClassNestingLevel(this.id,env.nestingLevel);
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);
 
@@ -89,7 +90,7 @@ public class ClassNode implements Node {
         return res;
     }
 
-    public ClassNode getExtendedClass()
+    ClassNode getExtendedClass()
     {
         return extendedClass;
     }
@@ -99,20 +100,20 @@ public class ClassNode implements Node {
         return id;
     }
 
-    public ArrayList<Node> getMethodsList()
+    ArrayList<FunNode> getMethodsList()
     {
         return methodList;
     }
 
-    public Node getMethodFromList(String methodName)
+    FunNode getMethodFromList(String methodName)
     {
         FunNode methodNode = null;
 
-        for (Node methoddec:methodList)
+        for (FunNode methoddec:methodList)
         {
-            if( ((FunNode) methoddec).getId().compareTo(methodName) == 0)
+            if(methoddec.getId().equals(methodName))
             {
-                methodNode = (FunNode) methoddec;
+                methodNode =  methoddec;
                 break;
             }
         }
@@ -128,7 +129,7 @@ public class ClassNode implements Node {
 
         env.offset = -2;
         //if there are children then check semantics for every child and save the results
-        for (Node attribute : attributeList)
+        for (VardecNode attribute : attributeList)
         {
             ArrayList<SemanticError> errorList = attribute.checkSemantics(env);
             if(!errorList.isEmpty())
@@ -152,7 +153,7 @@ public class ClassNode implements Node {
 
             env.offset = -2;
             //if there are children then check semantics for every child and save the results
-            for (Node method : methodList)
+            for (FunNode method : methodList)
             {
                 errors.addAll(method.checkSemantics(env));
             }

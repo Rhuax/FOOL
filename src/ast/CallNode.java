@@ -1,7 +1,9 @@
 package ast;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import util.Environment;
+import util.MapClassNestLevel;
 import util.SemanticError;
 import lib.FOOLlib;
 
@@ -38,21 +40,43 @@ public String toPrint(String s) {  //
 	public ArrayList<SemanticError> checkSemantics(Environment env) {
 		//create the result
 		ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-		
-		 int j=env.nestingLevel;
-		 STentry tmp=null; 
-		 while (j>=0 && tmp==null)
-		     tmp=(env.symTable.get(j--)).get(id);
-		 if (tmp==null)
-			 res.add(new SemanticError("Id "+id+" not declared"));
-		 
-		 else{
-			 this.entry = tmp;
-			 this.nestinglevel = env.nestingLevel;
-			 
-			 for(Node arg : parlist)
-				 res.addAll(arg.checkSemantics(env));
-		 }
+		ClassNode CurAnalyzedClass = MapClassNestLevel.getCurrentAnalyzedClass();
+		if (CurAnalyzedClass==null) {
+            int j = env.nestingLevel;
+            STentry tmp = null;
+            while (j >= 0 && tmp == null)
+                tmp = (env.symTable.get(j--)).get(id);
+            if (tmp == null)
+                res.add(new SemanticError("Id " + id + " not declared"));
+
+            else {
+                this.entry = tmp;
+                this.nestinglevel = env.nestingLevel;
+
+                for (Node arg : parlist)
+                    res.addAll(arg.checkSemantics(env));
+            }
+        }
+        else{
+            int j = env.nestingLevel-1;
+            STentry temp = (env.symTable.get(j)).get(id);
+            boolean should=true;
+            while (temp==null && should){
+                ClassNode inheritedClassNode=CurAnalyzedClass.getExtendedClass();
+                if (inheritedClassNode!=null) {
+                    String classInheritedName=inheritedClassNode.getId();
+                    int nestingLevel=MapClassNestLevel.getNestingLevelFromClass(classInheritedName);
+                    HashMap<String,STentry> t=env.symTable.get(nestingLevel);
+                    temp = (t.get(id));
+                }
+                else
+                    should=false;
+                CurAnalyzedClass=inheritedClassNode;
+            }
+            if (temp == null || should==false)
+                res.add(new SemanticError("Id " + id + " not declared"));
+
+        }
 		 return res;
 	}
   

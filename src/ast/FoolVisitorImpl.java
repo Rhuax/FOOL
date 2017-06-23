@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolProvaBisBaseVisitor;
@@ -296,8 +297,6 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 	public Node visitVardec(VardecContext ctx)
 	{
-		VarNode result;
-
 		Node typeNode = visit(ctx.type());
 		return new VardecNode(ctx.ID().getText(), typeNode);
 	}
@@ -306,11 +305,12 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	{
 		ProgClassNode res;
 
-		ArrayList<Node> classList = new ArrayList<Node>();
-		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
-			classList.add(visit(classdec));
-
+		ArrayList<ClassNode> classList = new ArrayList<>();
 		res = new ProgClassNode(classList);
+		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
+			classList.add((ClassNode)visit(classdec));
+
+
 
 		return res;
 	}
@@ -318,17 +318,27 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	public Node visitClassdec(FoolProvaBisParser.ClassdecContext ctx)
 	{
 		Node res;
-		ArrayList<Node> attList = new ArrayList<Node>();
-		ArrayList<Node> methList = new ArrayList<Node>();
+		ArrayList<VardecNode> attList = new ArrayList<>();
+		ArrayList<FunNode> methList = new ArrayList<>();
 
 		for(VardecContext vardec : ctx.vardec())
-			attList.add(visit(vardec));
+			attList.add((VardecNode)visit(vardec));
 
 		for(FunContext fundec : ctx.fun())
-			methList.add(visit(fundec));
+			methList.add((FunNode)visit(fundec));
 
-		if(ctx.ID().size() > 1)
-			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList,((ClassNode)  ctx.ID().get(1)));
+		if(ctx.ID().size() > 1) {
+			int i=0;
+			String parentName=ctx.ID().get(1).getText();
+			ClassNode parentClassNode=null;
+			while(i<ProgClassNode.classList.size() && parentClassNode==null){
+				if (Objects.equals(ProgClassNode.classList.get(i).getId(), parentName))
+					parentClassNode=ProgClassNode.classList.get(i);
+				else
+					i++;
+			}
+			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, parentClassNode);
+		}
 		else
 			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList);
 

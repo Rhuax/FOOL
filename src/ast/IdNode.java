@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import util.Environment;
 import util.MapClassNestLevel;
@@ -40,13 +41,17 @@ public class IdNode implements Node {
           }
       }
       else{
-	      int j = env.nestingLevel;
+	      int j = env.nestingLevel-1;
 	      STentry temp = (env.symTable.get(j)).get(id);
 	      boolean should=true;
 	      while (temp==null && should){
               ClassNode inheritedClassNode=CurAnalyzedClass.getExtendedClass();
-              if (inheritedClassNode!=null)
-	            temp = (env.symTable.get(MapClassNestLevel.getNestingLevelFromClass(inheritedClassNode.getId())).get(id));
+              if (inheritedClassNode!=null) {
+                  String classInheritedName=inheritedClassNode.getId();
+                  int nestingLevel=MapClassNestLevel.getNestingLevelFromClass(classInheritedName);
+                  HashMap<String,STentry> t=env.symTable.get(nestingLevel);
+                  temp = (t.get(id));
+              }
               else
                   should=false;
               CurAnalyzedClass=inheritedClassNode;
