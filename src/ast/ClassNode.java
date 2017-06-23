@@ -81,8 +81,8 @@ public class ClassNode implements Node {
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
-        checkAttributes(res,env);
-
+        checkAttributes(res, env);
+        checkMethods(res, env);
 
 
         return res;
@@ -124,23 +124,37 @@ public class ClassNode implements Node {
         boolean check = true;
 
         //check semantics in the dec list
-        if(attributeList.size() > 0)
+
+        env.offset = -2;
+        //if there are children then check semantics for every child and save the results
+        for (Node attribute : attributeList)
         {
+            ArrayList<SemanticError> errorList = attribute.checkSemantics(env);
+            if(!errorList.isEmpty())
+            {
+                for(SemanticError err: errorList)
+                    err.msg += " in class " + id;
+
+                check = false;
+            }
+            res.addAll(errorList);
+        }
+
+        return check;
+    }
+
+    private boolean checkMethods(ArrayList<SemanticError> errors, Environment env)
+    {
+        boolean check = true;
+
+        //check methods semantics
+
             env.offset = -2;
             //if there are children then check semantics for every child and save the results
-            for (Node attribute : attributeList)
+            for (Node method : methodList)
             {
-                ArrayList<SemanticError> errorList = attribute.checkSemantics(env);
-                if(!errorList.isEmpty())
-                {
-                    for(SemanticError err: errorList)
-                        err.msg += " in class " + id;
-
-                    check = false;
-                }
-                res.addAll(errorList);
+                errors.addAll(method.checkSemantics(env));
             }
-        }
 
         return check;
     }

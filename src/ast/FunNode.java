@@ -56,7 +56,7 @@ public class FunNode implements Node {
 	    	  ParNode arg = (ParNode) a;
 	    	  parTypes.add(arg.getType());
 	    	  if ( hmn.put(arg.getId(),new STentry(env.nestingLevel,arg.getType(),paroffset++)) != null  )
-	    		  System.out.println("Parameter id "+arg.getId()+" already declared");
+	    		  res.add(new SemanticError("Parameter id "+arg.getId()+" already declared"));
               
 	      }
 	      
