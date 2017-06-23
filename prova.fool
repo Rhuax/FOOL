@@ -8,12 +8,12 @@ class Prova
 
 class Prova2 implements Prova
 (
-    int x, float x
+    int x, float k
 )
 {
-    int getx() x;
+    int getx(int u,float u) x;
 }
 
 ;
 
-let int x = 1; in x+1;
+let int x = 1; int u(int o,int o) x+3; in x+1;
