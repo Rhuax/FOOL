@@ -49,12 +49,8 @@ public class ProgClassNode implements Node {
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
                if(checkCyclicInheritance(res))
-               {
                    for( Node classdec: classList)
-                   {
                        res.addAll(classdec.checkSemantics(env));
-                   }
-               }
 
         return res;
     }

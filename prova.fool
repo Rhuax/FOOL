@@ -22,7 +22,7 @@ class Prova3 implements Prova2
     int getx() x;
 }
 
-class Prova4 implements Prova3
+class Prova4 implements Prova4
 (
     int x, int y
 )
