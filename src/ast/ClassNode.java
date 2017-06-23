@@ -1,6 +1,7 @@
 package ast;
 
 import util.Environment;
+import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ClassNode implements Node {
     private String id;
     private ArrayList<Node> attributeList;
     private ArrayList<Node> methodList;
-    private String extendedClass = null;
+    private ClassNode extendedClass = null;
 
     public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml) {
         id = i;
@@ -25,7 +26,7 @@ public class ClassNode implements Node {
         methodList = ml;
     }
 
-    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, String cex) {
+    public ClassNode(String i, ArrayList<Node> al, ArrayList<Node> ml, ClassNode cex) {
         id = i;
         attributeList = al;
         methodList = ml;
@@ -72,7 +73,7 @@ public class ClassNode implements Node {
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-
+        MapClassNestLevel.setCurrentAnalyzedClass(this);
         //Controllare se ci sono attributi e metodi duplicati
         env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
@@ -84,11 +85,11 @@ public class ClassNode implements Node {
         checkAttributes(res, env);
         checkMethods(res, env);
 
-
+        MapClassNestLevel.setCurrentAnalyzedClass(null);
         return res;
     }
 
-    public String getExtendedClass()
+    public ClassNode getExtendedClass()
     {
         return extendedClass;
     }

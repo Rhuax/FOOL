@@ -4,10 +4,7 @@ import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by suri9 on 14/06/2017.
@@ -45,6 +42,10 @@ public class ProgClassNode implements Node {
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env)
     {
+        /*env.nestingLevel++;
+        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        env.symTable.add(hm);*/
+
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
@@ -90,13 +91,13 @@ public class ProgClassNode implements Node {
 
         for(Node classdec: classList)
         {
-            String extClass = ((ClassNode) classdec).getExtendedClass();
+            ClassNode extClass =( ((ClassNode) classdec).getExtendedClass());
             if( extClass != null)
             {
-                ClassNode superClass = getClassFromList(extClass);
+                ClassNode superClass = getClassFromList(extClass.getId());
                 if(superClass == null)
                 {
-                    errors.add(new SemanticError("Extended class " + extClass + " not in class list! "));
+                    errors.add(new SemanticError("Extended class " + extClass.getId() + " not in class list! "));
                     check = false;
                 }
             }
@@ -115,11 +116,11 @@ public class ProgClassNode implements Node {
             inheritedClasses = new HashSet<>();
 
             inheritedClasses.add(((ClassNode) classdec).getId());
-            String extClass = ((ClassNode) classdec).getExtendedClass();
+            ClassNode extClass =( ((ClassNode) classdec).getExtendedClass());
 
-                while( extClass != null && inheritedClasses.add(extClass) )
+                while( extClass != null && inheritedClasses.add(extClass.getId()) )
                 {
-                    extClass = getClassFromList(extClass).getExtendedClass();
+                    extClass = (getClassFromList(extClass.getId()).getExtendedClass());
                 }
 
                 if(extClass != null)
@@ -158,7 +159,7 @@ public class ProgClassNode implements Node {
     {
         for (Node classdec:classList)
         {
-            String extClass = ((ClassNode) classdec).getExtendedClass();
+            String extClass = ( ((ClassNode) classdec).getExtendedClass()).getId();
             if( extClass != null)
             {
                 ClassNode superClass = getClassFromList(extClass);

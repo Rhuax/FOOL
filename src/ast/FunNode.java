@@ -29,6 +29,7 @@ public class FunNode implements Node {
     declist=d;
     body=b;
   }
+
   
   @Override
 	public ArrayList<SemanticError> checkSemantics(Environment env) {

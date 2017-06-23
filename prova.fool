@@ -6,30 +6,13 @@ class Prova
     int getx() x;
 }
 
-class Prova2 implements Prova
-(
-    int y
-)
-{
-    int getx() x+y;
-}
 
 class aaaa(
 int porcodio
 )
 {
-int gettuamadreapecora() porcodio+getx();
+int gettuamadreapecora() x;
 }
-
-
-class Prova3 implements Prova2
-(
-    int z
-)
-{
-    int getx() x+y+z;
-}
-
 ;
 
-let int x = 1; int first() 3; int u(int x) x+3; in u(first());
+let int x = 1;in 3;

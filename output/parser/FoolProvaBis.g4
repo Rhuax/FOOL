@@ -17,7 +17,7 @@ prog   : exp SEMIC                  		            #singleExp
        | (classdec)+ SEMIC (let)? exp SEMIC	            #classExp
        ;
 
-classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)? (CLPAR (fun SEMIC)+ RLPAR)?;
+classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)? (CLPAR (fun SEMIC)+ CRPAR)?;
 
 let     : LET (dec SEMIC)+ IN ;
 
@@ -57,10 +57,10 @@ value  :
       | LPAR exp RPAR                      			                                    #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp
       | ID                                                                              #varExp
-      | THIS											                                #thisExp
+      | THIS											                                #thisExp//
       | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                           #funExp
-      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                        #methodExp
-      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp
+      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                        #methodExp//
+      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp//
       ; 
 
 operator      :

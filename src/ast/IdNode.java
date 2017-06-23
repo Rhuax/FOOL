@@ -3,6 +3,7 @@ package ast;
 import java.util.ArrayList;
 
 import util.Environment;
+import util.MapClassNestLevel;
 import util.SemanticError;
 
 public class IdNode implements Node {
@@ -24,19 +25,35 @@ public class IdNode implements Node {
 	  
 	  //create result list
 	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-	  
-	  int j=env.nestingLevel;
-	  STentry tmp=null; 
-	  while (j>=0 && tmp==null)
-		  tmp=(env.symTable.get(j--)).get(id);
-      if (tmp==null)
-          res.add(new SemanticError("Id "+id+" not declared"));
-      
-      else{
-    	  entry = tmp;
-    	  nestinglevel = env.nestingLevel;
+      ClassNode CurAnalyzedClass=MapClassNestLevel.getCurrentAnalyzedClass();
+	  if (CurAnalyzedClass==null) {
+          int j = env.nestingLevel;
+          STentry tmp = null;
+          while (j >= 0 && tmp == null)
+              tmp = (env.symTable.get(j--)).get(id);
+          if (tmp == null)
+              res.add(new SemanticError("Id " + id + " not declared"));
+
+          else {
+              entry = tmp;
+              nestinglevel = env.nestingLevel;
+          }
       }
-	  
+      else{
+	      int j = env.nestingLevel;
+	      STentry temp = (env.symTable.get(j)).get(id);
+	      boolean should=true;
+	      while (temp==null && should){
+              ClassNode inheritedClassNode=CurAnalyzedClass.getExtendedClass();
+              if (inheritedClassNode!=null)
+	            temp = (env.symTable.get(MapClassNestLevel.getNestingLevelFromClass(inheritedClassNode.getId())).get(id));
+              else
+                  should=false;
+              CurAnalyzedClass=inheritedClassNode;
+          }
+          if (temp == null || should==false)
+              res.add(new SemanticError("Id " + id + " not declared"));
+      }
 	  return res;
 	}
   
