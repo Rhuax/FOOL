@@ -87,7 +87,15 @@ public class ClassNode implements Node {
             env.offset = -2;
             //if there are children then check semantics for every child and save the results
             for (Node attribute : attributeList)
-                res.addAll(attribute.checkSemantics(env));
+            {
+                ArrayList<SemanticError> errorList = attribute.checkSemantics(env);
+                if(!errorList.isEmpty())
+                {
+                    for(SemanticError err: errorList)
+                        err.msg += " in class " + id;
+                }
+                    res.addAll(errorList);
+            }
         }
 
 

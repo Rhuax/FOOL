@@ -1,4 +1,4 @@
-class Prova implements Prova3
+class Prova
 (
     int x, int y
 )
@@ -8,23 +8,7 @@ class Prova implements Prova3
 
 class Prova2 implements Prova
 (
-    int x, int y
-)
-{
-    int getx() x;
-}
-
-class Prova3 implements Prova2
-(
-    int x, int y
-)
-{
-    int getx() x;
-}
-
-class Prova4 implements Prova4
-(
-    int x, int y
+    int x, float x
 )
 {
     int getx() x;
