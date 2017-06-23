@@ -18,7 +18,7 @@ class aaaa(
 int porcodio
 )
 {
-int gettuamadreapecora() porcodio+y;
+int gettuamadreapecora() porcodio+getx();
 }
 
 
