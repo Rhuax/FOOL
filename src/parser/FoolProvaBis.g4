@@ -17,9 +17,7 @@ prog   : exp SEMIC                  		            #singleExp
        | (classdec)+ SEMIC (let)? exp SEMIC	            #classExp
        ;
 
-classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)? CLPAR(classconstr SEMIC ( (fun SEMIC)+)? |
-            ( (fun SEMIC)+ )? classconstr SEMIC)CRPAR;
-classconstr : ID (LPAR vardec? ( COMMA vardec)* RPAR) (let)? exp?  ;
+classdec  : CLASS ID ( IMPLEMENTS ID )? (LPAR vardec ( COMMA vardec)* RPAR)? (CLPAR (fun SEMIC)+ RPAR)?;
 
 let     : LET (dec SEMIC)+ IN ;
 
