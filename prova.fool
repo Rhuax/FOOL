@@ -6,7 +6,7 @@ class Prova
     int getx() x;
 }
 
-class Prova2 implements Prova
+class Prova
 (
     int x, float x
 )

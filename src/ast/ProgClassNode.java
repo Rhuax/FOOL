@@ -58,7 +58,8 @@ public class ProgClassNode implements Node {
     private boolean checkDuplicatedClasses(ArrayList<SemanticError> errors)
     {
         boolean check = true;
-
+        Set<String> classSet = new HashSet<>();
+/*
         for(int i = 0; i < classList.size(); i++)
         {
             for(int j = i+1; j < classList.size(); j++)
@@ -68,6 +69,15 @@ public class ProgClassNode implements Node {
                     errors.add(new SemanticError("Class " + ((ClassNode) classList.get(i)).getId() + " already defined!"));
                     check = false;
                 }
+            }
+        }
+*/
+        for(Node classNode: classList)
+        {
+            if(!classSet.add( ((ClassNode) classNode).getId()))
+            {
+                errors.add(new SemanticError("Class " + ((ClassNode) classNode).getId() + " already defined!"));
+                check = false;
             }
         }
 
