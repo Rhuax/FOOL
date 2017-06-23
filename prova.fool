@@ -22,6 +22,14 @@ class Prova3 implements Prova2
     int getx() x;
 }
 
+class Prova4 implements Prova3
+(
+    int x, int y
+)
+{
+    int getx() x;
+}
+
 ;
 
 let int x = 1; in x+1;

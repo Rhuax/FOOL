@@ -46,21 +46,23 @@ public class ProgClassNode implements Node {
     public ArrayList<SemanticError> checkSemantics(Environment env)
     {
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-        checkDuplicatedClasses(res);
-        checkImplementedClasses(res);
-        checkCyclicInheritance(res);
-
-        for( Node classdec: classList)
-        {
-            res.addAll(classdec.checkSemantics(env));
-        }
+        if(checkDuplicatedClasses(res))
+            if(checkImplementedClasses(res))
+               if(checkCyclicInheritance(res))
+               {
+                   for( Node classdec: classList)
+                   {
+                       res.addAll(classdec.checkSemantics(env));
+                   }
+               }
 
         return res;
     }
 
-    private void checkDuplicatedClasses(ArrayList<SemanticError> errors)
+    private boolean checkDuplicatedClasses(ArrayList<SemanticError> errors)
     {
-        //Vedere se ci sono classi con nomi duplicati
+        boolean check = true;
+
         for(int i = 0; i < classList.size(); i++)
         {
             for(int j = i+1; j < classList.size(); j++)
@@ -68,13 +70,18 @@ public class ProgClassNode implements Node {
                 if( ((ClassNode) classList.get(i)).getId().compareTo(((ClassNode) classList.get(j)).getId()) == 0 )
                 {
                     errors.add(new SemanticError("Class " + ((ClassNode) classList.get(i)).getId() + " already defined!"));
+                    check = false;
                 }
             }
         }
+
+        return check;
     }
 
-    private void checkImplementedClasses(ArrayList<SemanticError> errors)
+    private boolean checkImplementedClasses(ArrayList<SemanticError> errors)
     {
+        boolean check = true;
+
         for(Node classdec: classList)
         {
             String extClass = ((ClassNode) classdec).getExtendedClass();
@@ -84,13 +91,17 @@ public class ProgClassNode implements Node {
                 if(superClass == null)
                 {
                     errors.add(new SemanticError("Extended class " + extClass + " not in class list! "));
+                    check = false;
                 }
             }
         }
+
+        return check;
     }
 
-    private void checkCyclicInheritance(ArrayList<SemanticError> errors)
+    private boolean checkCyclicInheritance(ArrayList<SemanticError> errors)
     {
+        boolean check = true;
         Set<String> inheritedClasses;
 
         for(Node classdec: classList)
@@ -106,8 +117,13 @@ public class ProgClassNode implements Node {
                 }
 
                 if(extClass != null)
+                {
                     errors.add(new SemanticError("Cyclic inheritance in class " + ((ClassNode) classdec).getId() + "!" ));
-            }
+                    check = false;
+                }
+        }
+
+        return check;
     }
 
     private ClassNode getClassFromList(String className)
