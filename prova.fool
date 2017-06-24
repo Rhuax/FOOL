@@ -1,4 +1,6 @@
-class a (int u){
-int getu() u;
+class a (int x)
+{
+    int getx() x;
 };
-let int u =22; int u() u; in print(u);
+
+let a obj = new a(2); in a.getx();

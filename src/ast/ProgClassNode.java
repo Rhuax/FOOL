@@ -56,8 +56,8 @@ public class ProgClassNode implements Node {
                if(checkCyclicInheritance(res))
                    for( ClassNode classdec: classList)
                        res.addAll(classdec.checkSemantics(env));
-        //Adesso checksemantic per il let(se c'è) e poi per l'exp
 
+        //Adesso checksemantic per il let(se c'è) e poi per l'exp
         if(ProgClassNode.innerdec!=null)
             for(Node d:ProgClassNode.innerdec)
                 res.addAll(d.checkSemantics(env));

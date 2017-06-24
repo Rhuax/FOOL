@@ -313,12 +313,14 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
 			classList.add((ClassNode)visit(classdec));
 
-		if (ctx.let()!=null){
-			ArrayList<Node> indec=new ArrayList<>();
+		if (ctx.let()!=null)
+		{
+			ArrayList<Node> indec = new ArrayList<>();
 			for(DecContext dec:ctx.let().dec())
 				indec.add(visit(dec));
 			ProgClassNode.innerdec=indec;
 		}
+
 		res.exp=visit(ctx.exp());
 
 		return res;
@@ -343,6 +345,46 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		}
 		else
 			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList);
+
+		return res;
+	}
+
+	public Node visitNewExp(FoolProvaBisParser.NewExpContext ctx)
+	{
+		NewExpNode res;
+		ArrayList<Node> expList = new ArrayList<>();
+
+		if(ctx.exp() != null)
+		{
+			for(FoolProvaBisParser.ExpContext exp: ctx.exp())
+				expList.add(visit(exp));
+
+			res = new NewExpNode(expList);
+		}
+		else
+		{
+			res = new NewExpNode(null);
+		}
+
+		return res;
+	}
+
+	public Node visitMethodExp(FoolProvaBisParser.MethodExpContext ctx)
+	{
+		MethodExpNode res;
+		ArrayList<Node> expList = new ArrayList<>();
+
+		if(ctx.exp() != null)
+		{
+			for(FoolProvaBisParser.ExpContext exp: ctx.exp())
+				expList.add(visit(exp));
+
+			res = new MethodExpNode(expList);
+		}
+		else
+		{
+			res = new MethodExpNode(null);
+		}
 
 		return res;
 	}
