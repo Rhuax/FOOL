@@ -57,7 +57,7 @@ public class IdNode implements Node {
               CurAnalyzedClass=inheritedClassNode;
           }
           if (temp == null || should==false)
-              res.add(new SemanticError("Id " + id + " not declared"));
+              res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
       }
 	  return res;
 	}

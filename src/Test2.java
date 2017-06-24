@@ -67,26 +67,26 @@ public class Test2 {
 			FoolProvaBisParser parser = new FoolProvaBisParser(tokens);
 
 			ParseTree t = parser.prog();
+			if (parser.getNumberOfSyntaxErrors() == 0) { //Se non ci sono errori nel parser allora passa ai controlli semantici
+				//System.out.println(t.getText()) ;
+				//System.out.println(count_var(t)) ;
 
-			//System.out.println(t.getText()) ;
-			//System.out.println(count_var(t)) ;
-
-			FoolVisitorImpl visitor = new FoolVisitorImpl();
-			Node ast = visitor.visit(t); //generazione AST
-
-
-			Environment env = new Environment();
-			ArrayList<SemanticError> err = ast.checkSemantics(env);
-
-			if (err.size() > 0) {
-				System.out.println("You had: " + err.size() + " errors:");
-				for (SemanticError e : err)
-					System.out.println("\t" + e);
-			} else {
+				FoolVisitorImpl visitor = new FoolVisitorImpl();
+				Node ast = visitor.visit(t); //generazione AST
 
 
-				System.out.println("Visualizing AST...");
-				//System.out.println(ast.toPrint(""));
+				Environment env = new Environment();
+				ArrayList<SemanticError> err = ast.checkSemantics(env);
+
+				if (err.size() > 0) {
+					System.out.println("You had: " + err.size() + " semantic errors:");
+					for (SemanticError e : err)
+						System.out.println("\t" + e);
+				} else {
+
+
+					System.out.println("Visualizing AST...");
+					//System.out.println(ast.toPrint(""));
 /*
 				Node type = ast.typeCheck(); //type-checking bottom-up
 				System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
@@ -117,8 +117,9 @@ public class Test2 {
 		        ExecuteVM vm = new ExecuteVM(parserASM.code);
 		        vm.cpu();
 		       }*/
-			}
+				}
 
+			}
 		}
 	}
 }

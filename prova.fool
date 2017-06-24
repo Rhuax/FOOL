@@ -1,15 +1,10 @@
-class a implements b(int y)
+class io(int j)
 {
-    float gety() y;
+ float bla() j;
 }
 
-
-class b implements a
-(int nuovoparametro)
-
+class a(io u)
 {
-    float getsumpar() y;
-}
-
-;
+float b() u;
+};
 let int u =22; in print(u);
