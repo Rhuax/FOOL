@@ -329,19 +329,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 		if(ctx.ID().size() > 1)
 		{
-			int i=0;
 			String parentName=ctx.ID().get(1).getText();
-
-			/*String parentClassNode=null;
-			while(i<ProgClassNode.classList.size() && parentClassNode==null)
-			{
-				ClassNode cl = ProgClassNode.classList.get(i);
-				System.out.println("Class " + (i+1) + " name = " + cl.getId());
-				if ((cl.getId()).compareTo(parentName) == 0)
-					parentClassNode=cl;
-				else
-					i++;
-			}*/
 			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, parentName);
 		}
 		else

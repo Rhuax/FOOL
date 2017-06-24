@@ -45,7 +45,9 @@ public class ProgClassNode implements Node {
         /*env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);*/
+
         setExtendedClasses();
+
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
@@ -72,19 +74,7 @@ public class ProgClassNode implements Node {
     {
         boolean check = true;
         Set<String> classSet = new HashSet<>();
-/*
-        for(int i = 0; i < classList.size(); i++)
-        {
-            for(int j = i+1; j < classList.size(); j++)
-            {
-                if( ((ClassNode) classList.get(i)).getId().compareTo(((ClassNode) classList.get(j)).getId()) == 0 )
-                {
-                    errors.add(new SemanticError("Class " + ((ClassNode) classList.get(i)).getId() + " already defined!"));
-                    check = false;
-                }
-            }
-        }
-*/
+
         for(ClassNode classNode: classList)
         {
             if(!classSet.add(  classNode.getId()))
