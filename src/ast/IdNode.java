@@ -2,6 +2,7 @@ package ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import util.Environment;
 import util.MapClassNestLevel;
@@ -41,14 +42,18 @@ public class IdNode implements Node {
           }
       }
       else{
-	      int j = env.nestingLevel-1;
+	      int j = env.nestingLevel;
 	      STentry temp = (env.symTable.get(j)).get(id);
+	      while (temp==null && j >= MapClassNestLevel.getNestingLevelFromClass(MapClassNestLevel.getCurrentAnalyzedClass().getId())){
+              temp = (env.symTable.get(j--)).get(id);
+          }
 	      boolean should=true;
 	      while (temp==null && should){
               ClassNode inheritedClassNode=CurAnalyzedClass.getExtendedClass();
               if (inheritedClassNode!=null) {
                   String classInheritedName=inheritedClassNode.getId();
                   int nestingLevel=MapClassNestLevel.getNestingLevelFromClass(classInheritedName);
+
                   HashMap<String,STentry> t=env.symTable.get(nestingLevel);
                   temp = (t.get(id));
               }
@@ -58,6 +63,11 @@ public class IdNode implements Node {
           }
           if (temp == null || should==false)
               res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
+	      else
+          {
+              entry=temp;
+              nestinglevel=env.nestingLevel;
+          }
       }
 	  return res;
 	}

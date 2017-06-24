@@ -58,8 +58,11 @@ public String toPrint(String s) {  //
             }
         }
         else{
-            int j = env.nestingLevel-1;
+            int j = env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(id);
+            while(temp==null && j>=MapClassNestLevel.getNestingLevelFromClass(MapClassNestLevel.getCurrentAnalyzedClass().getId())){
+                temp=(env.symTable.get(j--)).get(id);
+            }
             boolean should=true;
             while (temp==null && should){
                 ClassNode inheritedClassNode=CurAnalyzedClass.getExtendedClass();
@@ -75,7 +78,10 @@ public String toPrint(String s) {  //
             }
             if (temp == null || should==false)
                 res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
-
+            else{
+                entry=temp;
+                nestinglevel=env.nestingLevel;
+            }
         }
 		 return res;
 	}

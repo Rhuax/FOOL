@@ -1,10 +1,16 @@
-class io(int j)
+class madredituttelebestemmiechehotiratoperfarfunzionarequestacosa
+(int parametrodelcazzo)
 {
- float bla() j;
+    float valore() parametrodelcazzo+44.99228;
 }
 
-class a(io u)
+class g implements madredituttelebestemmiechehotiratoperfarfunzionarequestacosa(int j)
 {
-float b() u;
-};
-let int u =22; in print(u);
+float u() 33;
+}
+class laclassepiubruttachece implements g(int h)
+{
+ float f() let int x=33; int ahah() let int y=99;in y+valore();in x+j+ahah()+u();
+}
+;
+let int u =22; int u() u; in print(u);
