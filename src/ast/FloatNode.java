@@ -7,9 +7,9 @@ import util.SemanticError;
 
 public class FloatNode implements Node {
 
-    private Integer val;
+    private float val;
 
-    public FloatNode (Integer n) {
+    public FloatNode (float n) {
         val=n;
     }
 

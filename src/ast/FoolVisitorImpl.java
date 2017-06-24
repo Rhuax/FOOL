@@ -224,7 +224,10 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		//there is no need to perform a check here, the lexer ensures this text is a boolean
 		return new BoolNode(Boolean.parseBoolean(ctx.getText())); 
 	}
-	
+
+	public Node visitFloatVal(FoolProvaBisParser.FloatValContext ctx) {
+		return new FloatNode(Float.parseFloat(ctx.FLOATER().getText()));
+	}
 
 	public Node visitBaseExp(BaseExpContext ctx) {
 		
