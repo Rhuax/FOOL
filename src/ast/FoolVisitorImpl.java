@@ -327,17 +327,22 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		for(FunContext fundec : ctx.fun())
 			methList.add((FunNode)visit(fundec));
 
-		if(ctx.ID().size() > 1) {
+		if(ctx.ID().size() > 1)
+		{
 			int i=0;
 			String parentName=ctx.ID().get(1).getText();
-			ClassNode parentClassNode=null;
-			while(i<ProgClassNode.classList.size() && parentClassNode==null){
-				if (Objects.equals(ProgClassNode.classList.get(i).getId(), parentName))
-					parentClassNode=ProgClassNode.classList.get(i);
+
+			/*String parentClassNode=null;
+			while(i<ProgClassNode.classList.size() && parentClassNode==null)
+			{
+				ClassNode cl = ProgClassNode.classList.get(i);
+				System.out.println("Class " + (i+1) + " name = " + cl.getId());
+				if ((cl.getId()).compareTo(parentName) == 0)
+					parentClassNode=cl;
 				else
 					i++;
-			}
-			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, parentClassNode);
+			}*/
+			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList, parentName);
 		}
 		else
 			res = new ClassNode(ctx.ID().get(0).getText(), attList, methList);

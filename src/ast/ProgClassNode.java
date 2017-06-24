@@ -45,7 +45,7 @@ public class ProgClassNode implements Node {
         /*env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);*/
-
+        setExtendedClasses();
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
@@ -54,6 +54,18 @@ public class ProgClassNode implements Node {
                        res.addAll(classdec.checkSemantics(env));
 
         return res;
+    }
+
+    private void setExtendedClasses()
+    {
+        for(ClassNode classdec: classList)
+        {
+            String extClassName = classdec.getExtendedClassName();
+            if(extClassName != null)
+            {
+                classdec.setExtendedClass(getClassFromList(extClassName));
+            }
+        }
     }
 
     private boolean checkDuplicatedClasses(ArrayList<SemanticError> errors)

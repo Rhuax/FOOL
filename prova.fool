@@ -1,6 +1,6 @@
 class a implements b(int y)
 {
-float gety() y;
+    float gety() y;
 }
 
 
@@ -8,8 +8,8 @@ class b implements a
 (int nuovoparametro)
 
 {
-    float getsumpar() nuovoparametro;
-};
+    float getsumpar() y;
+}
 
-
+;
 let int u =22; in print(u);

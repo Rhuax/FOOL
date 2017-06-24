@@ -19,6 +19,17 @@ public class ClassNode implements Node {
     private ArrayList<VardecNode> attributeList;
     private ArrayList<FunNode> methodList;
     private ClassNode extendedClass = null;
+    private String extendedClassName = null;
+
+    public String getExtendedClassName() {
+        return extendedClassName;
+    }
+
+    public void setExtendedClass(ClassNode extendedClass) {
+        this.extendedClass = extendedClass;
+    }
+
+
 
     ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml) {
         id = i;
@@ -26,11 +37,11 @@ public class ClassNode implements Node {
         methodList = ml;
     }
 
-    ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml, ClassNode cex) {
+    ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml, String cex) {
         id = i;
         attributeList = al;
         methodList = ml;
-        extendedClass = cex;
+        extendedClassName = cex;
     }
 
 
