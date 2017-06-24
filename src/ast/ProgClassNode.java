@@ -58,6 +58,9 @@ public class ProgClassNode implements Node {
                        res.addAll(classdec.checkSemantics(env));
 
         //Adesso checksemantic per il let(se c'è) e poi per l'exp
+        env.nestingLevel++;
+        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        env.symTable.add(hm);
         if(ProgClassNode.innerdec!=null)
             for(Node d:ProgClassNode.innerdec)
                 res.addAll(d.checkSemantics(env));

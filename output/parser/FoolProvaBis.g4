@@ -57,10 +57,10 @@ value  :
       | LPAR exp RPAR                      			                                    #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp
       | ID                                                                              #varExp
-      | THIS											                                #thisExp//da implementare
+      | THIS											                                #thisExp
       | ID ( LPAR (exp (COMMA exp)* )? RPAR )                                           #funExp
-      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                        #methodExp//da implementare
-      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp//da implementare
+      | (ID | THIS) DOT ID ( LPAR (exp (COMMA exp)* )? RPAR )	                        #methodExp
+      | NEW ID (LPAR exp (COMMA exp)* RPAR)?			                                #newExp
       ; 
 
 operator      :

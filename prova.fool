@@ -1,6 +1,13 @@
 class a (int x)
 {
     int getx() x;
-};
+}
 
-let a obj = new a(2); in a.getx();
+class b(int x)
+{
+int getx() x;
+}
+
+;
+
+let int x =99;in print(x);
