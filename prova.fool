@@ -1,7 +1,4 @@
-class a
-(int parametrodelcazzo)
-{
-    float valore() parametrodelcazzo+44.99228;
-}
-;
+class a (int u){
+int getu() u;
+};
 let int u =22; int u() u; in print(u);

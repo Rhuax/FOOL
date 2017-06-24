@@ -313,7 +313,13 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		for(FoolProvaBisParser.ClassdecContext classdec : ctx.classdec())
 			classList.add((ClassNode)visit(classdec));
 
-
+		if (ctx.let()!=null){
+			ArrayList<Node> indec=new ArrayList<>();
+			for(DecContext dec:ctx.let().dec())
+				indec.add(visit(dec));
+			ProgClassNode.innerdec=indec;
+		}
+		res.exp=visit(ctx.exp());
 
 		return res;
 	}

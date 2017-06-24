@@ -1,6 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
+import parser.FoolProvaBisParser;
 import util.Environment;
 import util.SemanticError;
 
@@ -12,7 +13,8 @@ import java.util.*;
 public class ProgClassNode implements Node {
 
     public static ArrayList<ClassNode> classList;
-
+    public static ArrayList<Node> innerdec;
+    public static Node exp;
     ProgClassNode(ArrayList<ClassNode> cl)
     {
         classList = cl;
@@ -54,7 +56,12 @@ public class ProgClassNode implements Node {
                if(checkCyclicInheritance(res))
                    for( ClassNode classdec: classList)
                        res.addAll(classdec.checkSemantics(env));
+        //Adesso checksemantic per il let(se c'è) e poi per l'exp
 
+        if(ProgClassNode.innerdec!=null)
+            for(Node d:ProgClassNode.innerdec)
+                res.addAll(d.checkSemantics(env));
+        res.addAll(ProgClassNode.exp.checkSemantics(env));
         return res;
     }
 
