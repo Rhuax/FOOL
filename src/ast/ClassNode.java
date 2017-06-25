@@ -101,7 +101,7 @@ public class ClassNode implements Node {
         return res;
     }
 
-    ClassNode getExtendedClass()
+    public ClassNode getExtendedClass()
     {
         return extendedClass;
     }

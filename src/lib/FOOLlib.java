@@ -15,14 +15,37 @@ public class FOOLlib {
   //valuta se il tipo "a" � <= al tipo "b", dove "a" e "b" sono tipi di base: int o bool
   public static boolean isSubtype (Node a, Node b)
   {
-    boolean r=false;
-    if(a instanceof ClassNode && b instanceof ClassNode){
-      while()
+    boolean r = false;
+    boolean found;
 
+    if(a instanceof ClassNode && b instanceof ClassNode)
+    {
+      if(((ClassNode) a).getId().compareTo(((ClassNode) b).getId()) == 0)
+      {
+        r = true;
+      }
+      else
+      {
+        found = false;
+        ClassNode inheritedClass = (((ClassNode) a).getExtendedClass());
+
+        while(!found && inheritedClass != null)
+        {
+          if(((ClassNode) b).getId().compareTo(inheritedClass.getId()) == 0)
+            found = true;
+
+          inheritedClass = inheritedClass.getExtendedClass();
+        }
+
+        if(found)
+          r = true;
+      }
     }
     else
-      r= a.getClass().equals(b.getClass()) ||
-              ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) );
+    {
+      r = ( a.getClass().equals(b.getClass()) ) || ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) );
+    }
+
     return  r;
   }
 

@@ -90,7 +90,7 @@ public class Test2 {
 
 				Node type = ast.typeCheck(); //type-checking bottom-up
 
-				System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
+				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 /*
 
 		        // CODE GENERATION  prova.fool.asm

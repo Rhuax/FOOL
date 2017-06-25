@@ -193,11 +193,8 @@ public class ProgClassNode implements Node {
 
     private void checkMethods2()
     {
-
-
         for (ClassNode classdec:classList)
         {
-
             ArrayList<FunNode> methodList =  classdec.getMethodsList();
             for(FunNode method:methodList)
             {
@@ -210,14 +207,13 @@ public class ProgClassNode implements Node {
                     for (int i =0;i<superMethodList.size() && !found;i++)
                     {
                         FunNode superMethod=superMethodList.get(i);
-                        if(Objects.equals(superMethod.getId(), method.getId())){
-
+                        if(Objects.equals(superMethod.getId(), method.getId()))
+                        {
                             found=true;
                             Node curMethodType =  method.getType();
                             Node superMethodType =  superMethod.getType();
                             checkReturnType(curMethodType, superMethodType);
                             checkMethodParametersType(method, superMethod);
-
                         }
 
                     }
@@ -226,9 +222,6 @@ public class ProgClassNode implements Node {
 
                 }
             }
-
-
-
         }
     }
 
@@ -258,7 +251,7 @@ public class ProgClassNode implements Node {
 
     private void checkParamType(Node subParamType, Node superParamType, int paramIndex)
     {
-        if (!(FOOLlib.isSubtype(superParamType, subParamType)))
+        if (!FOOLlib.isSubtype(superParamType, subParamType))
         {
             System.out.println("Param type, in position " + (paramIndex + 1) + ", in sub-method, is not supertype of param type in super-method ");
             System.exit(0);
