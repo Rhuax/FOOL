@@ -31,7 +31,7 @@ public class ProgClassNode implements Node {
     public Node typeCheck()
     {
         checkClasses();
-        checkMethods();
+        checkMethods2();
 
         return null;
     }
@@ -193,31 +193,40 @@ public class ProgClassNode implements Node {
 
     private void checkMethods2()
     {
-        boolean found;
+
 
         for (ClassNode classdec:classList)
         {
-            ClassNode superClass = classdec.getExtendedClass();
 
-            while( superClass != null )
+            ArrayList<FunNode> methodList =  classdec.getMethodsList();
+            for(FunNode method:methodList)
             {
-                ArrayList<FunNode> methodList =  classdec.getMethodsList();
-
-                for (FunNode methoddec : methodList)
+                boolean found=false;
+                ClassNode superClass = classdec.getExtendedClass();
+                while( superClass != null && !found)
                 {
-                    FunNode superMethod = superClass.getMethodFromList(methoddec.getId());
+                    ArrayList<FunNode> superMethodList =  superClass.getMethodsList();
 
-                    if (superMethod != null)
+                    for (int i =0;i<superMethodList.size() && !found;i++)
                     {
-                        Node curMethodType =  methoddec.getType();
-                        Node superMethodType =  superMethod.getType();
-                        checkReturnType(curMethodType, superMethodType);
-                        checkMethodParametersType(methoddec, superMethod);
-                    }
-                }
+                        FunNode superMethod=superMethodList.get(i);
+                        if(Objects.equals(superMethod.getId(), method.getId())){
 
-                superClass = (superClass.getExtendedClass());
+                            found=true;
+                            Node curMethodType =  method.getType();
+                            Node superMethodType =  superMethod.getType();
+                            checkReturnType(curMethodType, superMethodType);
+                            checkMethodParametersType(method, superMethod);
+
+                        }
+
+                    }
+                    if(!found)
+                        superClass = (superClass.getExtendedClass());
+
+                }
             }
+
 
 
         }

@@ -2,6 +2,8 @@ package lib;
 
 import ast.*;
 
+import java.util.Objects;
+
 public class FOOLlib {
   
   private static int labCount=0; 
@@ -13,8 +15,15 @@ public class FOOLlib {
   //valuta se il tipo "a" � <= al tipo "b", dove "a" e "b" sono tipi di base: int o bool
   public static boolean isSubtype (Node a, Node b)
   {
-    return a.getClass().equals(b.getClass()) ||
-    	   ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) ); //
+    boolean r=false;
+    if(a instanceof ClassNode && b instanceof ClassNode){
+      while()
+
+    }
+    else
+      r= a.getClass().equals(b.getClass()) ||
+              ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) );
+    return  r;
   }
 
   public static boolean isSupertype (Node a, Node b) {

@@ -1,13 +1,18 @@
 class a
 (int x)
 {
-    float getx() x + 0.5;
+    float getx() x;
 }
 
 class b implements a
 (int j)
 {
-    float u() getx() + j;
+    float getj()  j;
+}
+class c implements b
+(int y)
+{
+
 }
 
 ;
