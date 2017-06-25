@@ -190,17 +190,16 @@ public class ProgClassNode implements Node {
             }
         }
     }
-/*
+
     private void checkMethods2()
     {
         boolean found;
 
         for (ClassNode classdec:classList)
         {
-            found = false;
             ClassNode superClass = classdec.getExtendedClass();
 
-            while( superClass != null && !found )
+            while( superClass != null )
             {
                 ArrayList<FunNode> methodList =  classdec.getMethodsList();
 
@@ -223,7 +222,7 @@ public class ProgClassNode implements Node {
 
         }
     }
-*/
+
     private void checkMethodParametersType(FunNode subMethod, FunNode superMethod)
     {
         ArrayList<Node> subParamList = subMethod.getParlist();
