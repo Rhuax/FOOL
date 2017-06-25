@@ -171,7 +171,7 @@ public class ProgClassNode implements Node {
     {
         for (ClassNode classdec:classList)
         {
-            String extClass =  classdec.getExtendedClass().getId();
+            String extClass =  classdec.getExtendedClassName();
             if( extClass != null)
             {
                 ClassNode superClass = getClassFromList(extClass);
@@ -184,13 +184,46 @@ public class ProgClassNode implements Node {
                         Node curMethodType =  methoddec.getType();
                         Node superMethodType =  superMethod.getType();
                         checkReturnType(curMethodType, superMethodType);
-                        checkMethodParametersType( methoddec, superMethod);
+                        checkMethodParametersType(methoddec, superMethod);
                     }
                 }
             }
         }
     }
+/*
+    private void checkMethods2()
+    {
+        boolean found;
 
+        for (ClassNode classdec:classList)
+        {
+            found = false;
+            ClassNode superClass = classdec.getExtendedClass();
+
+            while( superClass != null && !found )
+            {
+                ArrayList<FunNode> methodList =  classdec.getMethodsList();
+
+                for (FunNode methoddec : methodList)
+                {
+                    FunNode superMethod = superClass.getMethodFromList(methoddec.getId());
+
+                    if (superMethod != null)
+                    {
+                        Node curMethodType =  methoddec.getType();
+                        Node superMethodType =  superMethod.getType();
+                        checkReturnType(curMethodType, superMethodType);
+                        checkMethodParametersType(methoddec, superMethod);
+                    }
+                }
+
+                superClass = (superClass.getExtendedClass());
+            }
+
+
+        }
+    }
+*/
     private void checkMethodParametersType(FunNode subMethod, FunNode superMethod)
     {
         ArrayList<Node> subParamList = subMethod.getParlist();
@@ -219,7 +252,7 @@ public class ProgClassNode implements Node {
     {
         if (!(FOOLlib.isSubtype(superParamType, subParamType)))
         {
-            System.out.println("Param type, in position " + (paramIndex + 1) + ", in sub-method is not supertype of param type in super-method ");
+            System.out.println("Param type, in position " + (paramIndex + 1) + ", in sub-method, is not supertype of param type in super-method ");
             System.exit(0);
         }
     }
@@ -232,4 +265,5 @@ public class ProgClassNode implements Node {
             System.exit(0);
         }
     }
+
 }

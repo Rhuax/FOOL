@@ -1,16 +1,14 @@
-class madredituttelebestemmiechehotiratoperfarfunzionarequestacosa
-(int parametrodelcazzo)
+class a
+(int x)
 {
-    float valore() parametrodelcazzo+44.99228;
+    float getx() x + 0.5;
 }
 
-class g implements madredituttelebestemmiechehotiratoperfarfunzionarequestacosa(int j)
+class b implements a
+(int j)
 {
-float u() 33;
+    float u() getx() + j;
 }
-class laclassepiubruttachece implements g(int h)
-{
- float f() let int x=33; int ahah() let int y=99;in y+valore();in x+j+ahah()+u();
-}
+
 ;
-let int u =22; int gu() u; in print(gu);
+let b obj = new b(1); in b.getx();
