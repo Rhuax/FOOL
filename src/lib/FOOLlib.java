@@ -43,7 +43,13 @@ public class FOOLlib {
     }
     else
     {
-      r = ( a.getClass().equals(b.getClass()) ) || ( (a instanceof IntTypeNode) && (b instanceof FloatTypeNode) );
+      if (a instanceof IntTypeNode){
+        if(b instanceof IntTypeNode || b instanceof FloatTypeNode)
+          r=true;
+      }
+      else if (a instanceof FloatTypeNode && b instanceof FloatTypeNode)
+        r=true;
+
     }
 
     return  r;
