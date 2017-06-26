@@ -1,21 +1,7 @@
-class a
-(int x)
+class a(int y)
 {
-    float getx(int k) x + k;
+int geta() y;
 }
-/*
-class b implements a
-(int y)
-{
-    int gety() y;
-}
-class c implements b
-(int z)
-{
-    int getz() z;
-    float getx(float u) z+u; //Sbaglia quasi tutto cazzooooo
-}
-*/
 ;
 
-let int obj = new a(2,3); in print(1);
+let g obj = new a(2,44); in print(1);

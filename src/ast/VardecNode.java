@@ -10,6 +10,11 @@ import lib.FOOLlib;
 public class VardecNode implements Node {
 
     private String id;
+
+    public Node getType() {
+        return type;
+    }
+
     private Node type;
 
     public VardecNode (String i, Node t) {
