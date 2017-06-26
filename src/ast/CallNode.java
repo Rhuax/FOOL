@@ -69,6 +69,7 @@ public String toPrint(String s) {  //
                 if (inheritedClassNode!=null) {
                     String classInheritedName=inheritedClassNode.getId();
                     int nestingLevel=MapClassNestLevel.getNestingLevelFromClass(classInheritedName);
+
                     HashMap<String,STentry> t=env.symTable.get(nestingLevel);
                     temp = (t.get(id));
                 }

@@ -56,12 +56,14 @@ public class Test2 {
 		String fileName = "prova.fool";
 
 		FileInputStream is = new FileInputStream(fileName);
+
 		ANTLRInputStream input = new ANTLRInputStream(is);
 		FoolProvaBisLexer lexer = new FoolProvaBisLexer(input);
+
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 
 		//SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
-		if (lexer.lexicalErrors > 0) {
+		 if (lexer.lexicalErrors > 0) {
 			System.out.println("The program was not in the right format. Exiting the compilation process now");
 		}
 		else

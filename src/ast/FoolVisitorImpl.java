@@ -1,6 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -367,19 +368,17 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	public Node visitMethodExp(FoolProvaBisParser.MethodExpContext ctx)
 	{
 		MethodExpNode res;
-		ArrayList<Node> expList = new ArrayList<>();
+		ArrayList<Node> expList=null;
 
 		if(ctx.exp() != null)
 		{
+			expList=new ArrayList<>();
 			for(FoolProvaBisParser.ExpContext exp: ctx.exp())
 				expList.add(visit(exp));
 
-			res = new MethodExpNode(expList);
+
 		}
-		else
-		{
-			res = new MethodExpNode(null);
-		}
+		res = new MethodExpNode(expList);
 
 		return res;
 	}

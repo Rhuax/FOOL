@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class MethodExpNode implements Node
 {
     public ArrayList<Node> expList;
+    public String variableID;
+    public String methodID;
 
     MethodExpNode(ArrayList<Node> el)
     {

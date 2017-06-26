@@ -1,12 +1,29 @@
 
-class g(int mamt)
+/*Questi sono due programmi che danno problemi:
+-Il primo fa crashare il programma (poi vi dico perchè)
+-Il secondo accetta getj() perchè lo trova nella symboltable ma non dovrebbe perchè appartiene
+solo ad 'a'
+*/
+/*class a implements g
+(int u)
 {
-int tuamadreapecora() mamt;
+int jj() u+p();
 }
-class a implements g(int y)
-{
-int geta() y;
-}
-;
 
-let a obj = new g(2); in print(1);
+
+class g (int k)
+{
+int p() 44;
+};
+let int x=1;in 3;
+*/
+
+
+/*
+class a(int j)
+{
+int getj() j;
+};
+let int x=1; in getj();
+
+*/
