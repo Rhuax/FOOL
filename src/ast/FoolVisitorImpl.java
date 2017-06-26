@@ -354,17 +354,11 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		NewExpNode res;
 		ArrayList<Node> expList = new ArrayList<>();
 
-		if(ctx.exp() != null)
-		{
-			for(FoolProvaBisParser.ExpContext exp: ctx.exp())
-				expList.add(visit(exp));
+		for(FoolProvaBisParser.ExpContext exp: ctx.exp())
+			expList.add(visit(exp));
 
-			res = new NewExpNode(expList);
-		}
-		else
-		{
-			res = new NewExpNode(null);
-		}
+		res = new NewExpNode(ctx.ID().getText() ,expList);
+
 
 		return res;
 	}

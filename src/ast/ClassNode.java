@@ -16,6 +16,11 @@ import lib.FOOLlib;
 public class ClassNode implements Node {
 
     private String id;
+
+    public ArrayList<VardecNode> getAttributeList() {
+        return attributeList;
+    }
+
     private ArrayList<VardecNode> attributeList;
     private ArrayList<FunNode> methodList;
     private ClassNode extendedClass = null;

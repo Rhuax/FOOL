@@ -145,18 +145,19 @@ public class ProgClassNode implements Node {
         return check;
     }
 
-    private ClassNode getClassFromList(String className)
+    public static ClassNode getClassFromList(String className)
     {
         ClassNode clNode = null;
 
-        for (ClassNode classdec:classList)
-        {
-            if(  classdec.getId().compareTo(className) == 0)
+        if(classList != null)
+            for (ClassNode classdec:classList)
             {
-                clNode =  classdec;
-                break;
+                if(  classdec.getId().compareTo(className) == 0)
+                {
+                    clNode =  classdec;
+                    break;
+                }
             }
-        }
 
         return clNode;
     }

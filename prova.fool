@@ -1,9 +1,9 @@
 class a
 (int x)
 {
-    float getx(float k) x + k;
+    float getx(int k) x + k;
 }
-
+/*
 class b implements a
 (int y)
 {
@@ -13,8 +13,9 @@ class c implements b
 (int z)
 {
     int getz() z;
-    float getx(int u) z+u;  //dovrebbe dare errore porca puttana, int non è super tipo di float
+    float getx(float u) z+u; //Sbaglia quasi tutto cazzooooo
 }
-
+*/
 ;
-let int x = 0; in x+1;
+
+let int obj = new a(2,3); in print(1);

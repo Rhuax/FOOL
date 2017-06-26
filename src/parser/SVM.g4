@@ -8,54 +8,38 @@ import java.util.HashMap;
 public int lexicalErrors=0;
 }
 
-@parser::members {
-      
-    public int[] code = new int[ExecuteVM.CODESIZE];    
-    private int i = 0;
-    private HashMap<String,Integer> labelAdd = new HashMap<String,Integer>();
-    private HashMap<Integer,String> labelRef = new HashMap<Integer,String>();
-        
-}
-
 /*------------------------------------------------------------------
  * PARSER RULES
  *------------------------------------------------------------------*/
-  
+start: (assembly)*                #startRule;
+
 assembly: 
-    ( PUSH n=NUMBER   {code[i++] = PUSH;
-			                 code[i++] = Integer.parseInt($n.text);}
-	  | PUSH l=LABEL    {code[i++] = PUSH; //
-	    		             labelRef.put(i++,$l.text);} 		     
-	  | POP		    {code[i++] = POP;}	
-	  | ADD		    {code[i++] = ADD;}
-	  | SUB		    {code[i++] = SUB;}
-	  | MULT	    {code[i++] = MULT;}
-	  | DIV		    {code[i++] = DIV;}
-	  | STOREW	  {code[i++] = STOREW;} //
-	  | LOADW           {code[i++] = LOADW;} //
-	  | l=LABEL COL     {labelAdd.put($l.text,i);}
-	  | BRANCH l=LABEL  {code[i++] = BRANCH;
-                       labelRef.put(i++,$l.text);}
-	  | BRANCHEQ l=LABEL {code[i++] = BRANCHEQ; //
-                        labelRef.put(i++,$l.text);}
-	  | BRANCHLESSEQ l=LABEL {code[i++] = BRANCHLESSEQ;
-                          labelRef.put(i++,$l.text);}
-	  | JS              {code[i++] = JS;}		     //
-	  | LOADRA          {code[i++] = LOADRA;}    //
-	  | STORERA         {code[i++] = STORERA;}   //
-	  | LOADRV          {code[i++] = LOADRV;}   //
-	  | STORERV         {code[i++] = STORERV;}    //
-	  | LOADFP          {code[i++] = LOADFP;}   //
-	  | STOREFP         {code[i++] = STOREFP;}   //
-	  | COPYFP          {code[i++] = COPYFP;}   //
-	  | LOADHP          {code[i++] = LOADHP;}   //
-	  | STOREHP         {code[i++] = STOREHP;}   //
-	  | PRINT           {code[i++] = PRINT;}
-	  | HALT            {code[i++] = HALT;}
-	  )* { for (Integer refAdd: labelRef.keySet()) {
-	              code[refAdd]=labelAdd.get(labelRef.get(refAdd));
-		     } 
-		   } ;
+     PUSH n=NUMBER              #pushNumber
+	  | PUSH l=LABEL            #pushLabel
+	  | POP                     #pop
+	  | ADD                     #add
+	  | SUB                     #sub
+	  | MULT                    #mult
+	  | DIV                     #div
+	  | LOADW                   #loadw
+	  | l=LABEL COL             #label
+	  | BRANCH l=LABEL          #branch
+	  | BRANCHEQ l=LABEL        #brancheq
+	  | BRANCHLESSEQ l=LABEL    #branchlesseq
+	  | JS                      #js
+	  | LOADRA                  #loadra
+	  | STORERA                 #storera
+	  | LOADRV                  #loadrv
+	  | STORERV                 #storerv
+	  | LOADFP                  #loadfp
+	  | STOREFP                 #storefp
+	  | COPYFP                  #copyfp
+	  | LOADHP                  #loadhp
+	  | STOREHP                 #storehp
+	  | PRINT                   #print
+	  | HALT                    #halt
+;
+
  	 
 /*------------------------------------------------------------------
  * LEXER RULES

@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.SemanticError;
 
@@ -10,11 +11,12 @@ import java.util.ArrayList;
  */
 public class NewExpNode implements  Node
 {
+    String classId;
     public ArrayList<Node> expList;
 
-    NewExpNode(ArrayList<Node> el)
+    NewExpNode(String id, ArrayList<Node> el)
     {
-        expList = el;
+        classId = id; expList = el;
     }
 
     @Override
@@ -23,7 +25,39 @@ public class NewExpNode implements  Node
     }
 
     @Override
-    public Node typeCheck() {
+    public Node typeCheck()
+    {
+        ClassNode cl = ProgClassNode.getClassFromList(classId);
+        if(cl != null)
+        {
+            ArrayList<VardecNode> al = cl.getAttributeList();
+            if(expList.size() == al.size())
+            {
+                for (int i = 0; i < expList.size(); i++)
+                {
+                    Node subAtt = expList.get(i);
+                    Node supAtt = al.get(i);
+                    Node subType = subAtt.typeCheck();
+                    Node supType = ((ParNode) supAtt).getType();
+                    if(!FOOLlib.isSubtype(subType, supType))
+                    {
+                        System.out.println("Type of parameter in position " + (i+1) + "in instantiation of class " + cl.getId() + "is not compatible with the type of corresponding attribute!");
+                        System.exit(0);
+                    }
+
+                }
+            }
+            else
+            {
+                System.out.println("Not enough parameters to instantiate an object of class " + cl.getId() + "!");
+                System.exit(0);
+            }
+        }
+        else
+        {
+            System.out.println("Cannot instantiate a class that non exists!");
+            System.exit(0);
+        }
         return null;
     }
 

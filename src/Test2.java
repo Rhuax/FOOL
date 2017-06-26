@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 
+import astInterpreter.InstructionSet;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -62,7 +63,9 @@ public class Test2 {
 		//SIMPLISTIC BUT WRONG CHECK OF THE LEXER ERRORS
 		if (lexer.lexicalErrors > 0) {
 			System.out.println("The program was not in the right format. Exiting the compilation process now");
-		} else {
+		}
+		else
+		{
 
 			FoolProvaBisParser parser = new FoolProvaBisParser(tokens);
 
@@ -82,7 +85,8 @@ public class Test2 {
 					System.out.println("You had: " + err.size() + " semantic errors:");
 					for (SemanticError e : err)
 						System.out.println("\t" + e);
-				} else {
+				} else
+					{
 
 
 					System.out.println("Visualizing AST...");
@@ -91,8 +95,8 @@ public class Test2 {
 				Node type = ast.typeCheck(); //type-checking bottom-up
 
 				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
-/*
 
+/*
 		        // CODE GENERATION  prova.fool.asm
 		        String code=ast.codeGeneration(); 
 		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
@@ -105,23 +109,27 @@ public class Test2 {
 		        SVMLexer lexerASM = new SVMLexer(inputASM);
 		        CommonTokenStream tokensASM = new CommonTokenStream(lexerASM);
 		        SVMParser parserASM = new SVMParser(tokensASM);
-		        
-		        parserASM.assembly();
+
 		        ========================================
 		        QUI BISOGNA ISTANZIARE UN VISITOR CHE GIRA L'ALBERO E PER OGNI NODO CREA L'ISTRUZIONE CORRISPONDENTE
 		        E POPOLA parserASM.code
+
+		        ParseTree svmt = parserASM.assembly();
+		        SVMVisitorImpl svmVisitor = new SVMVisitorImpl();
+		        Node svmTree = svmVisitor.visit(svmt);
 		        ========================================
+
 		        System.out.println("You had: "+lexerASM.lexicalErrors+" lexical errors and "+parserASM.getNumberOfSyntaxErrors()+" syntax errors.");
 		        if (lexerASM.lexicalErrors>0 || parserASM.getNumberOfSyntaxErrors()>0) System.exit(1);
 		
 		        System.out.println("Starting Virtual Machine...");
-		        ExecuteVM vm = new ExecuteVM(parserASM.code);
-		        vm.cpu();
-		       }*/
+		        ExecuteVM vm = new ExecuteVM(InstructionSet.code);
+		        vm.cpu();*/
+		       }
 				}
-
 			}
 		}
 	}
-}
+
+
 
