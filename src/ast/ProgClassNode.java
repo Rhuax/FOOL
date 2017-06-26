@@ -31,9 +31,19 @@ public class ProgClassNode implements Node {
     public Node typeCheck()
     {
         checkClasses();
-        checkMethods2();
-
+        checkMethods();
+        checkLet();
+        checkExp();
         return null;
+    }
+
+    private void checkExp() {
+        exp.typeCheck();
+    }
+
+    private void checkLet() {
+        for(Node n:innerdec)
+            n.typeCheck();
     }
 
     @Override
@@ -168,31 +178,9 @@ public class ProgClassNode implements Node {
             classdec.typeCheck();
     }
 
-    private void checkMethods()
-    {
-        for (ClassNode classdec:classList)
-        {
-            String extClass =  classdec.getExtendedClassName();
-            if( extClass != null)
-            {
-                ClassNode superClass = getClassFromList(extClass);
-                ArrayList<FunNode> methodList =  classdec.getMethodsList();
-                for (FunNode methoddec : methodList)
-                {
-                    FunNode superMethod = superClass.getMethodFromList( methoddec.getId());
-                    if (superMethod != null)
-                    {
-                        Node curMethodType =  methoddec.getType();
-                        Node superMethodType =  superMethod.getType();
-                        checkReturnType(curMethodType, superMethodType);
-                        checkMethodParametersType(methoddec, superMethod);
-                    }
-                }
-            }
-        }
-    }
 
-    private void checkMethods2()
+
+    private void checkMethods()
     {
         for (ClassNode classdec:classList)
         {

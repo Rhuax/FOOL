@@ -62,11 +62,11 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 	public Node visitVarasm(VarasmContext ctx) {
 		
-		//declare the result node
-		VarNode result;
+
 		
 		//visit the type
-		Node typeNode = visit(ctx.vardec().type());
+		VardecContext v=ctx.vardec();
+		Node typeNode = visit(v.type());
 		
 		//visit the exp
 		Node expNode = visit(ctx.exp());
@@ -118,9 +118,9 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		else
 			if(ctx.getText().equals("float"))
 				return new FloatTypeNode();
-		
-		//this will never happen thanks to the parser
-		return null;
+		else
+			return new IdTypeNode(ctx.getText());
+
 
 	}
 	
@@ -224,6 +224,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		//there is no need to perform a check here, the lexer ensures this text is a boolean
 		return new BoolNode(Boolean.parseBoolean(ctx.getText())); 
 	}
+
 
 	public Node visitFloatVal(FoolProvaBisParser.FloatValContext ctx) {
 		return new FloatNode(Float.parseFloat(ctx.FLOATER().getText()));

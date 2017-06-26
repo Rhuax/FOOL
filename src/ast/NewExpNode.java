@@ -29,7 +29,7 @@ public class NewExpNode implements  Node
     {
         ClassNode cl = ProgClassNode.getClassFromList(classId);
             ArrayList<VardecNode> al = cl.getAttributeList();
-            if(expList.size() == al.size())
+            if(expList.size() <= al.size())
             {
                 for (int i = 0; i < expList.size(); i++)
                 {
@@ -47,11 +47,11 @@ public class NewExpNode implements  Node
             }
             else
             {
-                System.out.println("Not enough parameters to instantiate an object of class " + cl.getId() + "!");
+                System.out.println("Too much parameters when instantiating class " + cl.getId() + "!");
                 System.exit(0);
             }
 
-        return null;
+        return new IdTypeNode(classId);
 }
 
     @Override

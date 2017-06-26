@@ -18,20 +18,24 @@ public class FOOLlib {
     boolean r = false;
     boolean found;
 
-    if(a instanceof ClassNode && b instanceof ClassNode)
+    if(a instanceof IdTypeNode && b instanceof IdTypeNode)
     {
-      if(((ClassNode) a).getId().compareTo(((ClassNode) b).getId()) == 0)
+      String nameA=((IdTypeNode) a).getTypeName();
+      String nameB=((IdTypeNode) b).getTypeName();
+
+      if(Objects.equals(nameA, nameB))
       {
         r = true;
       }
       else
       {
         found = false;
-        ClassNode inheritedClass = (((ClassNode) a).getExtendedClass());
+        ClassNode class_a=ProgClassNode.getClassFromList(nameA);
+        ClassNode inheritedClass = ((class_a.getExtendedClass()));
 
         while(!found && inheritedClass != null)
         {
-          if(((ClassNode) b).getId().compareTo(inheritedClass.getId()) == 0)
+          if((nameB.compareTo(inheritedClass.getId()) == 0))
             found = true;
 
           inheritedClass = inheritedClass.getExtendedClass();

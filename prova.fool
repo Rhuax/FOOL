@@ -1,7 +1,12 @@
-class a(int y)
+
+class g(int mamt)
+{
+int tuamadreapecora() mamt;
+}
+class a implements g(int y)
 {
 int geta() y;
 }
 ;
 
-let g obj = new a(2,44); in print(1);
+let a obj = new g(2); in print(1);
