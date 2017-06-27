@@ -64,8 +64,12 @@ public class ProgClassNode implements Node {
         if(checkDuplicatedClasses(res))
             if(checkImplementedClasses(res))
                if(checkCyclicInheritance(res))
+               {
+                   sortClassesByInheritance();
+
                    for( ClassNode classdec: classList)
                        res.addAll(classdec.checkSemantics(env));
+               }
 
         //Adesso checksemantic per il let(se c'è) e poi per l'exp
         env.nestingLevel++;
@@ -159,15 +163,19 @@ public class ProgClassNode implements Node {
     {
         ClassNode clNode = null;
 
-        if(classList != null)
-            for (ClassNode classdec:classList)
-            {
-                if(  classdec.getId().compareTo(className) == 0)
+        if(className != null)
+        {
+            if(classList != null)
+                for (ClassNode classdec:classList)
                 {
-                    clNode =  classdec;
-                    break;
+                    if(  classdec.getId().compareTo(className) == 0)
+                    {
+                        clNode =  classdec;
+                        break;
+                    }
                 }
-            }
+        }
+
 
         return clNode;
     }
@@ -256,4 +264,45 @@ public class ProgClassNode implements Node {
         }
     }
 
+    private void sortClassesByInheritance()
+    {
+        Map<String, String> classMap = new HashMap<>();
+        List<ClassNode> orderedList = new LinkedList<>();
+
+        for(ClassNode cl: classList)
+        {
+            String className = cl.getId();
+            String extendedClass = cl.getExtendedClassName();
+            classMap.put(className, extendedClass);
+        }
+
+        for(String clName: classMap.keySet())
+        {
+            String ext = classMap.get(clName);
+            ClassNode curClass = getClassFromList(clName);
+            ClassNode curExtClass = getClassFromList(ext);
+
+            if(ext != null)
+            {
+                if(!orderedList.contains(ext))
+                {
+                    orderedList.add(curExtClass);
+                    orderedList.add(curClass);
+                }
+                else
+                {
+                    int extIndex = orderedList.indexOf(ext);
+                    if(extIndex < orderedList.size() - 1)
+                        orderedList.add(extIndex+1, curClass);
+                    else
+                        orderedList.add(curClass);
+                }
+            }
+            else
+            {
+                orderedList.add(curClass);
+            }
+        }
+        classList = new ArrayList<>(orderedList);
+    }
 }

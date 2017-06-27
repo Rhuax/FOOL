@@ -4,10 +4,10 @@
 -Il secondo accetta getj() perchè lo trova nella symboltable ma non dovrebbe perchè appartiene
 solo ad 'a'
 */
-/*class a implements g
+class a implements g
 (int u)
 {
-int jj() u+p();
+int jj() u+k;
 }
 
 
@@ -16,7 +16,7 @@ class g (int k)
 int p() 44;
 };
 let int x=1;in 3;
-*/
+
 
 
 /*
