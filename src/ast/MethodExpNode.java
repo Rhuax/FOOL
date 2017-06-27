@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.MapClassNestLevel;
 import util.SemanticError;
@@ -34,21 +35,44 @@ public class MethodExpNode implements Node
         ClassNode c=ProgClassNode.getClassFromList(objectTypeName);
         while(!found)
         {
-
             if((methodNode=c.getMethodFromList(methodID))!=null)
                 found=true;
-            else{
+            else
+            {
                 c=c.getExtendedClass();
-                if(c==null) {
+                if(c==null)
+                {
                     System.out.println("Cannot call method " + methodID + " on object " + objectID);
                     System.exit(0);
                 }
+            }
+        }
 
+
+        ArrayList<VardecNode> al = c.getAttributeList();
+        if(expList.size() == al.size())
+        {
+            for (int i = 0; i < expList.size(); i++)
+            {
+                Node subAtt = expList.get(i);
+                Node supAtt = al.get(i);
+                Node subType = subAtt.typeCheck();
+                Node supType = ((VardecNode) supAtt).getType();
+
+                if(!FOOLlib.isSubtype(subType, supType))
+                {
+                    System.out.println("Type of parameter in position " + (i+1) + "in instantiation of class " + c.getId() + "is not compatible with the type of corresponding attribute!");
+                    System.exit(0);
+                }
+            }
         }
+        else
+        {
+            System.out.println("Too much parameters when instantiating class " + c.getId() + "!");
+            System.exit(0);
         }
+
         return methodNode.getType();
-
-
     }
 
     @Override
@@ -72,8 +96,6 @@ public class MethodExpNode implements Node
 
     private void checkRuleSemantic(ArrayList<SemanticError> errors,Environment env)
     {
-
-
         if(objectID == null)
         {
             ClassNode curAnalyzedClass = MapClassNestLevel.getCurrentAnalyzedClass();
@@ -97,9 +119,6 @@ public class MethodExpNode implements Node
                 errors.add(new SemanticError("Object "+objectID + " is not defined"));
             else
                 objectTypeName=temp.getType().toString();
-
-
-
         }
 
     }
