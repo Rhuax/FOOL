@@ -49,19 +49,19 @@ public class MethodExpNode implements Node
         }
 
 
-        ArrayList<VardecNode> al = c.getAttributeList();
+        ArrayList<Node> al = c.getMethodFromList(methodID).getParlist();
         if(expList.size() == al.size())
         {
             for (int i = 0; i < expList.size(); i++)
             {
                 Node subAtt = expList.get(i);
-                Node supAtt = al.get(i);
+                ParNode supAtt = (ParNode)al.get(i);
                 Node subType = subAtt.typeCheck();
-                Node supType = ((VardecNode) supAtt).getType();
+                Node supType =  supAtt.getType();
 
                 if(!FOOLlib.isSubtype(subType, supType))
                 {
-                    System.out.println("Type of parameter in position " + (i+1) + "in instantiation of class " + c.getId() + "is not compatible with the type of corresponding attribute!");
+                    System.out.println("Type of parameter in position " + (i+1) + " in instantiation of class " + c.getId() + " is not compatible with the type of corresponding attribute!");
                     System.exit(0);
                 }
             }

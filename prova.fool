@@ -1,10 +1,18 @@
 class a(int h)
 {
-float aa() 44;
+float aa(f u) 44;
 }
 
 class f implements a (int jk)
 {
-float y() 99;
-};
-let a oggetto= new f(33);int fffasd=oggetto.aa();in oggetto.aa();
+float y(h ooo) 99;
+}
+
+class h implements f (int l)
+{
+float asdasd() 44.4;
+
+}
+
+;
+let hx o=new h(44);h o2=new h(88); in o.y(o2);
