@@ -1,15 +1,15 @@
-class a(int o)
+class a (int x)
 {
-
-
-a bla(a k) k;
-a getO() this.bla(this);
-
+    int getx() x;
 }
 
-class u(int x)
+class b implements a (int y)
 {
-int getbla() 44;
+    int gety()
+        let
+            int z = this.getx();
+        in
+            if (z>0) then {z} else {2};
 }
 
 ;
