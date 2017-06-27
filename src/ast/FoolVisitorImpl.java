@@ -89,7 +89,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		//we are getting a shortcut here by constructing directly the ParNode
 		//this could be done differently by visiting instead the VardecContext
 		for(VardecContext vc : ctx.vardec())
-			res.addPar( new ParNode(vc.ID().getText(), visit( vc.type() )) );
+			res.addPar( new ParNode(vc.ID().getText(), ((VardecNode)visit(vc)).getType()) );
 		
 		//add body
 		//create a list for the nested declarations

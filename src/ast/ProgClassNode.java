@@ -3,6 +3,7 @@ package ast;
 import lib.FOOLlib;
 import parser.FoolProvaBisParser;
 import util.Environment;
+import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.*;
@@ -234,23 +235,23 @@ public class ProgClassNode implements Node {
         {
             for(int i = 0; i < subParamList.size(); i++)
             {
-                Node subParam = subParamList.get(i);
-                Node superParam = superParamList.get(i);
+                Node subParam = ((ParNode)subParamList.get(i)).getType();
+                Node superParam = ((ParNode)superParamList.get(i)).getType();
                 checkParamType(subParam, superParam, i);
             }
         }
         else
         {
-            System.out.println("Param list size of sub-method does not correspond to param list size of super-method");
+            System.out.println("Param list size of overridden method does not correspond to param list size of super-method");
             System.exit(0);
         }
     }
 
     private void checkParamType(Node subParamType, Node superParamType, int paramIndex)
     {
-        if (!FOOLlib.isSubtype(superParamType, subParamType))
+        if (!FOOLlib.isSupertype(subParamType, superParamType))
         {
-            System.out.println("Param type, in position " + (paramIndex + 1) + ", in sub-method, is not supertype of param type in super-method ");
+            System.out.println("Param type, in position " + (paramIndex + 1) + ", in overridden method, is not supertype of param type in super-method ");
             System.exit(0);
         }
     }
@@ -259,7 +260,7 @@ public class ProgClassNode implements Node {
     {
         if (!(FOOLlib.isSubtype(subType, superType)))
         {
-            System.out.println("Method return type in class is not subtype of method return type in super class ");
+            System.out.println("Method return type in class  is not subtype of method return type in super class ");
             System.exit(0);
         }
     }

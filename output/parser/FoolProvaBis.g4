@@ -52,7 +52,7 @@ factor : left=value (EQ right=value)?
    
 value  :
         INTEGER                        		                                            #intVal
-      | BOOLEAN                 		                                                #boolVal
+      | ( TRUE | FALSE )                		                                                #boolVal
       | FLOATER                                                                         #floatVal
       | LPAR exp RPAR                      			                                    #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp
@@ -123,7 +123,6 @@ DOT    : '.' ;
 fragment DIGIT : '0'..'9';    
 INTEGER       : DIGIT+;
 FLOATER       : DIGIT+ '.' DIGIT+;
-BOOLEAN       : TRUE | FALSE;
 
 
 

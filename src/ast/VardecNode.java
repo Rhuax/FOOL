@@ -15,6 +15,10 @@ public class VardecNode implements Node {
         return type;
     }
 
+    public String getId() {
+        return id;
+    }
+
     private Node type;
 
     public VardecNode (String i, Node t) {

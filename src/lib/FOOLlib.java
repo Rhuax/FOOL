@@ -1,6 +1,7 @@
 package lib;
 
 import ast.*;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Objects;
 
@@ -53,15 +54,15 @@ public class FOOLlib {
       }
       else if (a instanceof FloatTypeNode && b instanceof FloatTypeNode)
         r=true;
-
+      else if(a instanceof BoolTypeNode && b instanceof BoolTypeNode)
+        r=true;
     }
 
     return  r;
   }
 
   public static boolean isSupertype (Node a, Node b) {
-    return a.getClass().equals(b.getClass()) ||
-            ( (a instanceof FloatTypeNode) && (b instanceof IntTypeNode) ); //
+    return isSubtype(b,a);
   }
   
   public static String freshLabel() { 

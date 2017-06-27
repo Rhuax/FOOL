@@ -1,16 +1,12 @@
 class a (int x)
 {
-    int getx() x;
+    float getx(float y) x;
 }
 
 class b implements a (int y)
 {
-    int gety()
-        let
-            int z = this.getx();
-        in
-            if (z>0) then {z} else {2};
+    float  getxx(bool f) 44;
 }
 
 ;
-let a og=new a(99); in 3;
+let b og=new b(99); in og.getxx(true);

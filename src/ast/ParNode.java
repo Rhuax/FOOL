@@ -36,7 +36,7 @@ public class ParNode implements Node {
   
   //non utilizzato
   public Node typeCheck () {
-     return null;
+     return type;
   }
   
   //non utilizzato
