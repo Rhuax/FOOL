@@ -284,14 +284,16 @@ public class ProgClassNode implements Node {
 
             if(ext != null)
             {
-                if(!orderedList.contains(ext))
+                if(!orderedList.contains(curExtClass))
                 {
+
+
                     orderedList.add(curExtClass);
-                    orderedList.add(curClass);
+                        orderedList.add(curClass);
                 }
                 else
                 {
-                    int extIndex = orderedList.indexOf(ext);
+                    int extIndex = orderedList.indexOf(curExtClass);
                     if(extIndex < orderedList.size() - 1)
                         orderedList.add(extIndex+1, curClass);
                     else

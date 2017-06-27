@@ -1,18 +1,14 @@
-class a(int h)
+class a(int o)
 {
-float aa(f u) 44;
+
+a bla(a k) k;
+a getO() this.bla(this);
 }
 
-class f implements a (int jk)
+class u(int x)
 {
-float y(h ooo) 99;
-}
-
-class h implements f (int l)
-{
-float asdasd() 44.4;
-
+int getbla() 44;
 }
 
 ;
-let hx o=new h(44);h o2=new h(88); in o.y(o2);
+let a og=new a(99); in 3;

@@ -52,7 +52,10 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		return res;
 	}
 	
+	public Node visitThisExp(FoolProvaBisParser.ThisExpContext ctx){
 
+		return new ThisNode();
+	}
 	public Node visitSingleExp(SingleExpContext ctx) {
 		
 		//simply return the result of the visit to the inner exp

@@ -70,7 +70,7 @@ public class ClassNode implements Node {
 
     @Override
     public Node typeCheck() {
-
+        MapClassNestLevel.setCurrentAnalyzedClass(this);
         if (attributeList!=null)
             for (VardecNode dec:attributeList)
                 dec.typeCheck();
@@ -78,7 +78,7 @@ public class ClassNode implements Node {
         if (methodList!=null)
             for (FunNode dec:methodList)
                 dec.typeCheck();
-
+    MapClassNestLevel.setCurrentAnalyzedClass(null);
     return null;
     }
 
