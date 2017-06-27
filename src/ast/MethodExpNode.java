@@ -61,7 +61,7 @@ public class MethodExpNode implements Node
 
                 if(!FOOLlib.isSubtype(subType, supType))
                 {
-                    System.out.println("Type of parameter in position " + (i+1) + "in instantiation of class " + c.getId() + "is not compatible with the type of corresponding attribute!");
+                    System.out.println("Type of parameter in position " + (i+1) + " in instantiation of class " + c.getId() + " is not compatible with the type of corresponding attribute!");
                     System.exit(0);
                 }
             }
