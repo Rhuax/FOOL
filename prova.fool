@@ -1,8 +1,10 @@
 class a(int o)
 {
 
+
 a bla(a k) k;
 a getO() this.bla(this);
+
 }
 
 class u(int x)
