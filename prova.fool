@@ -5,7 +5,9 @@ float aa(f u) 44;
 
 class f implements a (int jk)
 {
-float y(h ooo) 99;
+int k() 3;
+float y(h ooo) 99 + this.aa(new f(2));
+
 }
 
 class h implements f (int l)
@@ -15,4 +17,8 @@ float asdasd() 44.4;
 }
 
 ;
-let hx o=new h(44);h o2=new h(88); in o.y(o2);
+let
+    h o=new h(44);
+    h o2=new h(88);
+in
+    o.y(o2);
