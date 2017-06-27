@@ -21,7 +21,10 @@ public class IdTypeNode implements Node{
     public String toPrint(String indent) {
         return indent+"typeName:"+typeName+"\n";
     }
-
+    @Override
+    public String toString(){
+        return getTypeName();
+    }
     @Override
     public Node typeCheck() {
         return null;

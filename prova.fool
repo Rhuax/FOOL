@@ -1,29 +1,10 @@
-
-/*Questi sono due programmi che danno problemi:
--Il primo fa crashare il programma (poi vi dico perchè)
--Il secondo accetta getj() perchè lo trova nella symboltable ma non dovrebbe perchè appartiene
-solo ad 'a'
-*/
-class a implements g
-(int u)
+class a(int h)
 {
-int jj() u+k;
+float aa() 44;
 }
 
-
-class g (int k)
+class f implements a (int jk)
 {
-int p() 44;
+float y() 99;
 };
-let int x=1;in 3;
-
-
-
-/*
-class a(int j)
-{
-int getj() j;
-};
-let int x=1; in getj();
-
-*/
+let a oggetto= new f(33);int fffasd=oggetto.aa();in oggetto.aa();

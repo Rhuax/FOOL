@@ -11,6 +11,12 @@ import java.util.HashMap;
 public  class MapClassNestLevel {
     static private HashMap<String,Integer> map=new HashMap<>();
     static private ClassNode currentAnalyzedClass;
+
+    public static int getMaxClassNestLevel() {
+        return maxClassNestLevel;
+    }
+
+    static private int maxClassNestLevel=0;
     public static ClassNode getCurrentAnalyzedClass() {
         return currentAnalyzedClass;
     }
@@ -27,6 +33,8 @@ public  class MapClassNestLevel {
     }
 
     public static void putClassNestingLevel(String c,int nest){
+        if (nest>maxClassNestLevel)
+            maxClassNestLevel=nest;
         map.put(c,nest);
     }
 

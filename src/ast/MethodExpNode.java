@@ -5,6 +5,7 @@ import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Created by suri9 on 24/06/2017.
@@ -14,14 +15,13 @@ public class MethodExpNode implements Node
     public ArrayList<Node> expList;
     public String objectID;
     public String methodID;
-
+    private String objectTypeName;
     MethodExpNode(ArrayList<Node> el, String o, String m)
     {
         expList = el;
         objectID = o;
         methodID = m;
     }
-
     @Override
     public String toPrint(String indent) {
         return null;
@@ -29,7 +29,26 @@ public class MethodExpNode implements Node
 
     @Override
     public Node typeCheck() {
-        return null;
+        boolean found=false;
+        FunNode methodNode=null;
+        ClassNode c=ProgClassNode.getClassFromList(objectTypeName);
+        while(!found)
+        {
+
+            if((methodNode=c.getMethodFromList(methodID))!=null)
+                found=true;
+            else{
+                c=c.getExtendedClass();
+                if(c==null) {
+                    System.out.println("Cannot call method " + methodID + " on object " + objectID);
+                    System.exit(0);
+                }
+
+        }
+        }
+        return methodNode.getType();
+
+
     }
 
     @Override
@@ -42,7 +61,7 @@ public class MethodExpNode implements Node
     {
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        checkRuleSemantic(res);
+        checkRuleSemantic(res,env);
 
         if(expList != null)
             for(Node exp: expList)
@@ -51,16 +70,16 @@ public class MethodExpNode implements Node
         return res;
     }
 
-    private void checkRuleSemantic(ArrayList<SemanticError> errors)
+    private void checkRuleSemantic(ArrayList<SemanticError> errors,Environment env)
     {
-        String curAnalyzedClassName;
+
 
         if(objectID == null)
         {
             ClassNode curAnalyzedClass = MapClassNestLevel.getCurrentAnalyzedClass();
             if(curAnalyzedClass != null)
             {
-                curAnalyzedClassName = curAnalyzedClass.getId();
+                objectTypeName = curAnalyzedClass.getId();
             }
             else
             {
@@ -69,7 +88,19 @@ public class MethodExpNode implements Node
         }
         else
         {
-            
+            int j = env.nestingLevel;
+            STentry temp = (env.symTable.get(j)).get(objectID);
+            while (temp!=null && j > MapClassNestLevel.getMaxClassNestLevel())
+                temp = (env.symTable.get(j--)).get(objectID);
+
+            if(temp==null)
+                errors.add(new SemanticError("Object "+objectID + " is not defined"));
+            else
+                objectTypeName=temp.getType().toString();
+
+
+
         }
+
     }
 }
