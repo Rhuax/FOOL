@@ -14,7 +14,6 @@ let b og=new b(99); in og.getxx(true);
 */
 
 let
-    int y=3;
-    int calcola() if(y>=3) then {y+1} else {y-1};
+    int calcola(int y) if(y>0) then {1} else {0};
 in
-    print(calcola());
+    print(calcola(2));
