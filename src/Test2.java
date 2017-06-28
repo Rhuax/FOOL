@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 
 import astInterpreter.InstructionSet;
+import astInterpreter.InterpreterNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -98,35 +99,33 @@ public class Test2 {
 
 				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 
-/*
+
 		        // CODE GENERATION  prova.fool.asm
-		        String code=ast.codeGeneration(); 
+		        String code=ast.codeGeneration();
+		        System.out.println("Code generated!");
+
 		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
 		        out.write(code);
 		        out.close(); 
 		        System.out.println("Code generated! Assembling and running generated code.");
-		        
+
 		        FileInputStream isASM = new FileInputStream(fileName+".asm");
 		        ANTLRInputStream inputASM = new ANTLRInputStream(isASM);
 		        SVMLexer lexerASM = new SVMLexer(inputASM);
 		        CommonTokenStream tokensASM = new CommonTokenStream(lexerASM);
 		        SVMParser parserASM = new SVMParser(tokensASM);
 
-		        ========================================
-		        QUI BISOGNA ISTANZIARE UN VISITOR CHE GIRA L'ALBERO E PER OGNI NODO CREA L'ISTRUZIONE CORRISPONDENTE
-		        E POPOLA parserASM.code
-
-		        ParseTree svmt = parserASM.assembly();
+		        ParseTree svmt = parserASM.start();
 		        SVMVisitorImpl svmVisitor = new SVMVisitorImpl();
-		        Node svmTree = svmVisitor.visit(svmt);
-		        ========================================
+		        InterpreterNode svmTree = svmVisitor.visit(svmt);
+
 
 		        System.out.println("You had: "+lexerASM.lexicalErrors+" lexical errors and "+parserASM.getNumberOfSyntaxErrors()+" syntax errors.");
 		        if (lexerASM.lexicalErrors>0 || parserASM.getNumberOfSyntaxErrors()>0) System.exit(1);
 		
 		        System.out.println("Starting Virtual Machine...");
 		        ExecuteVM vm = new ExecuteVM(InstructionSet.code);
-		        vm.cpu();*/
+		        vm.cpu();
 		       }
 				}
 			}

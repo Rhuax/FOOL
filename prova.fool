@@ -1,3 +1,4 @@
+/*
 class a (int x)
 {
     float getx(float y) x;
@@ -10,3 +11,10 @@ class b implements a (int y)
 
 ;
 let b og=new b(99); in og.getxx(true);
+*/
+
+let
+    int y=3;
+    int calcola() if(y>=3) then {y+1} else {y-1};
+in
+    print(calcola());

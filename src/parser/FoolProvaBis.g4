@@ -52,7 +52,7 @@ factor : left=value (EQ right=value)?
    
 value  :
         INTEGER                        		                                            #intVal
-      | ( TRUE | FALSE )                		                                                #boolVal
+      | ( TRUE | FALSE )                		                                        #boolVal
       | FLOATER                                                                         #floatVal
       | LPAR exp RPAR                      			                                    #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp

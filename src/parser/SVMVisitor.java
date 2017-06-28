@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL_ATTRIBUTE_GRAMMAR/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -97,6 +97,27 @@ public interface SVMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBrancheq(SVMParser.BrancheqContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code branchgreater}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBranchgreater(SVMParser.BranchgreaterContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code branchless}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBranchless(SVMParser.BranchlessContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code branchgreatereq}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBranchgreatereq(SVMParser.BranchgreatereqContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code branchlesseq}
 	 * labeled alternative in {@link SVMParser#assembly}.

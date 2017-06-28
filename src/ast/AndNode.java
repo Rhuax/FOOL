@@ -47,7 +47,7 @@ public class AndNode implements Node
     public String codeGeneration()
     {
         return left.codeGeneration()+
-                right.codeGeneration()+
+               right.codeGeneration()+
                 "and\n";
     }
 

@@ -68,6 +68,24 @@ public class ExecuteVM {
             v2=pop();
             if (v2 == v1) ip = address;
             break;
+          case SVMParser.BRANCHGREATER :
+            address = code[ip++];
+            v1=pop();
+            v2=pop();
+            if (v2 > v1) ip = address;
+            break;
+          case SVMParser.BRANCHLESS :
+            address = code[ip++];
+            v1=pop();
+            v2=pop();
+            if (v2 < v1) ip = address;
+            break;
+          case SVMParser.BRANCHGREATEREQ :
+            address = code[ip++];
+            v1=pop();
+            v2=pop();
+            if (v2 >= v1) ip = address;
+            break;
           case SVMParser.BRANCHLESSEQ :
             address = code[ip++];
             v1=pop();

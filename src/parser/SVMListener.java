@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL_ATTRIBUTE_GRAMMAR/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -154,6 +154,42 @@ public interface SVMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBrancheq(SVMParser.BrancheqContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code branchgreater}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterBranchgreater(SVMParser.BranchgreaterContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code branchgreater}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitBranchgreater(SVMParser.BranchgreaterContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code branchless}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterBranchless(SVMParser.BranchlessContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code branchless}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitBranchless(SVMParser.BranchlessContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code branchgreatereq}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterBranchgreatereq(SVMParser.BranchgreatereqContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code branchgreatereq}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitBranchgreatereq(SVMParser.BranchgreatereqContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code branchlesseq}
 	 * labeled alternative in {@link SVMParser#assembly}.

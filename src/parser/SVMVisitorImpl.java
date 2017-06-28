@@ -17,8 +17,6 @@ public class SVMVisitorImpl extends SVMBaseVisitor<InterpreterNode>
         return new PushLabelNode(ctx.LABEL().getText());
     }
 
-    
-
     public InterpreterNode visitPop(SVMParser.PopContext ctx)
     {
         return new PopNode();
@@ -47,6 +45,21 @@ public class SVMVisitorImpl extends SVMBaseVisitor<InterpreterNode>
     public InterpreterNode visitBrancheq(SVMParser.BrancheqContext ctx)
     {
         return new BrancheqNode(ctx.LABEL().getText());
+    }
+
+    public InterpreterNode visitBranchgreater(SVMParser.BranchgreaterContext ctx)
+    {
+        return new BranchgreaterNode(ctx.LABEL().getText());
+    }
+
+    public InterpreterNode visitBranchless(SVMParser.BranchlessContext ctx)
+    {
+        return new BranchlessNode(ctx.LABEL().getText());
+    }
+
+    public InterpreterNode visitBranchgreatereq(SVMParser.BranchgreatereqContext ctx)
+    {
+        return new BranchgreatereqNode(ctx.LABEL().getText());
     }
 
     public InterpreterNode visitBranchlesseq(SVMParser.BranchlesseqContext ctx)
