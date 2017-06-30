@@ -114,13 +114,6 @@ public interface FoolProvaBisVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBoolVal(FoolProvaBisParser.BoolValContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code floatVal}
-	 * labeled alternative in {@link FoolProvaBisParser#value}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFloatVal(FoolProvaBisParser.FloatValContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code baseExp}
 	 * labeled alternative in {@link FoolProvaBisParser#value}.
 	 * @param ctx the parse tree

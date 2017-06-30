@@ -21,6 +21,9 @@ assembly:
 	  | SUB                     #sub
 	  | MULT                    #mult
 	  | DIV                     #div
+	  | AND                     #and
+	  | OR                      #or
+	  | NOT                     #not
 	  | LOADW                   #loadw
 	  | l=LABEL COL             #label
 	  | BRANCH l=LABEL          #branch
@@ -41,6 +44,7 @@ assembly:
 	  | STOREHP                 #storehp
 	  | PRINT                   #print
 	  | HALT                    #halt
+	  | STOREW                  #storew
 ;
 
  	 
@@ -54,6 +58,9 @@ ADD	 : 'add' ;  	// add two values from the stack
 SUB	 : 'sub' ;	// add two values from the stack
 MULT : 'mult' ;  	// add two values from the stack
 DIV	 : 'div' ;	// add two values from the stack
+AND : 'and' ;
+OR : 'or' ;
+NOT : 'not' ;
 STOREW	 : 'sw' ; 	// store in the memory cell pointed by top the value next
 LOADW	 : 'lw' ;	// load a value from the memory cell pointed by top
 BRANCH	 : 'b' ;	// jump to label

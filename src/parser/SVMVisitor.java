@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from /home/crow/git/FOOL/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -69,6 +69,27 @@ public interface SVMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDiv(SVMParser.DivContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code and}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAnd(SVMParser.AndContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code or}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOr(SVMParser.OrContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code not}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNot(SVMParser.NotContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code loadw}
 	 * labeled alternative in {@link SVMParser#assembly}.
@@ -209,4 +230,11 @@ public interface SVMVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitHalt(SVMParser.HaltContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code storew}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStorew(SVMParser.StorewContext ctx);
 }

@@ -10,7 +10,7 @@ public class FunNode implements Node {
 
   private String id;
   private Node type;
-
+  public STentry entry;
 	ArrayList<Node> getParlist()
 	{
 		return parlist;
@@ -38,12 +38,6 @@ public class FunNode implements Node {
 	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 	  
 	  //env.offset = -2;
-	  HashMap<String,STentry> hm = env.symTable.get(env.nestingLevel);
-      STentry entry = new STentry(env.nestingLevel,env.offset--); //separo introducendo "entry"
-      
-      if ( hm.put(id,entry) != null )
-        res.add(new SemanticError("Fun id "+id+" already declared"));
-      else{
     	  //creare una nuova hashmap per la symTable
 	      env.nestingLevel++;
 	      HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
@@ -62,7 +56,7 @@ public class FunNode implements Node {
 	      }
 	      
 	      //set func type
-	      entry.addType( new ArrowTypeNode(parTypes, type) );
+	      this.entry.addType( new ArrowTypeNode(parTypes, type) );
 	      
 	    //check semantics in the dec list
 	      if(declist.size() > 0){
@@ -78,7 +72,7 @@ public class FunNode implements Node {
 	      //close scope
 	      env.symTable.remove(env.nestingLevel--);
 	      
-      }
+
       
       return res;
 	}

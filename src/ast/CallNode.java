@@ -14,14 +14,6 @@ public class CallNode implements Node {
   private ArrayList<Node> parlist; 
   private int nestinglevel;
 
-  
-  public CallNode (String i, STentry e, ArrayList<Node> p, int nl) {
-    id=i;
-    entry=e;
-    parlist = p;
-    nestinglevel=nl;
-  }
-  
   public CallNode(String text, ArrayList<Node> args) {
 	id=text;
     parlist = args;
@@ -80,8 +72,10 @@ public String toPrint(String s) {  //
             if (temp == null || should==false)
                 res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
             else{
-                entry=temp;
+                this.entry=temp;
                 nestinglevel=env.nestingLevel;
+                for (Node arg : parlist)
+                    res.addAll(arg.checkSemantics(env));
             }
         }
 		 return res;
@@ -118,7 +112,7 @@ public String toPrint(String s) {  //
 	    
 		return "lfp\n"+ //CL
                parCode+
-               "lfp\n"+getAR+ //setto AL risalendo la catena statica
+               "lfp\n"+getAR+ //setto AR risalendo la catena statica
                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
                "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
 		       "lfp\n"+getAR+ //risalgo la catena statica

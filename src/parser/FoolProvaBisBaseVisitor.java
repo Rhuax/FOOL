@@ -129,13 +129,6 @@ public class FoolProvaBisBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFloatVal(FoolProvaBisParser.FloatValContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitBaseExp(FoolProvaBisParser.BaseExpContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

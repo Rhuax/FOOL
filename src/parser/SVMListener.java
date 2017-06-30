@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from /home/crow/git/FOOL/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -106,6 +106,42 @@ public interface SVMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDiv(SVMParser.DivContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code and}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterAnd(SVMParser.AndContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code and}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitAnd(SVMParser.AndContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code or}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterOr(SVMParser.OrContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code or}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitOr(SVMParser.OrContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code not}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterNot(SVMParser.NotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code not}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitNot(SVMParser.NotContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code loadw}
 	 * labeled alternative in {@link SVMParser#assembly}.
@@ -346,4 +382,16 @@ public interface SVMListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHalt(SVMParser.HaltContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code storew}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void enterStorew(SVMParser.StorewContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code storew}
+	 * labeled alternative in {@link SVMParser#assembly}.
+	 * @param ctx the parse tree
+	 */
+	void exitStorew(SVMParser.StorewContext ctx);
 }

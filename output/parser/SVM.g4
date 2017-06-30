@@ -21,10 +21,16 @@ assembly:
 	  | SUB                     #sub
 	  | MULT                    #mult
 	  | DIV                     #div
+	  | AND                     #and
+	  | OR                      #or
+	  | NOT                     #not
 	  | LOADW                   #loadw
 	  | l=LABEL COL             #label
 	  | BRANCH l=LABEL          #branch
 	  | BRANCHEQ l=LABEL        #brancheq
+	  | BRANCHGREATER l=LABEL   #branchgreater
+	  | BRANCHLESS l=LABEL      #branchless
+	  | BRANCHGREATEREQ l=LABEL #branchgreatereq
 	  | BRANCHLESSEQ l=LABEL    #branchlesseq
 	  | JS                      #js
 	  | LOADRA                  #loadra
@@ -38,6 +44,7 @@ assembly:
 	  | STOREHP                 #storehp
 	  | PRINT                   #print
 	  | HALT                    #halt
+	  | STOREW                  #storew
 ;
 
  	 
@@ -45,16 +52,22 @@ assembly:
  * LEXER RULES
  *------------------------------------------------------------------*/
  
-PUSH  	 : 'push' ; 	// pushes constant in the stack
+PUSH : 'push' ; 	// pushes constant in the stack
 POP	 : 'pop' ; 	// pops from stack
 ADD	 : 'add' ;  	// add two values from the stack
 SUB	 : 'sub' ;	// add two values from the stack
-MULT	 : 'mult' ;  	// add two values from the stack
+MULT : 'mult' ;  	// add two values from the stack
 DIV	 : 'div' ;	// add two values from the stack
+AND : 'and' ;
+OR : 'or' ;
+NOT : 'not' ;
 STOREW	 : 'sw' ; 	// store in the memory cell pointed by top the value next
 LOADW	 : 'lw' ;	// load a value from the memory cell pointed by top
 BRANCH	 : 'b' ;	// jump to label
 BRANCHEQ : 'beq' ;	// jump to label if top == next
+BRANCHGREATER : 'bg';   //
+BRANCHLESS: 'bl';   //
+BRANCHGREATEREQ: 'bgeq';    //
 BRANCHLESSEQ:'bleq' ;	// jump to label if top <= next
 JS	 : 'js' ;	// jump to instruction pointed by top of stack and store next instruction in ra
 LOADRA	 : 'lra' ;	// load from ra

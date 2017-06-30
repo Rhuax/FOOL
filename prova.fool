@@ -1,19 +1,13 @@
-/*
+
 class a (int x)
 {
-    float getx(float y) x;
+    int getx(int y) x;
 }
 
 class b implements a (int y)
 {
-    float  getxx(bool f) 44;
+    int  getxx(bool f) 44;
 }
 
 ;
-let b og=new b(99); in og.getxx(true);
-*/
-
-let
-    int calcola(int y) if(y>0) then {1} else {0};
-in
-    print(calcola(2));
+let int u=1;in 3;

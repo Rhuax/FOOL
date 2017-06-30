@@ -48,11 +48,6 @@ public class ProgClassNode implements Node {
     }
 
     @Override
-    public String codeGeneration() {
-        return null;
-    }
-
-    @Override
     public ArrayList<SemanticError> checkSemantics(Environment env)
     {
         /*env.nestingLevel++;
@@ -76,9 +71,19 @@ public class ProgClassNode implements Node {
         env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);
-        if(ProgClassNode.innerdec!=null)
-            for(Node d:ProgClassNode.innerdec)
+        if(ProgClassNode.innerdec!=null) {
+            for(Node node:ProgClassNode.innerdec){
+                STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
+                if(node instanceof FunNode) {
+                    if (hm.put(((FunNode)node).getId(), entry) != null)
+                        res.add(new SemanticError("Fun id " + ((FunNode)node).getId() + " already declared"));
+                    else
+                        ((FunNode)node).entry=entry;
+                }
+            }
+            for (Node d : ProgClassNode.innerdec)
                 res.addAll(d.checkSemantics(env));
+        }
         res.addAll(ProgClassNode.exp.checkSemantics(env));
         return res;
     }
@@ -308,4 +313,23 @@ public class ProgClassNode implements Node {
         }
         classList = new ArrayList<>(orderedList);
     }
+
+    @Override
+    public String codeGeneration()
+    {
+        String classDeclCode="";
+        for (Node classdec:classList)
+            classDeclCode+=classdec.codeGeneration();
+
+        String innerDeclCode="";
+        for(Node inDec:innerdec)
+            innerDeclCode+=inDec.codeGeneration();
+
+        return  "push 0\n"+
+                classDeclCode+
+                innerDeclCode+
+                exp.codeGeneration()+"halt\n"+
+                FOOLlib.getCode();
+    }
+
 }

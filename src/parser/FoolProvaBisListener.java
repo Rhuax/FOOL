@@ -182,18 +182,6 @@ public interface FoolProvaBisListener extends ParseTreeListener {
 	 */
 	void exitBoolVal(FoolProvaBisParser.BoolValContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code floatVal}
-	 * labeled alternative in {@link FoolProvaBisParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void enterFloatVal(FoolProvaBisParser.FloatValContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code floatVal}
-	 * labeled alternative in {@link FoolProvaBisParser#value}.
-	 * @param ctx the parse tree
-	 */
-	void exitFloatVal(FoolProvaBisParser.FloatValContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code baseExp}
 	 * labeled alternative in {@link FoolProvaBisParser#value}.
 	 * @param ctx the parse tree

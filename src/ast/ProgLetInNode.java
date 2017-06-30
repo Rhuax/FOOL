@@ -33,12 +33,20 @@ public class ProgLetInNode implements Node {
       ArrayList<SemanticError> res = new ArrayList<SemanticError>();
       
       //check semantics in the dec list
-      if(declist.size() > 0){
+      for(Node node:declist) {
+          STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
+          if(node instanceof FunNode) {
+              if (hm.put(((FunNode)node).getId(), entry) != null)
+                  res.add(new SemanticError("Fun id " + ((FunNode)node).getId() + " already declared"));
+              else
+                  ((FunNode)node).entry=entry;
+          }
+      }
     	  env.offset = -2;
     	  //if there are children then check semantics for every child and save the results
     	  for(Node n : declist)
-    		  res.addAll(n.checkSemantics(env));
-      }
+              res.addAll(n.checkSemantics(env));
+
       
       //check semantics in the exp body
       res.addAll(exp.checkSemantics(env));

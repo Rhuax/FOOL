@@ -22,9 +22,20 @@ public class ClassNode implements Node {
     }
 
     private ArrayList<VardecNode> attributeList;
+
+    public ArrayList<FunNode> getMethodList() {
+        return methodList;
+    }
+
     private ArrayList<FunNode> methodList;
     private ClassNode extendedClass = null;
     private String extendedClassName = null;
+
+    public int getTotalAttributes() {
+        return totalAttributes;
+    }
+
+    private int totalAttributes;
 
     public String getExtendedClassName() {
         return extendedClassName;
@@ -82,10 +93,7 @@ public class ClassNode implements Node {
     return null;
     }
 
-    @Override
-    public String codeGeneration() {
-        return null;
-    }
+
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
@@ -101,6 +109,10 @@ public class ClassNode implements Node {
 
         checkAttributes(res, env);
         checkMethods(res, env);
+
+        totalAttributes = attributeList.size();
+        if (extendedClass!=null)
+            totalAttributes+= extendedClass.attributeList.size();
 
         MapClassNestLevel.setCurrentAnalyzedClass(null);
         return res;
@@ -165,15 +177,39 @@ public class ClassNode implements Node {
     {
         boolean check = true;
 
+        HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
         //check methods semantics
+        for(FunNode f:methodList) {
+            STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
 
+            if (hm.put(f.getId(), entry) != null) {
+                errors.add(new SemanticError("Fun id " + id + " already declared"));
+                check=false;
+            }
+            else
+                f.entry=entry;
+        }
+        if(check) {
             env.offset = -2;
             //if there are children then check semantics for every child and save the results
-            for (FunNode method : methodList)
-            {
+            for (FunNode method : methodList) {
                 errors.addAll(method.checkSemantics(env));
             }
-
+        }
         return check;
+    }
+
+    @Override
+    public String codeGeneration()
+    {
+
+        MapClassNestLevel.setCurrentAnalyzedClass(this);
+        String classCode="";
+        for(FunNode method:methodList) {
+            classCode+=method.codeGeneration()+'\n';
+        }
+
+        MapClassNestLevel.setCurrentAnalyzedClass(null);
+        return classCode;
     }
 }

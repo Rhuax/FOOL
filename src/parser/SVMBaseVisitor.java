@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from /home/crow/git/FOOL/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -70,6 +70,27 @@ public class SVMBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SV
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitDiv(SVMParser.DivContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitAnd(SVMParser.AndContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitOr(SVMParser.OrContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitNot(SVMParser.NotContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -210,4 +231,11 @@ public class SVMBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SV
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitHalt(SVMParser.HaltContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStorew(SVMParser.StorewContext ctx) { return visitChildren(ctx); }
 }

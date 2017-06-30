@@ -1,6 +1,8 @@
 package ast;
 
 import lib.FOOLlib;
+import org.omg.PortableInterceptor.DISCARDING;
+import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
 
@@ -13,7 +15,7 @@ public class NewExpNode implements  Node
 {
     String classId;
     public ArrayList<Node> expList;
-
+    private static int fakehp=0;
     public NewExpNode(String id, ArrayList<Node> el)
     {
         classId = id; expList = el;
@@ -29,7 +31,9 @@ public class NewExpNode implements  Node
     {
         ClassNode cl = ProgClassNode.getClassFromList(classId);
             ArrayList<VardecNode> al = cl.getAttributeList();
-            if(expList.size() <= al.size())
+            int totalAttributes = cl.getTotalAttributes();
+
+            if(expList.size() == totalAttributes)
             {
                 for (int i = 0; i < expList.size(); i++)
                 {
@@ -47,7 +51,7 @@ public class NewExpNode implements  Node
             }
             else
             {
-                System.out.println("Too much parameters when instantiating class " + cl.getId() + "!");
+                System.out.println("Wrong number of parameters when instantiating class " + cl.getId() + ". Also super classes attributes must be included!");
                 System.exit(0);
             }
 
@@ -56,6 +60,25 @@ public class NewExpNode implements  Node
 
     @Override
     public String codeGeneration() {
+        String code="";
+        int dispatchEntryIndex= DispatchTable.getDispatchIndexFromClassName(this.classId);
+
+        code+="push " + dispatchEntryIndex+"\n"
+                +"lhp\n"
+                +"sw\n";
+
+        for(Node exp:expList){
+            code+=exp.codeGeneration();
+            code+="lhp\n"
+                    + "push 1\n"
+                    + "add\n"
+                    + "shp\n"
+                    + "lhp\n"
+                    + "sw\n";
+
+        }
+
+
         return null;
     }
 

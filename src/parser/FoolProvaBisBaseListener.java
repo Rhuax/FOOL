@@ -208,18 +208,6 @@ public class FoolProvaBisBaseListener implements FoolProvaBisListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFloatVal(FoolProvaBisParser.FloatValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFloatVal(FoolProvaBisParser.FloatValContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBaseExp(FoolProvaBisParser.BaseExpContext ctx) { }
 	/**
 	 * {@inheritDoc}

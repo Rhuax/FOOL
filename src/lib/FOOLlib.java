@@ -48,12 +48,9 @@ public class FOOLlib {
     }
     else
     {
-      if (a instanceof IntTypeNode){
-        if(b instanceof IntTypeNode || b instanceof FloatTypeNode)
+      if (a instanceof IntTypeNode && b instanceof IntTypeNode){
           r=true;
       }
-      else if (a instanceof FloatTypeNode && b instanceof FloatTypeNode)
-        r=true;
       else if(a instanceof BoolTypeNode && b instanceof BoolTypeNode)
         r=true;
     }

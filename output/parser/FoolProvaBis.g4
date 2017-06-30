@@ -34,7 +34,6 @@ dec   : varasm           #varAssignment
    
 type   :
           INT
-        | FLOAT
         | BOOL
         | ID
       ;  
@@ -52,8 +51,7 @@ factor : left=value (EQ right=value)?
    
 value  :
         INTEGER                        		                                            #intVal
-      | ( TRUE | FALSE )                		                                                #boolVal
-      | FLOATER                                                                         #floatVal
+      | ( TRUE | FALSE )                		                                        #boolVal
       | LPAR exp RPAR                      			                                    #baseExp
       | IF cond=exp THEN CLPAR thenBranch=exp CRPAR ELSE CLPAR elseBranch=exp CRPAR     #ifExp
       | ID                                                                              #varExp
@@ -112,7 +110,6 @@ VAR    : 'var' ;
 FUN    : 'fun' ;
 INT    : 'int' ;
 BOOL   : 'bool' ;
-FLOAT  : 'float';
 CLASS   : 'class' ;
 IMPLEMENTS   : 'implements' ;
 THIS   : 'this' ;
@@ -122,7 +119,6 @@ DOT    : '.' ;
 //Numbers
 fragment DIGIT : '0'..'9';    
 INTEGER       : DIGIT+;
-FLOATER       : DIGIT+ '.' DIGIT+;
 
 
 

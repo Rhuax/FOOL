@@ -1,4 +1,4 @@
-// Generated from C:/Users/suri9/Documents/GitHub/FOOL/src/parser\SVM.g4 by ANTLR 4.7
+// Generated from /home/crow/git/FOOL/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
 import java.util.HashMap;
@@ -110,6 +110,42 @@ public class SVMBaseListener implements SVMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDiv(SVMParser.DivContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAnd(SVMParser.AndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAnd(SVMParser.AndContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOr(SVMParser.OrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOr(SVMParser.OrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNot(SVMParser.NotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNot(SVMParser.NotContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -350,6 +386,18 @@ public class SVMBaseListener implements SVMListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitHalt(SVMParser.HaltContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStorew(SVMParser.StorewContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStorew(SVMParser.StorewContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

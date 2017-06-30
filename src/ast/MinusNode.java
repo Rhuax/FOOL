@@ -34,27 +34,8 @@ public class MinusNode implements Node
                 return new IntTypeNode();
             }
             else
-            if (FOOLlib.isSubtype(right.typeCheck(), new FloatTypeNode()))
-            {
-                return new FloatTypeNode();
-            }
-            else
             {
                 System.out.println("First type is not subtype of the second in sub!");
-                System.exit(0);
-            }
-        }
-        else
-        if ( FOOLlib.isSubtype(left.typeCheck(), new FloatTypeNode()) )
-        {
-            if ( FOOLlib.isSubtype(right.typeCheck(), new FloatTypeNode()) ||
-                    FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()))
-            {
-                return new FloatTypeNode();
-            }
-            else
-            {
-                System.out.println("Incompatible types in sub!");
                 System.exit(0);
             }
         }

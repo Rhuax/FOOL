@@ -120,9 +120,6 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 			if(ctx.getText().equals("bool"))
 				return new BoolTypeNode();
 		else
-			if(ctx.getText().equals("float"))
-				return new FloatTypeNode();
-		else
 			return new IdTypeNode(ctx.getText());
 
 
@@ -230,9 +227,7 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 	}
 
 
-	public Node visitFloatVal(FoolProvaBisParser.FloatValContext ctx) {
-		return new FloatNode(Float.parseFloat(ctx.FLOATER().getText()));
-	}
+
 
 	public Node visitBaseExp(BaseExpContext ctx) {
 		

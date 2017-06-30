@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 
+import ast.ProgClassNode;
 import astInterpreter.InstructionSet;
 import astInterpreter.InterpreterNode;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -100,9 +101,10 @@ public class Test2 {
 				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 
 
+				DispatchTable.buildDispatchTable(ProgClassNode.classList);
 		        // CODE GENERATION  prova.fool.asm
 		        String code=ast.codeGeneration();
-		        System.out.println("Code generated!");
+
 
 		        BufferedWriter out = new BufferedWriter(new FileWriter(fileName+".asm"));
 		        out.write(code);

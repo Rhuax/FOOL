@@ -36,37 +36,14 @@ public class PlusNode implements Node {
   
   public Node typeCheck()
   {
-      if( FOOLlib.isSubtype(left.typeCheck(),new IntTypeNode()) )
-      {
-          if (FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()))
-          {
+      if( FOOLlib.isSubtype(left.typeCheck(),new IntTypeNode()) ) {
+          if (FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode())) {
               return new IntTypeNode();
+          } else {
+              System.out.println("First type is not subtype of the second in sum!");
+              System.exit(0);
           }
-          else
-              if (FOOLlib.isSubtype(right.typeCheck(), new FloatTypeNode()))
-              {
-                  return new FloatTypeNode();
-              }
-              else
-                  {
-                      System.out.println("First type is not subtype of the second in sum!");
-                      System.exit(0);
-                  }
       }
-      else
-          if ( FOOLlib.isSubtype(left.typeCheck(), new FloatTypeNode()) )
-          {
-             if ( FOOLlib.isSubtype(right.typeCheck(), new FloatTypeNode()) ||
-                  FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()))
-             {
-                 return new FloatTypeNode();
-             }
-             else
-             {
-                 System.out.println("Incompatible types in sum!");
-                 System.exit(0);
-             }
-          }
           else
           {
               System.out.println("Boolean cannot be summed!");
