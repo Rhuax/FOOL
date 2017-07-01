@@ -7,9 +7,6 @@ import util.SemanticError;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ast.FunNode;
-import lib.FOOLlib;
-
 /**
  * Created by crow on 14/06/17.
  */
@@ -190,10 +187,12 @@ public class ClassNode implements Node {
                 f.entry=entry;
         }
         if(check) {
-            env.offset = -2;
-            //if there are children then check semantics for every child and save the results
-            for (FunNode method : methodList) {
-                errors.addAll(method.checkSemantics(env));
+            if(methodList.size()>0) {
+                env.offset = -2;
+                //if there are children then check semantics for every child and save the results
+                for (FunNode method : methodList) {
+                    errors.addAll(method.checkSemantics(env));
+                }
             }
         }
         return check;

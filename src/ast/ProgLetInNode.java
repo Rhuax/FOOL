@@ -42,10 +42,13 @@ public class ProgLetInNode implements Node {
                   ((FunNode)node).entry=entry;
           }
       }
-    	  env.offset = -2;
+
     	  //if there are children then check semantics for every child and save the results
-    	  for(Node n : declist)
+      if(declist.size()>0) {
+          env.offset = -2;
+          for (Node n : declist)
               res.addAll(n.checkSemantics(env));
+      }
 
       
       //check semantics in the exp body
