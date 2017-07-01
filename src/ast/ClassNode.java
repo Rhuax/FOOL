@@ -173,6 +173,8 @@ public class ClassNode implements Node {
     private boolean checkMethods(ArrayList<SemanticError> errors, Environment env)
     {
         boolean check = true;
+        if(methodList.size()>0)
+            env.offset = -2;
 
         HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
         //check methods semantics
@@ -187,12 +189,11 @@ public class ClassNode implements Node {
                 f.entry=entry;
         }
         if(check) {
-            if(methodList.size()>0) {
-                env.offset = -2;
+
                 //if there are children then check semantics for every child and save the results
                 for (FunNode method : methodList) {
                     errors.addAll(method.checkSemantics(env));
-                }
+
             }
         }
         return check;

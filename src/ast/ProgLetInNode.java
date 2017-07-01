@@ -31,7 +31,8 @@ public class ProgLetInNode implements Node {
       
       //declare resulting list
       ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-      
+      if(declist.size()>0)
+          env.offset=-2;
       //check semantics in the dec list
       for(Node node:declist) {
           STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
@@ -44,12 +45,9 @@ public class ProgLetInNode implements Node {
       }
 
     	  //if there are children then check semantics for every child and save the results
-      if(declist.size()>0) {
-          env.offset = -2;
+
           for (Node n : declist)
               res.addAll(n.checkSemantics(env));
-      }
-
       
       //check semantics in the exp body
       res.addAll(exp.checkSemantics(env));

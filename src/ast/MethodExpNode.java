@@ -1,6 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
+import org.antlr.v4.runtime.tree.TerminalNode;
 import util.Environment;
 import util.MapClassNestLevel;
 import util.SemanticError;
@@ -17,11 +18,18 @@ public class MethodExpNode implements Node
     public String objectID;
     public String methodID;
     private String objectTypeName;
-    MethodExpNode(ArrayList<Node> el, String o, String m)
+    TerminalNode object;
+    TerminalNode method;
+    private int nestinglevel;
+    private STentry entry;
+
+    MethodExpNode(ArrayList<Node> el, TerminalNode o, TerminalNode m)
     {
         expList = el;
-        objectID = o;
-        methodID = m;
+        objectID = o.getText();
+        methodID = m.getText();
+        this.object=o;
+        this.method=m;
     }
     @Override
     public String toPrint(String indent) {
@@ -76,11 +84,6 @@ public class MethodExpNode implements Node
     }
 
     @Override
-    public String codeGeneration() {
-        return null;
-    }
-
-    @Override
     public ArrayList<SemanticError> checkSemantics(Environment env)
     {
         ArrayList<SemanticError> res = new ArrayList<>();
@@ -111,15 +114,47 @@ public class MethodExpNode implements Node
         else
         {
             int j = env.nestingLevel;
+            this.nestinglevel=env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(objectID);
             while (temp!=null && j > MapClassNestLevel.getMaxClassNestLevel())
                 temp = (env.symTable.get(j--)).get(objectID);
 
             if(temp==null)
                 errors.add(new SemanticError("Object "+objectID + " is not defined"));
-            else
-                objectTypeName=temp.getType().toString();
+            else {
+                objectTypeName = temp.getType().toString();
+                this.entry=temp;
+            }
+
         }
 
+
+
+    }
+    @Override
+    public String codeGeneration() {
+        String code="";
+        String parCode="";
+        for (int i=expList.size()-1; i>=0; i--)
+            parCode+=expList.get(i).codeGeneration();
+        String getAR="";
+        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
+            getAR+="lw\n";
+
+        code= "lfp\n"+ //CL
+                parCode+
+                "lfp\n"+getAR+ //setto AR risalendo la catena statica
+                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
+                "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
+                "lfp\n"+getAR+ //risalgo la catena statica
+                "add\n"+
+                "lw\n"+ //carico sullo stack il valore all'indirizzo ottenuto
+                "js\n";
+
+
+        code+=((IdNode)this.object).codeGeneration();
+
+
+        return null;
     }
 }

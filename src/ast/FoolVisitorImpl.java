@@ -379,9 +379,9 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 		List<TerminalNode> l = ctx.ID();
 		if(l.size() > 1)
-			res = new MethodExpNode(expList, l.get(0).getText(), l.get(1).getText());
+			res = new MethodExpNode(expList, l.get(0), l.get(1));
 		else
-			res = new MethodExpNode(expList, null, l.get(0).getText());
+			res = new MethodExpNode(expList, null, l.get(0));
 
 		return res;
 	}

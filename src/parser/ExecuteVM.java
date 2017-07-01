@@ -20,10 +20,9 @@ public class ExecuteVM {
     private int ra;           
     private int rv;
     
-    public ExecuteVM(int[] code) {this.code=code;System.out.println(code.length);}
+    public ExecuteVM(int[] code) {this.code=code;}
     
     public void cpu() {
-        int y=0;
       while ( true ) {
         int bytecode = code[ip++]; // fetch
         int v1,v2;

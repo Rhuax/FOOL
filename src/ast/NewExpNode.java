@@ -61,12 +61,7 @@ public class NewExpNode implements  Node
     @Override
     public String codeGeneration() {
         String code="";
-        int dispatchEntryIndex= DispatchTable.getDispatchIndexFromClassName(this.classId);
-
-        code+="push " + dispatchEntryIndex+"\n"
-                +"lhp\n"
-                +"sw\n";
-
+        code+="lhp\n";
         for(Node exp:expList){
             code+=exp.codeGeneration();
             code+="lhp\n"
@@ -79,7 +74,7 @@ public class NewExpNode implements  Node
         }
 
 
-        return null;
+        return code;
     }
 
     @Override

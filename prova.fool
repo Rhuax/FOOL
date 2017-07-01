@@ -1,15 +1,12 @@
 /*
-class a (int x)
+class a(int h)
 {
-    int getx(int y) x;
+int a() 3;
+int b() 4;
 }
-
-class b implements a (int y)
-{
-    int  getxx(bool f) 44;
-}
-
 ;
+
+let int y = 99;a x=new a(33);in x;
 */
 
-let int x = 1; int f() x; in f();
+let int f(int x) x; in f(7);
