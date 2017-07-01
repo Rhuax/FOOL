@@ -3,8 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import lib.FOOLlib;
-import util.Environment;
-import util.SemanticError;
+import util.*;
 
 public class FunNode implements Node {
 
@@ -122,7 +121,18 @@ public class FunNode implements Node {
 	    for (Node dec:parlist)
 	    	popParl+="pop\n";
 	    
-	    String funl=FOOLlib.freshFunLabel(); 
+	    String funl;
+	    if(MapClassNestLevel.getCurrentAnalyzedClass()!=null){
+			int index = DispatchTable.getDispatchIndexFromClassName(MapClassNestLevel.getCurrentAnalyzedClass().getId());
+			DispatchMethodTable dispmetTable=DispatchTable.dispatchTable.get(index).getDispatchMethodTable();
+			funl = dispmetTable.methodList.get(this.id);
+
+		}
+		else
+        {
+            funl=FOOLlib.freshFunLabel();
+        }
+
 	    FOOLlib.putCode(funl+":\n"+
 	            "cfp\n"+ //setta $fp a $sp				
 				"lra\n"+ //inserimento return address

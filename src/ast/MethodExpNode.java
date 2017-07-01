@@ -2,9 +2,7 @@ package ast;
 
 import lib.FOOLlib;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import util.Environment;
-import util.MapClassNestLevel;
-import util.SemanticError;
+import util.*;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -133,6 +131,11 @@ public class MethodExpNode implements Node
     }
     @Override
     public String codeGeneration() {
+
+        int index=DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
+        DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
+        String mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
+
         String code="";
         String parCode="";
         for (int i=expList.size()-1; i>=0; i--)
@@ -141,20 +144,13 @@ public class MethodExpNode implements Node
         for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
             getAR+="lw\n";
 
-        code= "lfp\n"+ //CL
+        code = "lfp\n"+ //CL
                 parCode+
-                "lfp\n"+getAR+ //setto AR risalendo la catena statica
-                // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
-                "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
-                "lfp\n"+getAR+ //risalgo la catena statica
-                "add\n"+
-                "lw\n"+ //carico sullo stack il valore all'indirizzo ottenuto
+                "lfp\n"+
+                "push "+mLabel+"\n"+
                 "js\n";
 
 
-        code+=((IdNode)this.object).codeGeneration();
-
-
-        return null;
+        return code;
     }
 }

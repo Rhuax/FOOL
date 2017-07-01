@@ -3,6 +3,7 @@ package util;
 import ast.ClassNode;
 import ast.FunNode;
 import ast.VardecNode;
+import lib.FOOLlib;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,7 +28,7 @@ public static int getDispatchIndexFromClassName(String className)
     }
     return i;
 }
-    static ArrayList<DispatchEntry> dispatchTable=new ArrayList<>();
+    public static ArrayList<DispatchEntry> dispatchTable=new ArrayList<>();
 
 
     public static void buildDispatchTable(ArrayList<ClassNode> classList)
@@ -46,12 +47,20 @@ public static int getDispatchIndexFromClassName(String className)
 
                 DispatchMethodTable dmt=new DispatchMethodTable();
 
-                if(extClass!=null){
+                if(extClass!=null)
+                {
                     for(FunNode method:extClass.getMethodList())
-                        dmt.methodList.put(method.getId(),0);
+                    {
+                        DispatchEntry dEntry = dispatchTable.get(getDispatchIndexFromClassName(extClass.getId()));
+                        dmt.methodList.put(method.getId(), dEntry.getDispatchMethodTable().methodList.get(method.getId()));
+                    }
+
                 }
+
                 for(FunNode method:classdec.getMethodList())
-                    dmt.methodList.put(method.getId(),0);
+                    dmt.methodList.put(method.getId(), FOOLlib.freshFunLabel());
+
+
 
                 entry.dispatchMethodTable=dmt;
                 entry.className=classdec.getId();
@@ -62,9 +71,3 @@ public static int getDispatchIndexFromClassName(String className)
 }
 
 
-class DispatchEntry{
-    String className;
-    DispatchMethodTable dispatchMethodTable;
-    ArrayList<VardecNode> attributes;
-
-}

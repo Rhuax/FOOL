@@ -9,4 +9,11 @@ int b() 4;
 let int y = 99;a x=new a(33);in x;
 */
 
-let int f(int x) x; in f(7);
+/*let int f(int x) x; in f(7);*/
+
+
+class a(int y)
+{
+int h() 33;
+};
+let a ogg=new a(44);in ogg.h();

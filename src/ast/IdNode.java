@@ -11,7 +11,12 @@ import util.SemanticError;
 public class IdNode implements Node {
 
   private String id;
-  private STentry entry;
+
+    public STentry getEntry() {
+        return entry;
+    }
+
+    private STentry entry;
   private int nestinglevel;
   
   public IdNode (String i) {

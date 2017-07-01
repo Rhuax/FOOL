@@ -205,7 +205,8 @@ public class ClassNode implements Node {
 
         MapClassNestLevel.setCurrentAnalyzedClass(this);
         String classCode="";
-        for(FunNode method:methodList) {
+        for(FunNode method:methodList)
+        {
             classCode+=method.codeGeneration()+'\n';
         }
 
