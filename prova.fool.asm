@@ -1,10 +1,13 @@
 push 0
-push function0
-
-push function1
-
 push 1
-push 3
+push function0
+lfp
+lfp
+push -1
+lfp
+add
+lw
+js
 halt
 
 function0:
@@ -17,20 +20,6 @@ add
 lw
 srv
 sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function1:
-cfp
-lra
-push 44
-srv
-sra
-pop
 pop
 sfp
 lrv

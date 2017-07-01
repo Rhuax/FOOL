@@ -29,10 +29,10 @@ public class ExecuteVM {
         int bytecode = code[ip++]; // fetch
         int v1,v2;
         int address;
-          ArrayList<Integer> list = new ArrayList<Integer>(memory.length);
+          /*ArrayList<Integer> list = new ArrayList<Integer>(memory.length);
           for (int i = MEMSIZE-40; i < MEMSIZE; i++)
               list.add(Integer.valueOf(memory[i]));
-          System.out.println(list);
+          System.out.println(list);*/
         switch ( bytecode ) {
           case SVMParser.PUSH:
             push( code[ip++] );

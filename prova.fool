@@ -1,4 +1,4 @@
-
+/*
 class a (int x)
 {
     int getx(int y) x;
@@ -10,4 +10,6 @@ class b implements a (int y)
 }
 
 ;
-let int u=1;in 3;
+*/
+
+let int x = 1; int f() x; in f();

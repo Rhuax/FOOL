@@ -28,40 +28,38 @@ public static int getDispatchIndexFromClassName(String className)
     }
     return i;
 }
-static ArrayList<DispatchEntry> dispatchTable=new ArrayList<>();
+    static ArrayList<DispatchEntry> dispatchTable=new ArrayList<>();
 
 
-public static void buildDispatchTable(ArrayList<ClassNode> classList){
-    for(ClassNode classdec:classList){
-        ArrayList<VardecNode> current_attributes=new ArrayList<>();
-        ClassNode extClass =classdec.getExtendedClass();
-        if(extClass!=null)
-            current_attributes.addAll(extClass.getAttributeList());
+    public static void buildDispatchTable(ArrayList<ClassNode> classList)
+    {
+        if(classList != null)
+        {
+            for(ClassNode classdec:classList){
+                ArrayList<VardecNode> current_attributes=new ArrayList<>();
+                ClassNode extClass =classdec.getExtendedClass();
+                if(extClass!=null)
+                    current_attributes.addAll(extClass.getAttributeList());
 
-        current_attributes.addAll(classdec.getAttributeList());
-        DispatchEntry entry=new DispatchEntry();
-        entry.attributes=current_attributes;
+                current_attributes.addAll(classdec.getAttributeList());
+                DispatchEntry entry=new DispatchEntry();
+                entry.attributes=current_attributes;
 
-        DispatchMethodTable dmt=new DispatchMethodTable();
+                DispatchMethodTable dmt=new DispatchMethodTable();
 
-        if(extClass!=null){
-            for(FunNode method:extClass.getMethodList())
-                dmt.methodList.put(method.getId(),0);
+                if(extClass!=null){
+                    for(FunNode method:extClass.getMethodList())
+                        dmt.methodList.put(method.getId(),0);
+                }
+                for(FunNode method:classdec.getMethodList())
+                    dmt.methodList.put(method.getId(),0);
+
+                entry.dispatchMethodTable=dmt;
+                entry.className=classdec.getId();
+                dispatchTable.add(entry);
+            }
         }
-        for(FunNode method:classdec.getMethodList())
-            dmt.methodList.put(method.getId(),0);
-
-        entry.dispatchMethodTable=dmt;
-        entry.className=classdec.getId();
-        dispatchTable.add(entry);
-
-
-
     }
-
-
-}
-
 }
 
 
