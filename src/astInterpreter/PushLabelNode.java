@@ -18,5 +18,5 @@ public class PushLabelNode implements InterpreterNode
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.PUSH;
         InstructionSet.labelRef.put(InstructionSet.ip++, label);
-    };
+    }
 }

@@ -62,7 +62,7 @@ public class ProgClassNode implements Node {
                if(checkCyclicInheritance(res))
                {
                    sortClassesByInheritance();
-
+                   env.methodOffset=-2;
                    for( ClassNode classdec: classList)
                        res.addAll(classdec.checkSemantics(env));
                }
@@ -71,8 +71,12 @@ public class ProgClassNode implements Node {
         env.nestingLevel++;
         HashMap<String,STentry> hm = new HashMap<String,STentry> ();
         env.symTable.add(hm);
+
+        env.offset=env.methodOffset;
         if(ProgClassNode.innerdec!=null) {
+            //env.offset -2??????????????????????
             for(Node node:ProgClassNode.innerdec){
+
                 STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
                 if(node instanceof FunNode) {
                     if (hm.put(((FunNode)node).getId(), entry) != null)
@@ -80,10 +84,17 @@ public class ProgClassNode implements Node {
                     else
                         ((FunNode)node).entry=entry;
                 }
+                else if (node instanceof VarNode){
+                    if (hm.put(((VarNode)node).getId(), entry) != null)
+                        res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
+                    else
+                        ((VarNode) node).entry = entry;
+                }
             }
             for (Node d : ProgClassNode.innerdec)
                 res.addAll(d.checkSemantics(env));
         }
+
         res.addAll(ProgClassNode.exp.checkSemantics(env));
 
         env.symTable.remove(env.nestingLevel--);

@@ -139,6 +139,8 @@ public class MethodExpNode implements Node
     }
     @Override
     public String codeGeneration() {
+        //MapClassNestLevel.setCurrentAnalyzedClass(ProgClassNode.getClassFromList(this.objectTypeName));
+
 
         int index=DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
         DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
@@ -154,7 +156,7 @@ public class MethodExpNode implements Node
             getAR+="lw\n";*/
         int objectOffset = this.entry.getOffset();
 
-        int nAtt = ProgClassNode.getClassFromList(objectTypeName).getAttributeList().size();
+        int nAtt = ProgClassNode.getClassFromList(objectTypeName).getTotalAttributes().size();
         String attCode="";
 
         for(int i = 0; i < nAtt; i++)
@@ -169,14 +171,15 @@ public class MethodExpNode implements Node
             ;
         }
 
-        code = ""+ //CL
+        code = "lfp\n"+ //CL
                 parCode +
                 attCode +
+                "push "+(nAtt+2)+"\n"+
                 "lfp\n"+
                 "push "+mLabel+"\n"+
                 "js\n";
 
-
+        //MapClassNestLevel.setCurrentAnalyzedClass(null);
         return code;
     }
 }

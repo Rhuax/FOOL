@@ -30,15 +30,14 @@ public class NewExpNode implements  Node
     public Node typeCheck()
     {
         ClassNode cl = ProgClassNode.getClassFromList(classId);
-            ArrayList<VardecNode> al = cl.getAttributeList();
-            int totalAttributes = cl.getTotalAttributes();
+            ArrayList<VardecNode> totalAttributes = cl.getTotalAttributes();
 
-            if(expList.size() == totalAttributes)
+            if(expList.size() == totalAttributes.size())
             {
-                for (int i = 0; i < expList.size(); i++)
+                for (int i = 0; i < totalAttributes.size(); i++)
                 {
                     Node subAtt = expList.get(i);
-                    Node supAtt = al.get(i);
+                    Node supAtt = totalAttributes.get(i);
                     Node subType = subAtt.typeCheck();
                     Node supType = ((VardecNode) supAtt).getType();
 
@@ -76,6 +75,11 @@ public class NewExpNode implements  Node
                     + "lhp\n"
                     + "sw\n";
         }
+        code+="lhp\n"+
+                "push 1\n"+
+                "add\n"+
+                "shp\n";
+
 
 
         return code;

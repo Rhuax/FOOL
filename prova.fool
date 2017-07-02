@@ -9,12 +9,35 @@ int b() 4;
 let int y = 99;a x=new a(33);in x;
 */
 
-let int h = 8; int f() h; in f();
+/*let  int f() h;  int h=1;in print(f());*/
 
-/*
-class a(int o,int u,int l)
+
+
+/*class a(b x){
+int u()22;
+}
+class b(int x){
+int ll() 44;
+}
+;
+
+let int lll=y+o;int y=o+3;int o=2;in print(lll);*/
+
+
+class a(int x,int p)
 {
-    int h() o;
-};
-let a ogg=new a(7,8,9);in print(ogg.h());
-*/
+    int getx() x;
+    int getp() p;
+}
+
+
+class b implements a (int y)
+{
+    int gety() y+x;
+}
+class c implements a (int w)
+{
+int getw() w+p;
+}
+;
+let b ogg=new b(1,2,3);c ogg2= new c(4,5,6); in print(ogg.gety()+ogg2.getw());

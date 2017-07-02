@@ -14,6 +14,8 @@ public class ClassNode implements Node {
 
     private String id;
 
+    public int attributeOffset = -1;
+
     public ArrayList<VardecNode> getAttributeList() {
         return attributeList;
     }
@@ -28,11 +30,11 @@ public class ClassNode implements Node {
     private ClassNode extendedClass = null;
     private String extendedClassName = null;
 
-    public int getTotalAttributes() {
+    public ArrayList<VardecNode> getTotalAttributes() {
         return totalAttributes;
     }
 
-    private int totalAttributes;
+    private ArrayList<VardecNode> totalAttributes = new ArrayList<>();
 
     public String getExtendedClassName() {
         return extendedClassName;
@@ -106,10 +108,11 @@ public class ClassNode implements Node {
 
         checkAttributes(res, env);
         checkMethods(res, env);
-
-        totalAttributes = attributeList.size();
+        ;
         if (extendedClass!=null)
-            totalAttributes+= extendedClass.attributeList.size();
+            totalAttributes.addAll(extendedClass.totalAttributes);
+
+        totalAttributes.addAll(attributeList);
 
         MapClassNestLevel.setCurrentAnalyzedClass(null);
         return res;
@@ -149,10 +152,12 @@ public class ClassNode implements Node {
     private boolean checkAttributes(ArrayList<SemanticError> res, Environment env)
     {
         boolean check = true;
+        if(extendedClass != null)
+            attributeOffset = extendedClass.attributeOffset;
+
+        env.offset = attributeOffset;
 
         //check semantics in the dec list
-
-        env.offset = -1;
         //if there are children then check semantics for every child and save the results
         for (VardecNode attribute : attributeList)
         {
@@ -166,6 +171,7 @@ public class ClassNode implements Node {
             }
             res.addAll(errorList);
         }
+        attributeOffset=env.offset;
 
         return check;
     }
@@ -173,8 +179,7 @@ public class ClassNode implements Node {
     private boolean checkMethods(ArrayList<SemanticError> errors, Environment env)
     {
         boolean check = true;
-        if(methodList.size()>0)
-            env.offset = -2;
+        env.offset=env.methodOffset;
 
         HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
         //check methods semantics
@@ -196,6 +201,7 @@ public class ClassNode implements Node {
 
             }
         }
+        env.methodOffset=env.offset;
         return check;
     }
 

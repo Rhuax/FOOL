@@ -151,13 +151,14 @@ public class FunNode implements Node {
 		}
 		else{
 			String popAttr="";
-			int nAtt = MapClassNestLevel.getCurrentAnalyzedClass().getAttributeList().size();
-			for (int i = 0;i < nAtt; i++)
+			int nAtt = MapClassNestLevel.getCurrentAnalyzedClass().getTotalAttributes().size();
+			for (int i = 0;i < nAtt-1; i++)
 				popAttr+="pop\n";
 
 			FOOLlib.putCode(funl + ":\n" +
 					"cfp\n" + //setta $fp a $sp
-					"push " + nAtt + '\n' +
+					"pop\n"+
+
 					"lfp\n" +
 					"add\n" +
 					"sfp\n" +
@@ -165,13 +166,15 @@ public class FunNode implements Node {
 					declCode + //inserimento dichiarazioni locali
 					body.codeGeneration() +
 					"srv\n" + //pop del return value
-					popAttr +
+
 					popDecl +
 					"sra\n" + // pop del return address
 					"pop\n" + // pop di AL
+					popAttr +
 					popParl +
 					"sfp\n" +  // setto $fp a valore del CL
 					"lrv\n" + // risultato della funzione sullo stack
+
 					"lra\n" +
 					"js\n"); // salta a $ra
 		}

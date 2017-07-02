@@ -3,16 +3,21 @@ package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.stringtemplate.v4.ST;
 import util.Environment;
 import util.SemanticError;
 import lib.FOOLlib;
 
 public class VarNode implements Node {
 
-  private String id;
+    public String getId() {
+        return id;
+    }
+
+    private String id;
   private Node type;
   private Node exp;
-  
+  public STentry entry;
   public VarNode (String i, Node t, Node v) {
     id=i;
     type=t;
@@ -35,12 +40,11 @@ public class VarNode implements Node {
         if(!error){
 
           //env.offset = -2;
-          HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
+          /*HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
           STentry entry = new STentry(env.nestingLevel, type, env.offset--); //separo introducendo "entry"
-
-          if (hm.put(id, entry) != null)
-              res.add(new SemanticError("Var id " + id + " already declared"));
-
+          /*if (hm.put(id, entry) != null)
+              res.add(new SemanticError("Var id " + id + " already declared"));*/
+          this.entry.addType(this.type);
           res.addAll(exp.checkSemantics(env));
       }
         

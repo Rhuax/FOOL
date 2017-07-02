@@ -105,9 +105,10 @@ public class SVMVisitorImpl extends SVMBaseVisitor<InterpreterNode>
 
             node.code();
         }
-        for(Integer refAdd: InstructionSet.labelRef.keySet())
-            InstructionSet.code[refAdd]=InstructionSet.labelAdd.get(InstructionSet.labelRef.get(refAdd));
-
+        for(Integer refAdd: InstructionSet.labelRef.keySet()) {
+            String s=InstructionSet.labelRef.get(refAdd);
+            InstructionSet.code[refAdd] = InstructionSet.labelAdd.get(s);
+        }
             InstructionSet.code[InstructionSet.ip++] = SVMParser.HALT;
         return null;
     }

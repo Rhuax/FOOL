@@ -42,6 +42,14 @@ public class ProgLetInNode implements Node {
               else
                   ((FunNode)node).entry=entry;
           }
+          else if (node instanceof VarNode){
+              if (hm.put(((VarNode)node).getId(), entry) != null)
+                  res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
+              else
+                  ((VarNode) node).entry = entry;
+            System.out.println(entry.getOffset());
+
+          }
       }
 
     	  //if there are children then check semantics for every child and save the results

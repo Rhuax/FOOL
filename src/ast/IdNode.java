@@ -3,6 +3,7 @@ package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import util.Environment;
 import util.MapClassNestLevel;
@@ -89,7 +90,7 @@ public class IdNode implements Node {
   public String codeGeneration() {
       String getAR="";
 	  for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) 
-	    	 getAR+="lw\n";
+	    	 getAR+="";
 	    return "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
 		       "lfp\n"+getAR+ //risalgo la catena statica
 			   "add\n"+ 
