@@ -132,22 +132,49 @@ public class FunNode implements Node {
         {
             funl=FOOLlib.freshFunLabel();
         }
+		if(MapClassNestLevel.getCurrentAnalyzedClass()==null) {
+			FOOLlib.putCode(funl + ":\n" +
+					"cfp\n" + //setta $fp a $sp
+					"lra\n" + //inserimento return address
+					declCode + //inserimento dichiarazioni locali
+					body.codeGeneration() +
+					"srv\n" + //pop del return value
+					popDecl +
+					"sra\n" + // pop del return address
+					"pop\n" + // pop di AL
+					popParl +
+					"sfp\n" +  // setto $fp a valore del CL
+					"lrv\n" + // risultato della funzione sullo stack
+					"lra\n" + "js\n" // salta a $ra
+			);
 
-	    FOOLlib.putCode(funl+":\n"+
-	            "cfp\n"+ //setta $fp a $sp				
-				"lra\n"+ //inserimento return address
-	    		declCode+ //inserimento dichiarazioni locali
-	    		body.codeGeneration()+
-	    		"srv\n"+ //pop del return value
-	    		popDecl+
-	    		"sra\n"+ // pop del return address
-	    		"pop\n"+ // pop di AL
-	    		popParl+
-	    		"sfp\n"+  // setto $fp a valore del CL
-	    		"lrv\n"+ // risultato della funzione sullo stack
-	    		"lra\n"+"js\n" // salta a $ra
-	    		);
-	    
+		}
+		else{
+			String popAttr="";
+			int nAtt = MapClassNestLevel.getCurrentAnalyzedClass().getAttributeList().size();
+			for (int i = 0;i < nAtt; i++)
+				popAttr+="pop\n";
+
+			FOOLlib.putCode(funl + ":\n" +
+					"cfp\n" + //setta $fp a $sp
+					"push " + nAtt + '\n' +
+					"lfp\n" +
+					"add\n" +
+					"sfp\n" +
+					"lra\n" + //inserimento return address
+					declCode + //inserimento dichiarazioni locali
+					body.codeGeneration() +
+					"srv\n" + //pop del return value
+					popAttr +
+					popDecl +
+					"sra\n" + // pop del return address
+					"pop\n" + // pop di AL
+					popParl +
+					"sfp\n" +  // setto $fp a valore del CL
+					"lrv\n" + // risultato della funzione sullo stack
+					"lra\n" +
+					"js\n"); // salta a $ra
+		}
 		return "push "+ funl +"\n";
   }
 

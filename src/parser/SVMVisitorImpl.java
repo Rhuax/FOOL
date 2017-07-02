@@ -89,6 +89,9 @@ public class SVMVisitorImpl extends SVMBaseVisitor<InterpreterNode>
     public InterpreterNode visitLoadhp(SVMParser.LoadhpContext ctx) { return new LoadhpNode(); }
 
     public InterpreterNode visitStorehp(SVMParser.StorehpContext ctx) { return new StorehpNode(); }
+    public InterpreterNode visitStorew(SVMParser.StorewContext ctx) {
+        return new StorewNode();
+    }
 
     public InterpreterNode visitPrint(SVMParser.PrintContext ctx) { return new PrintNode(); }
 

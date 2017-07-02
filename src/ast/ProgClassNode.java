@@ -85,6 +85,8 @@ public class ProgClassNode implements Node {
                 res.addAll(d.checkSemantics(env));
         }
         res.addAll(ProgClassNode.exp.checkSemantics(env));
+
+        env.symTable.remove(env.nestingLevel--);
         return res;
     }
 

@@ -1,24 +1,23 @@
 push 0
+push 8
 push function0
-
-lhp
-push 44
-lhp
-push 1
+lfp
+lfp
+push -3
+lfp
 add
-shp
-lhp
-sw
-lfp
-lfp
-push function0
+lw
 js
 halt
 
 function0:
 cfp
 lra
-push 33
+push -4
+lfp
+lw
+add
+lw
 srv
 sra
 pop

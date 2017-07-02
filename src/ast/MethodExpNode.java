@@ -74,7 +74,14 @@ public class MethodExpNode implements Node
         }
         else
         {
-            System.out.println("Too much parameters when instantiating class " + c.getId() + "!");
+            String sign ;
+
+            if(expList.size() > al.size())
+                sign="much";
+            else
+                sign="few";
+
+            System.out.println("Too " + sign + " parameters when calling method " + this.methodID + " of object "+this.objectID+" of type "+this.objectTypeName);
             System.exit(0);
         }
 
@@ -114,6 +121,7 @@ public class MethodExpNode implements Node
             int j = env.nestingLevel;
             this.nestinglevel=env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(objectID);
+
             while (temp!=null && j > MapClassNestLevel.getMaxClassNestLevel())
                 temp = (env.symTable.get(j--)).get(objectID);
 
@@ -140,12 +148,30 @@ public class MethodExpNode implements Node
         String parCode="";
         for (int i=expList.size()-1; i>=0; i--)
             parCode+=expList.get(i).codeGeneration();
-        String getAR="";
-        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
-            getAR+="lw\n";
 
-        code = "lfp\n"+ //CL
-                parCode+
+        /*String getAR="";
+        for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
+            getAR+="lw\n";*/
+        int objectOffset = this.entry.getOffset();
+
+        int nAtt = ProgClassNode.getClassFromList(objectTypeName).getAttributeList().size();
+        String attCode="";
+
+        for(int i = 0; i < nAtt; i++)
+        {
+            attCode+= "push " + objectOffset + '\n' +
+                    "lfp\n" +
+                    "add\n" +
+                    "lw\n" +
+                    "push " + i + '\n' +
+                    "add\n" +
+                    "lw\n"
+            ;
+        }
+
+        code = ""+ //CL
+                parCode +
+                attCode +
                 "lfp\n"+
                 "push "+mLabel+"\n"+
                 "js\n";

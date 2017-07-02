@@ -62,15 +62,19 @@ public class NewExpNode implements  Node
     public String codeGeneration() {
         String code="";
         code+="lhp\n";
-        for(Node exp:expList){
-            code+=exp.codeGeneration();
+        if(expList.size()>0){
+            code+=expList.get(0).codeGeneration();
+            code+="lhp\n"+
+                    "sw\n";
+        }
+        for(int i=1;i<expList.size();i++){
+            code+=expList.get(i).codeGeneration();
             code+="lhp\n"
                     + "push 1\n"
                     + "add\n"
                     + "shp\n"
                     + "lhp\n"
                     + "sw\n";
-
         }
 
 
