@@ -43,4 +43,6 @@ int getw() w+p;
 let b ogg=new b(1,2,3); in print(ogg.getx(true)+ogg.gety(7,1));
 
 
+
+
 /*let int u=3;int f(bool b) if(b==true)then{u+1}else{u-1};in print(f(true));*/

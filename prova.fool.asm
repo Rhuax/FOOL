@@ -31,21 +31,21 @@ add
 shp
 lfp
 push 1
-push -6
+push -5
 lfp
 add
 lw
 push 0
 add
 lw
-push -6
+push -5
 lfp
 add
 lw
 push 1
 add
 lw
-push -6
+push -5
 lfp
 add
 lw
@@ -59,21 +59,21 @@ js
 lfp
 push 1
 push 7
-push -6
+push -5
 lfp
 add
 lw
 push 0
 add
 lw
-push -6
+push -5
 lfp
 add
 lw
 push 1
 add
 lw
-push -6
+push -5
 lfp
 add
 lw
@@ -95,8 +95,10 @@ lfp
 add
 sfp
 lra
+push 1
 push 9
 srv
+pop
 sra
 pop
 pop

@@ -47,7 +47,7 @@ public class ProgLetInNode implements Node {
                   res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
               else
                   ((VarNode) node).entry = entry;
-            System.out.println(entry.getOffset());
+            //System.out.println(entry.getOffset());
 
           }
       }

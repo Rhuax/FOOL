@@ -61,6 +61,24 @@ public class FunNode implements Node {
 	      if(declist.size() > 0){
 	    	  env.offset = -2;
 	    	  //if there are children then check semantics for every child and save the results
+              for(Node node:declist) {
+                  STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
+                  if(node instanceof FunNode) {
+                      if (hmn.put(((FunNode)node).getId(), entry) != null)
+                          res.add(new SemanticError("Fun id " + ((FunNode)node).getId() + " already declared"));
+                      else
+                          ((FunNode)node).entry=entry;
+                  }
+                  else if (node instanceof VarNode){
+                      if (hmn.put(((VarNode)node).getId(), entry) != null)
+                          res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
+                      else
+                          ((VarNode) node).entry = entry;
+                      //System.out.println(entry.getOffset());
+
+                  }
+              }
+
 	    	  for(Node n : declist)
 	    		  res.addAll(n.checkSemantics(env));
 	      }
