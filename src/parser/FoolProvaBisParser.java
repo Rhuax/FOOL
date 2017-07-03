@@ -18,11 +18,10 @@ public class FoolProvaBisParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		SEMIC=1, COLON=2, COMMA=3, EQ=4, ASM=5, PLUS=6, MINUS=7, TIMES=8, DIV=9, 
-		LESS=10, GREATER=11, LEQ=12, GEQ=13, AND=14, OR=15, NOT=16, TRUE=17, FALSE=18, 
-		LPAR=19, RPAR=20, CLPAR=21, CRPAR=22, IF=23, THEN=24, ELSE=25, LET=26, 
-		IN=27, VAR=28, FUN=29, INT=30, BOOL=31, CLASS=32, IMPLEMENTS=33, THIS=34, 
-		NEW=35, DOT=36, INTEGER=37, ID=38, WS=39, LINECOMENTS=40, BLOCKCOMENTS=41, 
-		ERR=42;
+		LESS=10, GREATER=11, LEQ=12, GEQ=13, TRUE=14, FALSE=15, LPAR=16, RPAR=17, 
+		CLPAR=18, CRPAR=19, IF=20, THEN=21, ELSE=22, LET=23, IN=24, VAR=25, FUN=26, 
+		INT=27, BOOL=28, CLASS=29, IMPLEMENTS=30, THIS=31, NEW=32, DOT=33, INTEGER=34, 
+		ID=35, WS=36, LINECOMENTS=37, BLOCKCOMENTS=38, ERR=39;
 	public static final int
 		RULE_prog = 0, RULE_classdec = 1, RULE_let = 2, RULE_vardec = 3, RULE_varasm = 4, 
 		RULE_fun = 5, RULE_dec = 6, RULE_type = 7, RULE_exp = 8, RULE_term = 9, 
@@ -34,17 +33,16 @@ public class FoolProvaBisParser extends Parser {
 
 	private static final String[] _LITERAL_NAMES = {
 		null, "';'", "':'", "','", "'=='", "'='", "'+'", "'-'", "'*'", "'/'", 
-		"'<'", "'>'", "'<='", "'>='", "'&&'", "'||'", "'not'", "'true'", "'false'", 
-		"'('", "')'", "'{'", "'}'", "'if'", "'then'", "'else'", "'let'", "'in'", 
-		"'var'", "'fun'", "'int'", "'bool'", "'class'", "'implements'", "'this'", 
-		"'new'", "'.'"
+		"'<'", "'>'", "'<='", "'>='", "'true'", "'false'", "'('", "')'", "'{'", 
+		"'}'", "'if'", "'then'", "'else'", "'let'", "'in'", "'var'", "'fun'", 
+		"'int'", "'bool'", "'class'", "'implements'", "'this'", "'new'", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "SEMIC", "COLON", "COMMA", "EQ", "ASM", "PLUS", "MINUS", "TIMES", 
-		"DIV", "LESS", "GREATER", "LEQ", "GEQ", "AND", "OR", "NOT", "TRUE", "FALSE", 
-		"LPAR", "RPAR", "CLPAR", "CRPAR", "IF", "THEN", "ELSE", "LET", "IN", "VAR", 
-		"FUN", "INT", "BOOL", "CLASS", "IMPLEMENTS", "THIS", "NEW", "DOT", "INTEGER", 
-		"ID", "WS", "LINECOMENTS", "BLOCKCOMENTS", "ERR"
+		"DIV", "LESS", "GREATER", "LEQ", "GEQ", "TRUE", "FALSE", "LPAR", "RPAR", 
+		"CLPAR", "CRPAR", "IF", "THEN", "ELSE", "LET", "IN", "VAR", "FUN", "INT", 
+		"BOOL", "CLASS", "IMPLEMENTS", "THIS", "NEW", "DOT", "INTEGER", "ID", 
+		"WS", "LINECOMENTS", "BLOCKCOMENTS", "ERR"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -928,12 +926,13 @@ public class FoolProvaBisParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
+			{
 			setState(125);
 			((TermContext)_localctx).left = factor();
 			setState(129);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ) | (1L << AND) | (1L << OR) | (1L << NOT))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ))) != 0)) {
 				{
 				{
 				setState(126);
@@ -944,6 +943,7 @@ public class FoolProvaBisParser extends Parser {
 				}
 			}
 
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -1491,9 +1491,6 @@ public class FoolProvaBisParser extends Parser {
 		public TerminalNode GREATER() { return getToken(FoolProvaBisParser.GREATER, 0); }
 		public TerminalNode LEQ() { return getToken(FoolProvaBisParser.LEQ, 0); }
 		public TerminalNode GEQ() { return getToken(FoolProvaBisParser.GEQ, 0); }
-		public TerminalNode AND() { return getToken(FoolProvaBisParser.AND, 0); }
-		public TerminalNode OR() { return getToken(FoolProvaBisParser.OR, 0); }
-		public TerminalNode NOT() { return getToken(FoolProvaBisParser.NOT, 0); }
 		public OperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1522,7 +1519,7 @@ public class FoolProvaBisParser extends Parser {
 			{
 			setState(200);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ) | (1L << AND) | (1L << OR) | (1L << NOT))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQ) | (1L << PLUS) | (1L << MINUS) | (1L << TIMES) | (1L << DIV) | (1L << LESS) | (1L << GREATER) | (1L << LEQ) | (1L << GEQ))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1544,7 +1541,7 @@ public class FoolProvaBisParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3,\u00cd\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u00cd\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\6\2%\n\2"+
 		"\r\2\16\2&\3\2\3\2\5\2+\n\2\3\2\3\2\3\2\5\2\60\n\2\3\3\3\3\3\3\3\3\5\3"+
@@ -1558,56 +1555,55 @@ public class FoolProvaBisParser extends Parser {
 		"\f\r\16\r\u00a6\13\r\5\r\u00a8\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\7\r"+
 		"\u00b2\n\r\f\r\16\r\u00b5\13\r\5\r\u00b7\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3"+
 		"\r\7\r\u00c0\n\r\f\r\16\r\u00c3\13\r\3\r\3\r\5\r\u00c7\n\r\5\r\u00c9\n"+
-		"\r\3\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2\6\4\2 !(("+
-		"\3\2\23\24\4\2$$((\4\2\6\6\b\22\2\u00de\2/\3\2\2\2\4\61\3\2\2\2\6P\3\2"+
-		"\2\2\bZ\3\2\2\2\n]\3\2\2\2\fa\3\2\2\2\16v\3\2\2\2\20x\3\2\2\2\22{\3\2"+
-		"\2\2\24\177\3\2\2\2\26\u0085\3\2\2\2\30\u00c8\3\2\2\2\32\u00ca\3\2\2\2"+
-		"\34\35\5\22\n\2\35\36\7\3\2\2\36\60\3\2\2\2\37 \5\6\4\2 !\5\22\n\2!\""+
-		"\7\3\2\2\"\60\3\2\2\2#%\5\4\3\2$#\3\2\2\2%&\3\2\2\2&$\3\2\2\2&\'\3\2\2"+
-		"\2\'(\3\2\2\2(*\7\3\2\2)+\5\6\4\2*)\3\2\2\2*+\3\2\2\2+,\3\2\2\2,-\5\22"+
-		"\n\2-.\7\3\2\2.\60\3\2\2\2/\34\3\2\2\2/\37\3\2\2\2/$\3\2\2\2\60\3\3\2"+
-		"\2\2\61\62\7\"\2\2\62\65\7(\2\2\63\64\7#\2\2\64\66\7(\2\2\65\63\3\2\2"+
-		"\2\65\66\3\2\2\2\66B\3\2\2\2\678\7\25\2\28=\5\b\5\29:\7\5\2\2:<\5\b\5"+
-		"\2;9\3\2\2\2<?\3\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\26"+
-		"\2\2AC\3\2\2\2B\67\3\2\2\2BC\3\2\2\2CN\3\2\2\2DH\7\27\2\2EF\5\f\7\2FG"+
+		"\r\3\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2\6\4\2\35\36"+
+		"%%\3\2\20\21\4\2!!%%\4\2\6\6\b\17\2\u00de\2/\3\2\2\2\4\61\3\2\2\2\6P\3"+
+		"\2\2\2\bZ\3\2\2\2\n]\3\2\2\2\fa\3\2\2\2\16v\3\2\2\2\20x\3\2\2\2\22{\3"+
+		"\2\2\2\24\177\3\2\2\2\26\u0085\3\2\2\2\30\u00c8\3\2\2\2\32\u00ca\3\2\2"+
+		"\2\34\35\5\22\n\2\35\36\7\3\2\2\36\60\3\2\2\2\37 \5\6\4\2 !\5\22\n\2!"+
+		"\"\7\3\2\2\"\60\3\2\2\2#%\5\4\3\2$#\3\2\2\2%&\3\2\2\2&$\3\2\2\2&\'\3\2"+
+		"\2\2\'(\3\2\2\2(*\7\3\2\2)+\5\6\4\2*)\3\2\2\2*+\3\2\2\2+,\3\2\2\2,-\5"+
+		"\22\n\2-.\7\3\2\2.\60\3\2\2\2/\34\3\2\2\2/\37\3\2\2\2/$\3\2\2\2\60\3\3"+
+		"\2\2\2\61\62\7\37\2\2\62\65\7%\2\2\63\64\7 \2\2\64\66\7%\2\2\65\63\3\2"+
+		"\2\2\65\66\3\2\2\2\66B\3\2\2\2\678\7\22\2\28=\5\b\5\29:\7\5\2\2:<\5\b"+
+		"\5\2;9\3\2\2\2<?\3\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\23"+
+		"\2\2AC\3\2\2\2B\67\3\2\2\2BC\3\2\2\2CN\3\2\2\2DH\7\24\2\2EF\5\f\7\2FG"+
 		"\7\3\2\2GI\3\2\2\2HE\3\2\2\2IJ\3\2\2\2JH\3\2\2\2JK\3\2\2\2KL\3\2\2\2L"+
-		"M\7\30\2\2MO\3\2\2\2ND\3\2\2\2NO\3\2\2\2O\5\3\2\2\2PT\7\34\2\2QR\5\16"+
+		"M\7\25\2\2MO\3\2\2\2ND\3\2\2\2NO\3\2\2\2O\5\3\2\2\2PT\7\31\2\2QR\5\16"+
 		"\b\2RS\7\3\2\2SU\3\2\2\2TQ\3\2\2\2UV\3\2\2\2VT\3\2\2\2VW\3\2\2\2WX\3\2"+
-		"\2\2XY\7\35\2\2Y\7\3\2\2\2Z[\5\20\t\2[\\\7(\2\2\\\t\3\2\2\2]^\5\b\5\2"+
-		"^_\7\7\2\2_`\5\22\n\2`\13\3\2\2\2ab\5\20\t\2bc\7(\2\2cl\7\25\2\2di\5\b"+
+		"\2\2XY\7\32\2\2Y\7\3\2\2\2Z[\5\20\t\2[\\\7%\2\2\\\t\3\2\2\2]^\5\b\5\2"+
+		"^_\7\7\2\2_`\5\22\n\2`\13\3\2\2\2ab\5\20\t\2bc\7%\2\2cl\7\22\2\2di\5\b"+
 		"\5\2ef\7\5\2\2fh\5\b\5\2ge\3\2\2\2hk\3\2\2\2ig\3\2\2\2ij\3\2\2\2jm\3\2"+
-		"\2\2ki\3\2\2\2ld\3\2\2\2lm\3\2\2\2mn\3\2\2\2np\7\26\2\2oq\5\6\4\2po\3"+
+		"\2\2ki\3\2\2\2ld\3\2\2\2lm\3\2\2\2mn\3\2\2\2np\7\23\2\2oq\5\6\4\2po\3"+
 		"\2\2\2pq\3\2\2\2qr\3\2\2\2rs\5\22\n\2s\r\3\2\2\2tw\5\n\6\2uw\5\f\7\2v"+
 		"t\3\2\2\2vu\3\2\2\2w\17\3\2\2\2xy\t\2\2\2y\21\3\2\2\2z|\7\t\2\2{z\3\2"+
 		"\2\2{|\3\2\2\2|}\3\2\2\2}~\5\24\13\2~\23\3\2\2\2\177\u0083\5\26\f\2\u0080"+
 		"\u0081\5\32\16\2\u0081\u0082\5\22\n\2\u0082\u0084\3\2\2\2\u0083\u0080"+
 		"\3\2\2\2\u0083\u0084\3\2\2\2\u0084\25\3\2\2\2\u0085\u0088\5\30\r\2\u0086"+
 		"\u0087\7\6\2\2\u0087\u0089\5\30\r\2\u0088\u0086\3\2\2\2\u0088\u0089\3"+
-		"\2\2\2\u0089\27\3\2\2\2\u008a\u00c9\7\'\2\2\u008b\u00c9\t\3\2\2\u008c"+
-		"\u008d\7\25\2\2\u008d\u008e\5\22\n\2\u008e\u008f\7\26\2\2\u008f\u00c9"+
-		"\3\2\2\2\u0090\u0091\7\31\2\2\u0091\u0092\5\22\n\2\u0092\u0093\7\32\2"+
-		"\2\u0093\u0094\7\27\2\2\u0094\u0095\5\22\n\2\u0095\u0096\7\30\2\2\u0096"+
-		"\u0097\7\33\2\2\u0097\u0098\7\27\2\2\u0098\u0099\5\22\n\2\u0099\u009a"+
-		"\7\30\2\2\u009a\u00c9\3\2\2\2\u009b\u00c9\7(\2\2\u009c\u00c9\7$\2\2\u009d"+
-		"\u009e\7(\2\2\u009e\u00a7\7\25\2\2\u009f\u00a4\5\22\n\2\u00a0\u00a1\7"+
-		"\5\2\2\u00a1\u00a3\5\22\n\2\u00a2\u00a0\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4"+
-		"\u00a2\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00a8\3\2\2\2\u00a6\u00a4\3\2"+
-		"\2\2\u00a7\u009f\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9"+
-		"\u00c9\7\26\2\2\u00aa\u00ab\t\4\2\2\u00ab\u00ac\7&\2\2\u00ac\u00ad\7("+
-		"\2\2\u00ad\u00b6\7\25\2\2\u00ae\u00b3\5\22\n\2\u00af\u00b0\7\5\2\2\u00b0"+
-		"\u00b2\5\22\n\2\u00b1\u00af\3\2\2\2\u00b2\u00b5\3\2\2\2\u00b3\u00b1\3"+
-		"\2\2\2\u00b3\u00b4\3\2\2\2\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b6"+
-		"\u00ae\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00c9\7\26"+
-		"\2\2\u00b9\u00ba\7%\2\2\u00ba\u00c6\7(\2\2\u00bb\u00bc\7\25\2\2\u00bc"+
-		"\u00c1\5\22\n\2\u00bd\u00be\7\5\2\2\u00be\u00c0\5\22\n\2\u00bf\u00bd\3"+
-		"\2\2\2\u00c0\u00c3\3\2\2\2\u00c1\u00bf\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2"+
-		"\u00c4\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c4\u00c5\7\26\2\2\u00c5\u00c7\3"+
-		"\2\2\2\u00c6\u00bb\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8"+
-		"\u008a\3\2\2\2\u00c8\u008b\3\2\2\2\u00c8\u008c\3\2\2\2\u00c8\u0090\3\2"+
-		"\2\2\u00c8\u009b\3\2\2\2\u00c8\u009c\3\2\2\2\u00c8\u009d\3\2\2\2\u00c8"+
-		"\u00aa\3\2\2\2\u00c8\u00b9\3\2\2\2\u00c9\31\3\2\2\2\u00ca\u00cb\t\5\2"+
-		"\2\u00cb\33\3\2\2\2\31&*/\65=BJNVilpv{\u0083\u0088\u00a4\u00a7\u00b3\u00b6"+
-		"\u00c1\u00c6\u00c8";
+		"\2\2\2\u0089\27\3\2\2\2\u008a\u00c9\7$\2\2\u008b\u00c9\t\3\2\2\u008c\u008d"+
+		"\7\22\2\2\u008d\u008e\5\22\n\2\u008e\u008f\7\23\2\2\u008f\u00c9\3\2\2"+
+		"\2\u0090\u0091\7\26\2\2\u0091\u0092\5\22\n\2\u0092\u0093\7\27\2\2\u0093"+
+		"\u0094\7\24\2\2\u0094\u0095\5\22\n\2\u0095\u0096\7\25\2\2\u0096\u0097"+
+		"\7\30\2\2\u0097\u0098\7\24\2\2\u0098\u0099\5\22\n\2\u0099\u009a\7\25\2"+
+		"\2\u009a\u00c9\3\2\2\2\u009b\u00c9\7%\2\2\u009c\u00c9\7!\2\2\u009d\u009e"+
+		"\7%\2\2\u009e\u00a7\7\22\2\2\u009f\u00a4\5\22\n\2\u00a0\u00a1\7\5\2\2"+
+		"\u00a1\u00a3\5\22\n\2\u00a2\u00a0\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2"+
+		"\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\u00a8\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7"+
+		"\u009f\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u00c9\7\23"+
+		"\2\2\u00aa\u00ab\t\4\2\2\u00ab\u00ac\7#\2\2\u00ac\u00ad\7%\2\2\u00ad\u00b6"+
+		"\7\22\2\2\u00ae\u00b3\5\22\n\2\u00af\u00b0\7\5\2\2\u00b0\u00b2\5\22\n"+
+		"\2\u00b1\u00af\3\2\2\2\u00b2\u00b5\3\2\2\2\u00b3\u00b1\3\2\2\2\u00b3\u00b4"+
+		"\3\2\2\2\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b6\u00ae\3\2\2\2\u00b6"+
+		"\u00b7\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00c9\7\23\2\2\u00b9\u00ba\7"+
+		"\"\2\2\u00ba\u00c6\7%\2\2\u00bb\u00bc\7\22\2\2\u00bc\u00c1\5\22\n\2\u00bd"+
+		"\u00be\7\5\2\2\u00be\u00c0\5\22\n\2\u00bf\u00bd\3\2\2\2\u00c0\u00c3\3"+
+		"\2\2\2\u00c1\u00bf\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2\u00c4\3\2\2\2\u00c3"+
+		"\u00c1\3\2\2\2\u00c4\u00c5\7\23\2\2\u00c5\u00c7\3\2\2\2\u00c6\u00bb\3"+
+		"\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8\u008a\3\2\2\2\u00c8"+
+		"\u008b\3\2\2\2\u00c8\u008c\3\2\2\2\u00c8\u0090\3\2\2\2\u00c8\u009b\3\2"+
+		"\2\2\u00c8\u009c\3\2\2\2\u00c8\u009d\3\2\2\2\u00c8\u00aa\3\2\2\2\u00c8"+
+		"\u00b9\3\2\2\2\u00c9\31\3\2\2\2\u00ca\u00cb\t\5\2\2\u00cb\33\3\2\2\2\31"+
+		"&*/\65=BJNVilpv{\u0083\u0088\u00a4\u00a7\u00b3\u00b6\u00c1\u00c6\u00c8";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -44,7 +44,7 @@ type   :
 
 exp    : ('-')? left=term ;
 
-term   : left=factor (( op=operator ) right=exp )? ;
+term   : (left=factor (( op=operator ) right=exp )?) ;
 
 factor : left=value (EQ right=value)?
       ;     
@@ -70,10 +70,7 @@ operator      :
                | LESS
                | GREATER
                | LEQ
-               | GEQ
-               | AND
-               | OR
-               | NOT ;
+               | GEQ ;
    
 /*------------------------------------------------------------------
  * LEXER RULES
@@ -91,9 +88,6 @@ LESS        : '<' ;
 GREATER     : '>' ;
 LEQ         : '<=' ;
 GEQ         : '>=' ;
-AND         : '&&' ;
-OR          : '||' ;
-NOT         : 'not' ;
 TRUE        : 'true' ;
 FALSE       : 'false' ;
 LPAR        : '(' ;

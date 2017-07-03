@@ -66,20 +66,7 @@ public class ExecuteVM {
             v2=pop();
             push(v2 - v1);
             break;
-          case SVMParser.AND :
-                v1=pop();
-                v2=pop();
-                push(v2==1 && v1==1?1:0);
-                break;
-          case SVMParser.OR :
-            v1=pop();
-            v2=pop();
-            push(v2==1 || v1==1?1:0);
-            break;
-          case SVMParser.NOT :
-            v1=pop();
-            push(v1==0?1:0);
-            break;
+
           case SVMParser.STOREW : //
             address = pop();
             memory[address] = pop();    

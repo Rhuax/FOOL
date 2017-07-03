@@ -26,18 +26,21 @@ let int lll=y+o;int y=o+3;int o=2;in print(lll);*/
 
 class a(int x,int p)
 {
-    int getx() x;
+    int getx(bool b) let int mm=1;in 9;
     int getp() p;
 }
 
 
 class b implements a (int y)
 {
-    int gety() y+x;
+    int gety(int h,int j) if(h>j)then {h+j}else {h-j};
 }
 class c implements a (int w)
 {
 int getw() w+p;
 }
 ;
-let b ogg=new b(1,2,3);c ogg2= new c(4,5,6); in print(ogg.gety()+ogg2.getw());
+let b ogg=new b(1,2,3); in print(ogg.getx(true)+ogg.gety(7,1));
+
+
+/*let int u=3;int f(bool b) if(b==true)then{u+1}else{u-1};in print(f(true));*/

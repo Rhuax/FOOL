@@ -107,42 +107,6 @@ public interface SVMListener extends ParseTreeListener {
 	 */
 	void exitDiv(SVMParser.DivContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code and}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void enterAnd(SVMParser.AndContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code and}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void exitAnd(SVMParser.AndContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code or}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void enterOr(SVMParser.OrContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code or}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void exitOr(SVMParser.OrContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code not}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void enterNot(SVMParser.NotContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code not}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 */
-	void exitNot(SVMParser.NotContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code loadw}
 	 * labeled alternative in {@link SVMParser#assembly}.
 	 * @param ctx the parse tree

@@ -70,27 +70,6 @@ public interface SVMVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDiv(SVMParser.DivContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code and}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAnd(SVMParser.AndContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code or}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOr(SVMParser.OrContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code not}
-	 * labeled alternative in {@link SVMParser#assembly}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNot(SVMParser.NotContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code loadw}
 	 * labeled alternative in {@link SVMParser#assembly}.
 	 * @param ctx the parse tree

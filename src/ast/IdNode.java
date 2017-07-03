@@ -46,7 +46,7 @@ public class IdNode implements Node {
               entry = tmp;
               nestinglevel = env.nestingLevel;
           }
-
+          System.out.println(this.id+"  offset:"+this.entry.getOffset());
       }
       else{
 	      int j = env.nestingLevel;
@@ -75,6 +75,7 @@ public class IdNode implements Node {
               entry=temp;
               nestinglevel=env.nestingLevel;
           }
+
       }
 	  return res;
 	}
@@ -89,8 +90,14 @@ public class IdNode implements Node {
   
   public String codeGeneration() {
       String getAR="";
+      System.out.println(this.id+" sottrazione "+(nestinglevel-entry.getNestinglevel()));
+
+      if(MapClassNestLevel.getCurrentAnalyzedClass()==null)
 	  for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) 
-	    	 getAR+="";
+	    	 getAR+="lw\n";
+
+
+
 	    return "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
 		       "lfp\n"+getAR+ //risalgo la catena statica
 			   "add\n"+ 

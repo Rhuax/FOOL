@@ -43,7 +43,7 @@ public class FunNode implements Node {
 	      env.symTable.add(hmn);
 	      
 	      ArrayList<Node> parTypes = new ArrayList<Node>();
-	      int paroffset=1;
+	      int paroffset=(MapClassNestLevel.getCurrentAnalyzedClass()==null?1:0);
 	      
 	      //check args
 	      for(Node a : parlist){

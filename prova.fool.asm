@@ -29,29 +29,36 @@ lhp
 push 1
 add
 shp
-lhp
-push 4
-lhp
-sw
-push 5
-lhp
-push 1
-add
-shp
-lhp
-sw
-push 6
-lhp
-push 1
-add
-shp
-lhp
-sw
-lhp
-push 1
-add
-shp
 lfp
+push 1
+push -6
+lfp
+add
+lw
+push 0
+add
+lw
+push -6
+lfp
+add
+lw
+push 1
+add
+lw
+push -6
+lfp
+add
+lw
+push 2
+add
+lw
+push 5
+lfp
+push function0
+js
+lfp
+push 1
+push 7
 push -6
 lfp
 add
@@ -77,32 +84,6 @@ push 5
 lfp
 push function3
 js
-lfp
-push -7
-lfp
-add
-lw
-push 0
-add
-lw
-push -7
-lfp
-add
-lw
-push 1
-add
-lw
-push -7
-lfp
-add
-lw
-push 2
-add
-lw
-push 5
-lfp
-push function2
-js
 add
 print
 halt
@@ -114,12 +95,10 @@ lfp
 add
 sfp
 lra
-push -1
-lfp
-add
-lw
+push 9
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -180,17 +159,47 @@ lfp
 add
 sfp
 lra
-push -3
+push 0
 lfp
 add
 lw
-push -1
+push 1
+lfp
+add
+lw
+bg label2
+push 0
+b label3
+label2:
+push 1
+label3:
+push 1
+beq label0
+push 0
+lfp
+add
+lw
+push 1
+lfp
+add
+lw
+sub
+b label1
+label0:
+push 0
+lfp
+add
+lw
+push 1
 lfp
 add
 lw
 add
+label1:
 srv
 sra
+pop
+pop
 pop
 pop
 pop

@@ -30,8 +30,8 @@ public class GeqNode implements Node
     @Override
     public Node typeCheck()
     {
-        if( !( FOOLlib.isSubtype(left.typeCheck(), new BoolTypeNode()) )
-                && !( FOOLlib.isSubtype(right.typeCheck(), new BoolTypeNode()) ) )
+        if( ( FOOLlib.isSubtype(left.typeCheck(), new IntTypeNode()) )
+                && ( FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()) ) )
         {
             return new BoolTypeNode();
         }
