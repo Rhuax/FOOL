@@ -155,8 +155,15 @@ public class MethodExpNode implements Node
         for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
             getAR+="lw\n";*/
         int objectOffset = this.entry.getOffset();
+        String popAttr="";
 
         int nAtt = ProgClassNode.getClassFromList(objectTypeName).getTotalAttributes().size();
+        for (int i = 0;i < nAtt-1; i++)
+            popAttr+="pop\n";
+        String popParl="";
+        for(int i=0;i<expList.size();i++)
+            popParl+="pop\n";
+
         String attCode="";
 
         for(int i = 0; i < nAtt; i++)
@@ -171,13 +178,17 @@ public class MethodExpNode implements Node
             ;
         }
 
-        code = "lfp\n"+ //CL
-                parCode +
+        code = parCode +
                 attCode +
-                "push "+(nAtt+2)+"\n"+
+                "lfp\n"+ //CL
+                "push "+(nAtt+3)+"\n"+
                 "lfp\n"+
                 "push "+mLabel+"\n"+
-                "js\n";
+                "js\n"+
+                "srv\n"+
+                popAttr +
+                popParl +
+                "lrv\n";
 
         //MapClassNestLevel.setCurrentAnalyzedClass(null);
         return code;

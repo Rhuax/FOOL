@@ -23,24 +23,59 @@ int ll() 44;
 
 let int lll=y+o;int y=o+3;int o=2;in print(lll);*/
 
-
-class a(int x,int p)
+/*
+class a(int x,int p, int u)
 {
-    int getx(bool b) let int mm=1;in 9;
+    int getx(bool b, bool c) let int ca=111;int funz(int wewe) wewe;in if(b==c)then{ca+funz(979797)}else{ca+1};
     int getp() p;
 }
 
 
-class b implements a (int y)
+class b implements a (int y, int k)
 {
-    int gety(int h,int j) if(h>j)then {h+j}else {h-j};
+    int gety(int h,int u) 11;
+    int getk(int a, int b) 14;
 }
 class c implements a (int w)
 {
 int getw() w+p;
 }
 ;
-let b ogg=new b(1,2,3); in print(ogg.getx(true)+ogg.gety(7,1));
+let c ogg=new c(55,2,77,100); in print( ogg.getx(true,false) + ogg.getp()+ ogg.getw() );*/
+
+
+
+
+class c(int y)
+{
+
+int metodo()let int metodo=33;in metodo;
+};
+let c ogg=new c(9);int oioi=22; in print(ogg.metodo());
+
+/*
+class a(int x,int p, int u)
+{
+    int getx(bool b, bool c) let int ca=111; int funz(int parametro) parametro ;in if(b==c)then{ca+funz(1)}else{ca+1};
+    int getp() p;
+}
+
+
+class b implements a (int y, int k)
+{
+    int gety(int h,int u) 11;
+    int getk(int a, int b) 14;
+}
+class c implements a (int w)
+{
+int getw() w+p;
+}
+;
+let c ogg=new c(55,2,77,100); in print( ogg.getx(true,false) );*/
+
+
+
+
 
 
 

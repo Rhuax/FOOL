@@ -1,6 +1,8 @@
 package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import lib.FOOLlib;
 import util.*;
@@ -40,6 +42,7 @@ public class FunNode implements Node {
     	  //creare una nuova hashmap per la symTable
 	      env.nestingLevel++;
 	      HashMap<String,STentry> hmn = new HashMap<String,STentry> ();
+
 	      env.symTable.add(hmn);
 	      
 	      ArrayList<Node> parTypes = new ArrayList<Node>();
@@ -59,18 +62,30 @@ public class FunNode implements Node {
 	      
 	    //check semantics in the dec list
 	      if(declist.size() > 0){
-	    	  env.offset = -2;
+
 	    	  //if there are children then check semantics for every child and save the results
+              int offsetchepartedamenouno=-1;
               for(Node node:declist) {
-                  STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
+
                   if(node instanceof FunNode) {
-                      if (hmn.put(((FunNode)node).getId(), entry) != null)
+                      STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
+                        if (Objects.equals(this.id, ((FunNode) node).id))
+                            res.add(new SemanticError("Fun id " + ((FunNode)node).getId() + " already declared"));
+                      else if (hmn.put(((FunNode)node).getId(), entry) != null )
                           res.add(new SemanticError("Fun id " + ((FunNode)node).getId() + " already declared"));
                       else
                           ((FunNode)node).entry=entry;
                   }
                   else if (node instanceof VarNode){
-                      if (hmn.put(((VarNode)node).getId(), entry) != null)
+                      STentry entry;
+                      if(MapClassNestLevel.getCurrentAnalyzedClass()!=null){
+                          entry = new STentry(env.nestingLevel, MapClassNestLevel.getCurrentAnalyzedClass().attributeOffset--); //separo introducendo "entry"
+                      }
+                      else
+                          entry=new STentry(env.nestingLevel,offsetchepartedamenouno--);
+                      if (Objects.equals(this.id, ((VarNode) node).getId()))
+                          res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
+                      else if (hmn.put(((VarNode)node).getId(), entry) != null)
                           res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
                       else
                           ((VarNode) node).entry = entry;
@@ -78,14 +93,15 @@ public class FunNode implements Node {
 
                   }
               }
-
-	    	  for(Node n : declist)
-	    		  res.addAll(n.checkSemantics(env));
+              if(res.isEmpty()) {
+                  for (Node n : declist)
+                      res.addAll(n.checkSemantics(env));
+              }
 	      }
-	     
-	      //check body
-	      res.addAll(body.checkSemantics(env));
-	      
+	     if(res.isEmpty()) {
+             //check body
+             res.addAll(body.checkSemantics(env));
+         }
 	      //close scope
 	      env.symTable.remove(env.nestingLevel--);
 	      
@@ -141,9 +157,14 @@ public class FunNode implements Node {
 	    
 	    String funl;
 	    if(MapClassNestLevel.getCurrentAnalyzedClass()!=null){
-			int index = DispatchTable.getDispatchIndexFromClassName(MapClassNestLevel.getCurrentAnalyzedClass().getId());
-			DispatchMethodTable dispmetTable=DispatchTable.dispatchTable.get(index).getDispatchMethodTable();
-			funl = dispmetTable.methodList.get(this.id);
+	        if(MapClassNestLevel.getCurrentAnalyzedClass().getMethodFromList(this.id)==null){
+	            funl=FOOLlib.freshFunLabel();
+            }
+            else {
+                int index = DispatchTable.getDispatchIndexFromClassName(MapClassNestLevel.getCurrentAnalyzedClass().getId());
+                DispatchMethodTable dispmetTable = DispatchTable.dispatchTable.get(index).getDispatchMethodTable();
+                funl = dispmetTable.methodList.get(this.id);
+            }
 
 		}
 		else
@@ -160,19 +181,15 @@ public class FunNode implements Node {
 					popDecl +
 					"sra\n" + // pop del return address
 					"pop\n" + // pop di AL
-					popParl +
+
 					"sfp\n" +  // setto $fp a valore del CL
 					"lrv\n" + // risultato della funzione sullo stack
-					"lra\n" + "js\n" // salta a $ra
-			);
+					"lra\n" +
+                    "js\n" // salta a $ra
 
+			);
 		}
 		else{
-			String popAttr="";
-			int nAtt = MapClassNestLevel.getCurrentAnalyzedClass().getTotalAttributes().size();
-			for (int i = 0;i < nAtt-1; i++)
-				popAttr+="pop\n";
-
 			FOOLlib.putCode(funl + ":\n" +
 					"cfp\n" + //setta $fp a $sp
 					"pop\n"+
@@ -188,11 +205,8 @@ public class FunNode implements Node {
 					popDecl +
 					"sra\n" + // pop del return address
 					"pop\n" + // pop di AL
-					popAttr +
-					popParl +
 					"sfp\n" +  // setto $fp a valore del CL
 					"lrv\n" + // risultato della funzione sullo stack
-
 					"lra\n" +
 					"js\n"); // salta a $ra
 		}

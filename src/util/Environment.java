@@ -14,6 +14,7 @@ public class Environment {
 	public int nestingLevel = -1;
 	public int methodOffset=0;
 	public int offset=0;
+
 	//livello ambiente con dichiarazioni piu' esterno � 0 (prima posizione ArrayList) invece che 1 (slides)
 	//il "fronte" della lista di tabelle � symTable.get(nestingLevel)
 	

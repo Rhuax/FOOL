@@ -193,6 +193,8 @@ public class ClassNode implements Node {
             else
                 f.entry=entry;
         }
+        env.methodOffset=env.offset;
+        attributeOffset+=-4;
         if(check) {
 
                 //if there are children then check semantics for every child and save the results
@@ -201,7 +203,7 @@ public class ClassNode implements Node {
 
             }
         }
-        env.methodOffset=env.offset;
+        //attributeOffset=env.offset;
         return check;
     }
 

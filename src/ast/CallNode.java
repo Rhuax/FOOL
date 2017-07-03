@@ -103,9 +103,11 @@ public String toPrint(String s) {  //
   
   public String codeGeneration() {
 	    String parCode="";
+	    String popParl="";
 	    for (int i=parlist.size()-1; i>=0; i--)
 	    	parCode+=parlist.get(i).codeGeneration();
-	    
+	    for(int i=0;i<parlist.size();i++)
+	        popParl+="pop\n";
 	    String getAR="";
 		  for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) 
 		    	 getAR+="lw\n";
@@ -118,7 +120,11 @@ public String toPrint(String s) {  //
 		       "lfp\n"+getAR+ //risalgo la catena statica
 			   "add\n"+ 
                "lw\n"+ //carico sullo stack il valore all'indirizzo ottenuto
-		       "js\n";
+		       "js\n"+
+                "srv\n"+
+                popParl +
+                "lrv\n"
+                ;
   }
 
     
