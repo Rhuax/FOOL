@@ -46,7 +46,7 @@ public class FunNode implements Node {
 	      env.symTable.add(hmn);
 	      
 	      ArrayList<Node> parTypes = new ArrayList<Node>();
-	      int paroffset=(MapClassNestLevel.getCurrentAnalyzedClass()==null?1:0);
+	      int paroffset=1;
 	      
 	      //check args
 	      for(Node a : parlist){
@@ -62,9 +62,9 @@ public class FunNode implements Node {
 	      
 	    //check semantics in the dec list
 	      if(declist.size() > 0){
-
+			  env.offset=-2;
 	    	  //if there are children then check semantics for every child and save the results
-              int offsetchepartedamenouno=-1;
+              int offsetchepartedamenouno=-3;
               for(Node node:declist) {
 
                   if(node instanceof FunNode) {
@@ -78,11 +78,7 @@ public class FunNode implements Node {
                   }
                   else if (node instanceof VarNode){
                       STentry entry;
-                      if(MapClassNestLevel.getCurrentAnalyzedClass()!=null){
-                          entry = new STentry(env.nestingLevel, MapClassNestLevel.getCurrentAnalyzedClass().attributeOffset--); //separo introducendo "entry"
-                      }
-                      else
-                          entry=new STentry(env.nestingLevel,offsetchepartedamenouno--);
+					  entry=new STentry(env.nestingLevel,offsetchepartedamenouno--);
                       if (Objects.equals(this.id, ((VarNode) node).getId()))
                           res.add(new SemanticError("Var id " + ((VarNode)node).getId() + " already declared"));
                       else if (hmn.put(((VarNode)node).getId(), entry) != null)
@@ -94,6 +90,7 @@ public class FunNode implements Node {
                   }
               }
               if(res.isEmpty()) {
+
                   for (Node n : declist)
                       res.addAll(n.checkSemantics(env));
               }
@@ -173,38 +170,36 @@ public class FunNode implements Node {
         }
 		if(MapClassNestLevel.getCurrentAnalyzedClass()==null) {
 			FOOLlib.putCode(funl + ":\n" +
-					"cfp\n" + //setta $fp a $sp
-					"lra\n" + //inserimento return address
-					declCode + //inserimento dichiarazioni locali
-					body.codeGeneration() +
-					"srv\n" + //pop del return value
-					popDecl +
-					"sra\n" + // pop del return address
-					"pop\n" + // pop di AL
-
-					"sfp\n" +  // setto $fp a valore del CL
-					"lrv\n" + // risultato della funzione sullo stack
-					"lra\n" +
-                    "js\n" // salta a $ra
-
+					"cfp\n"+ //setta $fp a $sp
+					"lra\n"+ //inserimento return address
+					declCode+ //inserimento dichiarazioni locali
+					body.codeGeneration()+
+					"srv\n"+ //pop del return value
+					popDecl+
+					"sra\n"+ // pop del return address
+					"pop\n"+ // pop di AL
+					popParl+
+					"sfp\n"+  // setto $fp a valore del CL
+					"lrv\n"+ // risultato della funzione sullo stack
+					"lra\n"+"js\n" // salta a $ra
 			);
 		}
 		else{
 			FOOLlib.putCode(funl + ":\n" +
 					"cfp\n" + //setta $fp a $sp
-					"pop\n"+
-
-					"lfp\n" +
+					"push 1\n" +
+					"lfp\n"+
 					"add\n" +
-					"sfp\n" +
+					"sfp\n"+
 					"lra\n" + //inserimento return address
 					declCode + //inserimento dichiarazioni locali
 					body.codeGeneration() +
 					"srv\n" + //pop del return value
-
 					popDecl +
 					"sra\n" + // pop del return address
 					"pop\n" + // pop di AL
+					"pop\n" +
+					popParl +
 					"sfp\n" +  // setto $fp a valore del CL
 					"lrv\n" + // risultato della funzione sullo stack
 					"lra\n" +

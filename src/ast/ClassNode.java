@@ -14,7 +14,7 @@ public class ClassNode implements Node {
 
     private String id;
 
-    public int attributeOffset = -1;
+    public int attributeOffset = 0;
 
     public ArrayList<VardecNode> getAttributeList() {
         return attributeList;
@@ -49,6 +49,8 @@ public class ClassNode implements Node {
     ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml) {
         id = i;
         attributeList = al;
+
+
         methodList = ml;
     }
 

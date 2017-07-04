@@ -9,6 +9,8 @@ import util.Environment;
 import util.MapClassNestLevel;
 import util.SemanticError;
 
+import static java.lang.StrictMath.abs;
+
 public class IdNode implements Node {
 
   private String id;
@@ -90,18 +92,41 @@ public class IdNode implements Node {
   
   public String codeGeneration() {
       String getAR="";
-      System.out.println(this.id+" sottrazione "+(nestinglevel-entry.getNestinglevel()));
+      //System.out.println(this.id+" sottrazione "+(nestinglevel-entry.getNestinglevel()));
 
       if(MapClassNestLevel.getCurrentAnalyzedClass()==null)
 	  for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) 
 	    	 getAR+="lw\n";
 
+      String code = "";
+      boolean isAttribute = false;
+      ClassNode curClass = MapClassNestLevel.getCurrentAnalyzedClass();
+      if(curClass != null)
+      {
+         ArrayList<VardecNode> attList = curClass.getAttributeList();
+         for(VardecNode att: attList)
+             if(Objects.equals(att.getId(), this.id))
+                 isAttribute = true;
+      }
 
+      if(isAttribute)
+      {
+          code += "lfp\n" +
+                    "push -1\n" +
+                    "add\n" +
+                    "lw\n" +
+                    "push "+abs(this.getEntry().getOffset()) + "\n" +
+                    "add\n" +
+                    "lw\n";
+      }
+      else
+      {
+        code += "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
+                "lfp\n"+getAR+ //risalgo la catena statica
+                "add\n"+
+                "lw\n"; //carico sullo stack il valore all'indirizzo ottenuto
+      }
 
-	    return "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
-		       "lfp\n"+getAR+ //risalgo la catena statica
-			   "add\n"+ 
-               "lw\n"; //carico sullo stack il valore all'indirizzo ottenuto
-
+	    return code;
   }
 }  

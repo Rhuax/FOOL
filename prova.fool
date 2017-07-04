@@ -1,83 +1,27 @@
 /*
-class a(int h)
+class a (int x, int y)
 {
-int a() 3;
-int b() 4;
-}
-;
+    int f(int u) let int g(int a, int b, int c) a+b+c; in g(u,x,y);
 
-let int y = 99;a x=new a(33);in x;
+};
+
+let a ogg = new a(7,8); in print(ogg.f(9));
 */
 
-/*let  int f() h;  int h=1;in print(f());*/
-
-
-
-/*class a(b x){
-int u()22;
-}
-class b(int x){
-int ll() 44;
-}
-;
-
-let int lll=y+o;int y=o+3;int o=2;in print(lll);*/
-
 /*
-class a(int x,int p, int u)
+class a (int x, int y)
 {
-    int getx(bool b, bool c) let int ca=111;int funz(int wewe) wewe;in if(b==c)then{ca+funz(979797)}else{ca+1};
-    int getp() p;
-}
-
-
-class b implements a (int y, int k)
-{
-    int gety(int h,int u) 11;
-    int getk(int a, int b) 14;
-}
-class c implements a (int w)
-{
-int getw() w+p;
-}
-;
-let c ogg=new c(55,2,77,100); in print( ogg.getx(true,false) + ogg.getp()+ ogg.getw() );*/
-
-
-
-
-class c(int y)
-{
-
-int metodo()let int metodo=33;in metodo;
+    int f(int u) let int a = 3; in u+a;
 };
-let c ogg=new c(9);int oioi=22; in print(ogg.metodo());
 
-/*
-class a(int x,int p, int u)
+let a ogg =new a(7,8); in print(ogg.f(9));
+*/
+
+class a (int x, int y)
 {
-    int getx(bool b, bool c) let int ca=111; int funz(int parametro) parametro ;in if(b==c)then{ca+funz(1)}else{ca+1};
-    int getp() p;
-}
+    int f(int u) g(u);
+    int g(int a) h(a+x);
+    int h(int b) b+y;
+};
 
-
-class b implements a (int y, int k)
-{
-    int gety(int h,int u) 11;
-    int getk(int a, int b) 14;
-}
-class c implements a (int w)
-{
-int getw() w+p;
-}
-;
-let c ogg=new c(55,2,77,100); in print( ogg.getx(true,false) );*/
-
-
-
-
-
-
-
-
-/*let int u=3;int f(bool b) if(b==true)then{u+1}else{u-1};in print(f(true));*/
+let a ogg =new a(7,8); in print(ogg.f(9));

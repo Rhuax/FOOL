@@ -1,10 +1,9 @@
 package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-import util.Environment;
-import util.MapClassNestLevel;
-import util.SemanticError;
+import util.*;
 import lib.FOOLlib;
 
 public class CallNode implements Node {
@@ -104,27 +103,48 @@ public String toPrint(String s) {  //
   public String codeGeneration() {
 	    String parCode="";
 	    String popParl="";
+	    String code="";
+
 	    for (int i=parlist.size()-1; i>=0; i--)
 	    	parCode+=parlist.get(i).codeGeneration();
+
 	    for(int i=0;i<parlist.size();i++)
 	        popParl+="pop\n";
+
 	    String getAR="";
 		  for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++) 
 		    	 getAR+="lw\n";
-	    
-		return "lfp\n"+ //CL
-               parCode+
-               "lfp\n"+getAR+ //setto AR risalendo la catena statica
-               // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
-               "push "+entry.getOffset()+"\n"+ //metto offset sullo stack
-		       "lfp\n"+getAR+ //risalgo la catena statica
-			   "add\n"+ 
-               "lw\n"+ //carico sullo stack il valore all'indirizzo ottenuto
-		       "js\n"+
-                "srv\n"+
-                popParl +
-                "lrv\n"
-                ;
+
+
+		  ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+		  if(current!=null && current.getMethodFromList(this.id)!=null){
+              int index= DispatchTable.getDispatchIndexFromClassName(current.getId());
+              DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
+              String mLabel=dispentry.getDispatchMethodTable().methodList.get(this.id);
+		      //sono in un metodo e sto chiamando un altro metodo della mia classe
+              code += "lfp\n" +
+                      parCode +
+                      "lfp\n"+ //CL
+                      "lfp\n" +
+                      "push -1\n" +
+                      "add\n" +
+                      "lw\n" +
+                      "push "+mLabel+"\n"+
+                      "js\n";
+          }
+		  else {
+
+              code += "lfp\n" + //CL
+                      parCode +
+                      "lfp\n" + getAR + //setto AR risalendo la catena statica
+                      // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
+                      "push " + entry.getOffset() + "\n" + //metto offset sullo stack
+                      "lfp\n" + getAR + //risalgo la catena statica
+                      "add\n" +
+                      "lw\n" + //carico sullo stack il valore all'indirizzo ottenuto
+                      "js\n";
+          }
+        return code;
   }
 
     

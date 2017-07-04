@@ -39,6 +39,8 @@ public class ExecuteVM {
               list.add(Integer.valueOf(memory[i]));
           System.out.println(list);
 
+          System.out.println("FP = " + fp);
+
         switch ( bytecode ) {
           case SVMParser.PUSH:
             push( code[ip++] );

@@ -24,6 +24,7 @@ import parser.FoolProvaBisParser.TypeContext;
 import parser.FoolProvaBisParser.VarExpContext;
 import parser.FoolProvaBisParser.VarasmContext;
 import parser.FoolProvaBisParser.VardecContext;
+import util.MapClassNestLevel;
 
 
 public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
@@ -354,7 +355,6 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 
 		for(VardecContext vardec : ctx.vardec())
 			attList.add((VardecNode)visit(vardec));
-
 		for(FoolProvaBisParser.FunContext fundec : ctx.fun())
 			methList.add((FunNode)visit(fundec));
 
