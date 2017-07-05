@@ -1,12 +1,20 @@
 /*
-class a (int x, int y)
+class a (int x, int y, int z)
 {
-    int f(int u) let int g(int a, int b, int c) a+b+c; in g(u,x,y);
+    int f(bool u, b oggetto) let int g(int a, int b, int c) a+b+c; in if(u==true) then {this.g(x,y,z)} else{this.g(oggetto)};
+    int g(b ogg) ogg.getfuck();
 
-};
+}
 
-let a ogg = new a(7,8); in print(ogg.f(9));
-*/
+class b (int k, bool v)
+{
+    int getfuck() if(v==true) then {k+1} else {k-1};
+}
+
+;
+
+let a ogg = new a(1,2,3); b ogg2 = new b(5,false); in print(ogg.f(false, ogg2));*/
+
 
 /*
 class a (int x, int y)
@@ -17,11 +25,78 @@ class a (int x, int y)
 let a ogg =new a(7,8); in print(ogg.f(9));
 */
 
+
+/*
 class a (int x, int y)
 {
-    int f(int u) g(u);
-    int g(int a) h(a+x);
-    int h(int b) b+y;
+    int f(int u) u+1;
+    int g(int a) let int h() 5; in h();
+    int o(int k) g(5);
 };
 
-let a ogg =new a(7,8); in print(ogg.f(9));
+let a ogg =new a(7,8); in print(ogg.g(4));*/
+
+/*
+class a (int i)
+{
+int geti(b dio) dio.dammi33();
+}
+class b (int p)
+{
+int dammi33() 33;
+}
+
+;
+
+let a oggetto=new a(55);int f(a ogg) let b oggetto2=new b(99);in ogg.geti(oggetto2);in print(f(oggetto));*/
+/*
+class a(int x)
+{
+    int metodo1() let int funz() this.metodo2();in funz();
+    int metodo2() 3;
+};
+let a ogg=new a(7);in print(ogg.metodo1());*/
+
+/*
+class a(int x)
+{
+    int getx() x;
+}
+
+class b implements a (int y)
+{
+    a gety(a supObj) supObj;
+}
+
+class c implements b (int z)
+{
+    int getz() z;
+}
+
+class d implements a(int w)
+{
+    int getw() w;
+}
+
+class e implements d(int o)
+{
+    int geto() o;
+}
+
+;
+
+let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg.gety(ogg3); in print( temp.getx() + ogg2.getw());
+*/
+
+class B(int bField1){
+int getField1()
+bField1;
+}
+
+class A(int aField1){
+int aFun1(B aFun1Par1)
+aField1+aFun1Par1.getField1();
+
+};
+
+let int x = 3; B b = new B(15); A a = new A(60); in print(a.aFun1(b));

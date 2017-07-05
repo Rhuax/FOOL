@@ -27,6 +27,7 @@ public class ClassNode implements Node {
     }
 
     private ArrayList<FunNode> methodList;
+
     private ClassNode extendedClass = null;
     private String extendedClassName = null;
 
@@ -35,6 +36,12 @@ public class ClassNode implements Node {
     }
 
     private ArrayList<VardecNode> totalAttributes = new ArrayList<>();
+
+    public ArrayList<FunNode> getTotalMethodList() {
+        return totalMethodList;
+    }
+
+    private ArrayList<FunNode> totalMethodList=new ArrayList<>();
 
     public String getExtendedClassName() {
         return extendedClassName;
@@ -58,7 +65,9 @@ public class ClassNode implements Node {
         id = i;
         attributeList = al;
         methodList = ml;
+
         extendedClassName = cex;
+
     }
 
 
@@ -110,11 +119,16 @@ public class ClassNode implements Node {
 
         checkAttributes(res, env);
         checkMethods(res, env);
-        ;
-        if (extendedClass!=null)
+
+        if (extendedClass!=null) {
             totalAttributes.addAll(extendedClass.totalAttributes);
+            totalMethodList.addAll(extendedClass.totalMethodList);
+        }
 
         totalAttributes.addAll(attributeList);
+        totalMethodList.addAll(methodList);
+
+
 
         MapClassNestLevel.setCurrentAnalyzedClass(null);
         return res;
@@ -155,7 +169,7 @@ public class ClassNode implements Node {
     {
         boolean check = true;
         if(extendedClass != null)
-            attributeOffset = extendedClass.attributeOffset;
+            attributeOffset = extendedClass.attributeOffset+4;
 
         env.offset = attributeOffset;
 

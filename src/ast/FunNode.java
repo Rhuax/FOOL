@@ -62,7 +62,7 @@ public class FunNode implements Node {
 	      
 	    //check semantics in the dec list
 	      if(declist.size() > 0){
-			  env.offset=-2;
+			  env.offset=-3;
 	    	  //if there are children then check semantics for every child and save the results
               int offsetchepartedamenouno=-3;
               for(Node node:declist) {
@@ -168,7 +168,9 @@ public class FunNode implements Node {
         {
             funl=FOOLlib.freshFunLabel();
         }
-		if(MapClassNestLevel.getCurrentAnalyzedClass()==null) {
+        ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+		if(current==null || current.getMethodFromList(this.id)==null)
+		{
 			FOOLlib.putCode(funl + ":\n" +
 					"cfp\n"+ //setta $fp a $sp
 					"lra\n"+ //inserimento return address

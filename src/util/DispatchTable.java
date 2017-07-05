@@ -6,6 +6,7 @@ import ast.VardecNode;
 import lib.FOOLlib;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 /**
@@ -30,7 +31,18 @@ public static int getDispatchIndexFromClassName(String className)
 }
     public static ArrayList<DispatchEntry> dispatchTable=new ArrayList<>();
 
+    public static void printDispatchTable(){
 
+        for(DispatchEntry entry:dispatchTable){
+            System.out.print("class "+entry.getClassName()+"--->[");
+            HashMap<String,String> methods=entry.getDispatchMethodTable().methodList;
+
+            for(String methName:methods.keySet()){
+                System.out.print("("+methName+","+methods.get(methName)+"),");
+            }
+            System.out.println("]");
+        }
+    }
     public static void buildDispatchTable(ArrayList<ClassNode> classList)
     {
         if(classList != null)
@@ -49,7 +61,7 @@ public static int getDispatchIndexFromClassName(String className)
 
                 if(extClass!=null)
                 {
-                    for(FunNode method:extClass.getMethodList())
+                    for(FunNode method:extClass.getTotalMethodList())
                     {
                         DispatchEntry dEntry = dispatchTable.get(getDispatchIndexFromClassName(extClass.getId()));
                         dmt.methodList.put(method.getId(), dEntry.getDispatchMethodTable().methodList.get(method.getId()));
@@ -66,6 +78,8 @@ public static int getDispatchIndexFromClassName(String className)
                 entry.className=classdec.getId();
                 dispatchTable.add(entry);
             }
+
+            DispatchTable.printDispatchTable();
         }
     }
 }

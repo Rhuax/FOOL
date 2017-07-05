@@ -24,7 +24,9 @@ public class MethodExpNode implements Node
     MethodExpNode(ArrayList<Node> el, TerminalNode o, TerminalNode m)
     {
         expList = el;
-        objectID = o.getText();
+        if(o!=null)
+            objectID = o.getText();
+
         methodID = m.getText();
         this.object=o;
         this.method=m;
@@ -122,7 +124,7 @@ public class MethodExpNode implements Node
             this.nestinglevel=env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(objectID);
 
-            while (temp!=null && j > MapClassNestLevel.getMaxClassNestLevel())
+            while (temp==null && j > MapClassNestLevel.getMaxClassNestLevel())
                 temp = (env.symTable.get(j--)).get(objectID);
 
             if(temp==null)
@@ -154,7 +156,7 @@ public class MethodExpNode implements Node
         /*String getAR="";
         for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
             getAR+="lw\n";*/
-        int objectOffset = this.entry.getOffset();
+        int objectOffset = (this.object==null?-1:this.entry.getOffset());
 
         String popParl="";
         for(int i=0;i<expList.size();i++)
