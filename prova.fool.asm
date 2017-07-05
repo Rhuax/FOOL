@@ -4,41 +4,37 @@ push function0
 push function1
 
 lhp
-push 0
+srv
 lhp
-sw
-lhp
-push 1
-lhp
-sw
 lhp
 push 2
-lhp
+shp
+push 5
+lrv
 sw
-lhp
+lrv
 push 1
 add
-shp
+srv
+lhp
+srv
+lhp
 lhp
 push 1
-add
 shp
-lhp
+push 1
+lrv
 sw
-lhp
+lrv
 push 1
 add
-shp
-lhp
-push 1
-add
-shp
-lhp
+srv
+lrv
 sw
-lhp
+lrv
 push 1
 add
-shp
+srv
 lfp
 lfp
 lfp

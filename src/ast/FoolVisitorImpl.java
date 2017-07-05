@@ -79,36 +79,6 @@ public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {
 		//build the varNode
 		return new VarNode(ctx.vardec().ID().getText(), typeNode, expNode);
 	}
-	
-	public Node visitMethod(FoolProvaBisParser.FunContext ctx){
-		//initialize @res with the visits to the type and its ID
-		FunNode res = new FunNode(ctx.ID().getText(), visit(ctx.type()));
-
-		//add argument declarations
-		//we are getting a shortcut here by constructing directly the ParNode
-		//this could be done differently by visiting instead the VardecContext
-		for(VardecContext vc : ctx.vardec())
-			res.addPar( new ParNode(vc.ID().getText(), ((VardecNode)visit(vc)).getType()) );
-
-		//add body
-		//create a list for the nested declarations
-		ArrayList<Node> innerDec = new ArrayList<Node>();
-
-		//check whether there are actually nested decs
-		if(ctx.let() != null){
-			//if there are visit each dec and add it to the @innerDec list
-			for(DecContext dc : ctx.let().dec())
-				innerDec.add(visit(dc));
-		}
-
-		//get the exp body
-		Node exp = visit(ctx.exp());
-
-		//add the body and the inner declarations to the function
-		res.addDecBody(innerDec, exp);
-
-		return res;
-	}
 	public Node visitFun(FunContext ctx) {
 		
 		//initialize @res with the visits to the type and its ID
