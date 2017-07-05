@@ -43,8 +43,9 @@ public class ProgClassNode implements Node {
     }
 
     private void checkLet() {
-        for(Node n:innerdec)
-            n.typeCheck();
+        if(innerdec!=null)
+            for(Node n:innerdec)
+                n.typeCheck();
     }
 
     @Override
@@ -228,7 +229,7 @@ public class ProgClassNode implements Node {
                             found=true;
                             Node curMethodType =  method.getType();
                             Node superMethodType =  superMethod.getType();
-                            checkReturnType(curMethodType, superMethodType);
+                            checkReturnType(curMethodType, superMethodType,classdec,superClass,superMethod.getId());
                             checkMethodParametersType(method, superMethod);
                         }
 
@@ -274,11 +275,11 @@ public class ProgClassNode implements Node {
         }
     }
 
-    private void checkReturnType(Node subType, Node superType)
+    private void checkReturnType(Node subType, Node superType,ClassNode current,ClassNode superclass,String method_name)
     {
         if (!(FOOLlib.isSubtype(subType, superType)))
         {
-            System.out.println("Method return type in class  is not subtype of method return type in super class ");
+            System.out.println("Return type of method "+method_name+" in class "+current.getId()+" is not subtype of method return type in super class "+superclass.getId());
             System.exit(0);
         }
     }
@@ -335,8 +336,9 @@ public class ProgClassNode implements Node {
             classDeclCode+=classdec.codeGeneration();
 
         String innerDeclCode="";
-        for(Node inDec:innerdec)
-            innerDeclCode+=inDec.codeGeneration();
+        if(innerdec!=null)
+            for(Node inDec:innerdec)
+                innerDeclCode+=inDec.codeGeneration();
 
         return  "push 0\n"+
                 classDeclCode+

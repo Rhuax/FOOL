@@ -43,7 +43,7 @@ public class NewExpNode implements  Node
 
                     if(!FOOLlib.isSubtype(subType, supType))
                     {
-                        System.out.println("Type of parameter in position " + (i+1) + "in instantiation of class " + cl.getId() + "is not compatible with the type of corresponding attribute!");
+                        System.out.println("Type of parameter in position " + (i+1) + " in instantiation of class " + cl.getId() + " is not compatible with the type of corresponding attribute!");
                         System.exit(0);
                     }
                 }
@@ -60,9 +60,9 @@ public class NewExpNode implements  Node
     @Override
     public String codeGeneration() {
         String code="";
-
-
-        code+="lhp\n"+
+       /*
+       versione da aggiustare con le new delle new delle new
+       code+="lhp\n"+
                 "srv\n";
 
         code+="lhp\n"+
@@ -79,9 +79,27 @@ public class NewExpNode implements  Node
                     "add\n" +
                     "srv\n";
         }
+*/
 
-
-
+        code+="lhp\n";
+        if(expList.size()>0){
+            code+=expList.get(0).codeGeneration();
+            code+="lhp\n"+
+                    "sw\n";
+        }
+        for(int i=1;i<expList.size();i++){
+            code+=expList.get(i).codeGeneration();
+            code+="lhp\n"
+                    + "push 1\n"
+                    + "add\n"
+                    + "shp\n"
+                    + "lhp\n"
+                    + "sw\n";
+        }
+        code+="lhp\n"+
+                "push 1\n"+
+                "add\n"+
+                "shp\n";
 
 
         return code;

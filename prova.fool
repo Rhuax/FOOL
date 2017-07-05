@@ -135,40 +135,24 @@ let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg
 
 
 
-/*test di alberto*/
-class A (int x) {
-        int value() x;
-    }
-    class B implements A ( A a) {
-        A getA() a;
-    }
-    ;
-    let
-        B b = new B(5, new A(1));
-        A a = b.getA();
+/*test di alberto
+
+    test che danno problemi:
+    49
+    52(qua dobbiamo fare che nel costruttore di una super classe
+        non puoi avere oggetti della sottoclasse)
+    56: qua da problemi perchè non ci possono essere attributi e metodi con gli stessi nomi. Alberto e dev lo hanno
+        fixato sto problema. Sul progetto di laneve da errore anche.
+    27: Questo è veramente boh. Non ho la più pallida idea
+    24: Questo sta da debuggare bene bene ma non dovrebbe essere difficile
+    20: Questo dovrebbe essere lo stesso nel n27
+    17: Questo fa crashare il compilatore
+    16: Questo è lo stesso del n56. Secondo me dovremmo fixarlo
+    15: stesso di sopra
+    3: Questo è scemo secondo me
+
+*/
+let
+      int y = 5 + 2;
     in
-        print(b.value() == (a.value() - 1));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      print( y );

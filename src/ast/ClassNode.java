@@ -6,6 +6,7 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by crow on 14/06/17.
@@ -172,12 +173,23 @@ public class ClassNode implements Node {
             attributeOffset = extendedClass.attributeOffset+4;
 
         env.offset = attributeOffset;
-
         //check semantics in the dec list
         //if there are children then check semantics for every child and save the results
         for (VardecNode attribute : attributeList)
         {
-            ArrayList<SemanticError> errorList = attribute.checkSemantics(env);
+            ArrayList<SemanticError> errorList = new ArrayList<>();
+            if(extendedClass!=null) {
+                boolean found = false;
+                for (int i = 0; i < extendedClass.getTotalAttributes().size() && !found; i++) {
+                    if (Objects.equals(extendedClass.getTotalAttributes().get(i).getId(), attribute.getId())) {
+                        found = true;
+                        errorList.add(new SemanticError("Attribute " + attribute.getId() + " is already defined"));
+                    }
+                }
+            }
+            if(errorList.isEmpty())
+                errorList.addAll(attribute.checkSemantics(env));
+
             if(!errorList.isEmpty())
             {
                 for(SemanticError err: errorList)
@@ -203,7 +215,7 @@ public class ClassNode implements Node {
             STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
 
             if (hm.put(f.getId(), entry) != null) {
-                errors.add(new SemanticError("Fun id " + id + " already declared in class"+ this.getId()));
+                errors.add(new SemanticError("Function id " + f.getId() + " already declared in class "+ this.getId()));
                 check=false;
             }
             else

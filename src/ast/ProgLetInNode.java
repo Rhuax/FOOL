@@ -53,13 +53,13 @@ public class ProgLetInNode implements Node {
       }
 
     	  //if there are children then check semantics for every child and save the results
+    if(res.isEmpty()) {
+        for (Node n : declist)
+            res.addAll(n.checkSemantics(env));
 
-          for (Node n : declist)
-              res.addAll(n.checkSemantics(env));
-      
-      //check semantics in the exp body
-      res.addAll(exp.checkSemantics(env));
-      
+        //check semantics in the exp body
+        res.addAll(exp.checkSemantics(env));
+    }
       //clean the scope, we are leaving a let scope
       env.symTable.remove(env.nestingLevel--);
       
