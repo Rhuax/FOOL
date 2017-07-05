@@ -48,7 +48,7 @@ public class IdNode implements Node {
               entry = tmp;
               nestinglevel = env.nestingLevel;
           }
-          System.out.println(this.id+"  offset:"+this.entry.getOffset());
+          //System.out.println(this.id+"  offset:"+this.entry.getOffset());
       }
       else{
 	      int j = env.nestingLevel;
@@ -77,7 +77,7 @@ public class IdNode implements Node {
               entry=temp;
               nestinglevel=env.nestingLevel;
           }
-          System.out.println(this.id+"  offset:"+this.entry.getOffset());
+          //System.out.println(this.id+"  offset:"+this.entry.getOffset());
       }
 	  return res;
 	}

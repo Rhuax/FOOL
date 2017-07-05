@@ -15,7 +15,6 @@ class b (int k, bool v)
 
 let a ogg = new a(1,2,3); b ogg2 = new b(5,false); in print(ogg.f(false, ogg2));*/
 
-
 /*
 class a (int x, int y)
 {
@@ -87,7 +86,7 @@ class e implements d(int o)
 
 let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg.gety(ogg3); in print( temp.getx() + ogg2.getw());
 */
-
+/*
 class B(int bField1){
 int getField1()
 bField1;
@@ -99,4 +98,77 @@ aField1+aFun1Par1.getField1();
 
 };
 
-let int x = 3; B b = new B(15); A a = new A(60); in print(a.aFun1(b));
+let int x = 3; B b = new B(15); A a = new A(60); in print(a.aFun1(b));*/
+
+
+
+/*
+class a(int x)
+{
+int getx() x;
+}
+
+class b implements a (int y)
+{
+a gety(a supObj) supObj;
+}
+
+class c implements b (int z)
+{
+int getz() z;
+}
+
+class d implements a(int w)
+{
+int getw() w;
+}
+
+class e implements d(int o)
+{
+int geto() o;
+}
+
+;
+
+let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg.gety(ogg3); in print( temp.getx() + ogg2.getw());*/
+
+
+
+
+/*test di alberto*/
+class A (int x) {
+        int value() x;
+    }
+    class B implements A ( A a) {
+        A getA() a;
+    }
+    ;
+    let
+        B b = new B(0, new B(1, new A(2)));
+        A a = b.getA();
+    in
+        print(b.value() == (a.value() - 1));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

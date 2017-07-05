@@ -28,7 +28,12 @@ public class ThisNode implements Node {
 
     @Override
     public String codeGeneration() {
-        return null;
+        String code ="";
+        code+=  "lfp\n"+
+                "push -1\n"+
+                "add \n"+
+                "lw\n";
+        return code;
     }
 
     @Override

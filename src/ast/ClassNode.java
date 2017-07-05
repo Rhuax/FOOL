@@ -203,7 +203,7 @@ public class ClassNode implements Node {
             STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
 
             if (hm.put(f.getId(), entry) != null) {
-                errors.add(new SemanticError("Fun id " + id + " already declared"));
+                errors.add(new SemanticError("Fun id " + id + " already declared in class"+ this.getId()));
                 check=false;
             }
             else

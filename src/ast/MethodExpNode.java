@@ -83,7 +83,7 @@ public class MethodExpNode implements Node
             else
                 sign="few";
 
-            System.out.println("Too " + sign + " parameters when calling method " + this.methodID + " of object "+this.objectID+" of type "+this.objectTypeName);
+            System.out.println("Too " + sign + " parameters when calling method " + this.methodID +(this.object!=null?" of object "+this.objectID+" of type "+this.objectTypeName:" on 'this' operator"));
             System.exit(0);
         }
 
