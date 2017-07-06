@@ -49,8 +49,6 @@ push function1
 lfp
 lfp
 lfp
-push -1
-add
 lw
 push -3
 lfp

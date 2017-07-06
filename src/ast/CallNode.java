@@ -124,11 +124,16 @@ public String toPrint(String s) {  //
               FunNode nodo=current.getMethodFromList(this.id);
                   code += "lfp\n" +
                           parCode +
-                          "lfp\n" + //CL
-                          "lfp\n" +
+                          "lfp\n" ; //CL
+              if(nodo!=null){
+                          code+="lfp\n" +
                           "push -1\n" +
                           "add\n" +
+                          "lw\n";}
+              else{
+                  code+="lfp\n"+
                           "lw\n";
+              }
 
               if(nodo!=null) {
                   int index = DispatchTable.getDispatchIndexFromClassName(current.getId());
