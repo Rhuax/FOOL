@@ -62,7 +62,11 @@ public class FunNode implements Node {
 	      
 	    //check semantics in the dec list
 	      if(declist.size() > 0){
-			  env.offset=-3;
+	      	ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+	      	if(current!=null && current.getMethodFromList(this.id)!=null)
+			  	env.offset=-3;
+	      	else
+	      		env.offset=-2;
 	    	  //if there are children then check semantics for every child and save the results
               int offsetchepartedamenouno=-3;
               for(Node node:declist) {

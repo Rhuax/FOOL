@@ -14,7 +14,7 @@ import java.util.Objects;
 public class ClassNode implements Node {
 
     private String id;
-
+    public ArrayList<ClassNode> extendingClasses=new ArrayList<>();
     public int attributeOffset = 0;
 
     public ArrayList<VardecNode> getAttributeList() {
@@ -93,10 +93,24 @@ public class ClassNode implements Node {
     @Override
     public Node typeCheck() {
         MapClassNestLevel.setCurrentAnalyzedClass(this);
-        if (attributeList!=null)
-            for (VardecNode dec:attributeList)
-                dec.typeCheck();
 
+
+
+        if (attributeList!=null)
+            for (VardecNode dec:attributeList) {
+                dec.typeCheck();
+                Node type=dec.getType();
+                if(type instanceof IdTypeNode){
+                    IdTypeNode id_typenode=(IdTypeNode)type;
+                    for (ClassNode extendingClass: extendingClasses){
+                        if(Objects.equals(extendingClass.getId(), id_typenode.getTypeName())){
+                            System.out.println("Cannot use the sublcass "+extendingClass.getId()+" in "+ this.getId()+"'s constructor");
+                            System.exit(0);
+                        }
+                    }
+
+                }
+            }
         if (methodList!=null)
             for (FunNode dec:methodList)
                 dec.typeCheck();

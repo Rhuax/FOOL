@@ -293,7 +293,17 @@ public class ProgClassNode implements Node {
         {
             String className = cl.getId();
             String extendedClass = cl.getExtendedClassName();
+            ClassNode ext=cl.getExtendedClass();
+            if(ext!=null)
+                ext.extendingClasses.add(cl);
             classMap.put(className, extendedClass);
+        }
+
+        for(String clName:classMap.keySet()){
+            ClassNode current=getClassFromList(clName);
+            ClassNode curExtClass = getClassFromList(classMap.get(clName));
+            if(curExtClass==null)
+                orderedList.add(current);
         }
 
         for(String clName: classMap.keySet())
@@ -304,25 +314,29 @@ public class ProgClassNode implements Node {
 
             if(ext != null)
             {
-                if(!orderedList.contains(curExtClass))
-                {
-
-
+                if(!orderedList.contains(curExtClass)) {
                     orderedList.add(curExtClass);
+                    if(!orderedList.contains(curClass))
                         orderedList.add(curClass);
                 }
                 else
                 {
-                    int extIndex = orderedList.indexOf(curExtClass);
-                    if(extIndex < orderedList.size() - 1)
-                        orderedList.add(extIndex+1, curClass);
-                    else
-                        orderedList.add(curClass);
+                    if(!orderedList.contains(curClass)) {
+                        int extIndex = orderedList.indexOf(curExtClass);
+                        if (extIndex < orderedList.size() - 1)
+                            orderedList.add(extIndex + 1, curClass);
+                        else
+                            orderedList.add(curClass);
+                    }
                 }
+
+
+
             }
             else
             {
-                orderedList.add(curClass);
+                if(!orderedList.contains(curClass))
+                    orderedList.add(curClass);
             }
         }
         classList = new ArrayList<>(orderedList);

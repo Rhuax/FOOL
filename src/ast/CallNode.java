@@ -117,20 +117,34 @@ public String toPrint(String s) {  //
 
 
 		  ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
-		  if(current!=null && current.getMethodFromList(this.id)!=null){
-              int index= DispatchTable.getDispatchIndexFromClassName(current.getId());
-              DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
-              String mLabel=dispentry.getDispatchMethodTable().methodList.get(this.id);
+		  if(current!=null /*&& current.getMethodFromList(this.id)!=null*/){
+
+
 		      //sono in un metodo e sto chiamando un altro metodo della mia classe
-              code += "lfp\n" +
-                      parCode +
-                      "lfp\n"+ //CL
-                      "lfp\n" +
-                      "push -1\n" +
-                      "add\n" +
-                      "lw\n" +
-                      "push "+mLabel+"\n"+
-                      "js\n";
+              FunNode nodo=current.getMethodFromList(this.id);
+                  code += "lfp\n" +
+                          parCode +
+                          "lfp\n" + //CL
+                          "lfp\n" +
+                          "push -1\n" +
+                          "add\n" +
+                          "lw\n";
+
+              if(nodo!=null) {
+                  int index = DispatchTable.getDispatchIndexFromClassName(current.getId());
+                  DispatchEntry dispentry = DispatchTable.dispatchTable.get(index);
+                  String mLabel = dispentry.getDispatchMethodTable().methodList.get(this.id);
+                  code+= "push "+mLabel+"\n";
+              }
+                else
+              {
+                  // ora recupero l'indirizzo a cui saltare e lo metto sullo stack
+                  code+="push " + entry.getOffset() + "\n" + //metto offset sullo stack
+                          "lfp\n" + getAR + //risalgo la catena statica
+                          "add\n" +
+                          "lw\n" ; //carico sullo stack il valore all'indirizzo ottenuto
+              }
+                      code+="js\n";
           }
 		  else {
 

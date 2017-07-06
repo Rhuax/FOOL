@@ -3,6 +3,7 @@ public class STentry {
  
   private int nl;
   private Node type;
+  public Node true_type;
   private int offset;
   
   public STentry (int n, int os)

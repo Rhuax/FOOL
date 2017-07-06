@@ -14,7 +14,7 @@ import static java.lang.StrictMath.abs;
 public class IdNode implements Node {
 
   private String id;
-
+    boolean isAttribute = false;
     public STentry getEntry() {
         return entry;
     }
@@ -36,6 +36,7 @@ public class IdNode implements Node {
 	  //create result list
 	  ArrayList<SemanticError> res = new ArrayList<SemanticError>();
       ClassNode CurAnalyzedClass=MapClassNestLevel.getCurrentAnalyzedClass();
+
 	  if (CurAnalyzedClass==null) {
           int j = env.nestingLevel;
           STentry tmp = null;
@@ -48,7 +49,7 @@ public class IdNode implements Node {
               entry = tmp;
               nestinglevel = env.nestingLevel;
           }
-          //System.out.println(this.id+"  offset:"+this.entry.getOffset());
+
       }
       else{
 	      int j = env.nestingLevel;
@@ -62,7 +63,6 @@ public class IdNode implements Node {
               if (inheritedClassNode!=null) {
                   String classInheritedName=inheritedClassNode.getId();
                   int nestingLevel=MapClassNestLevel.getNestingLevelFromClass(classInheritedName);
-
                   HashMap<String,STentry> t=env.symTable.get(nestingLevel);
                   temp = (t.get(id));
               }
@@ -76,8 +76,18 @@ public class IdNode implements Node {
           {
               entry=temp;
               nestinglevel=env.nestingLevel;
+              int n=MapClassNestLevel.getNestingLevelFromClass(MapClassNestLevel.getCurrentAnalyzedClass().getId());
+              if(nestinglevel==n)
+                  isAttribute=true;
+              else if (nestinglevel>n){
+                  ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+                  for(VardecNode att:current.getAttributeList()){
+                      if(Objects.equals(att.getId(), this.id))
+                          isAttribute=true;
+                  }
+              }
           }
-          //System.out.println(this.id+"  offset:"+this.entry.getOffset());
+
       }
 	  return res;
 	}
@@ -99,15 +109,7 @@ public class IdNode implements Node {
 	    	 getAR+="lw\n";
 
       String code = "";
-      boolean isAttribute = false;
-      ClassNode curClass = MapClassNestLevel.getCurrentAnalyzedClass();
-      if(curClass != null)
-      {
-         ArrayList<VardecNode> attList = curClass.getAttributeList();
-         for(VardecNode att: attList)
-             if(Objects.equals(att.getId(), this.id))
-                 isAttribute = true;
-      }
+
 
       if(isAttribute)
       {

@@ -16,6 +16,7 @@ public class MethodExpNode implements Node
     public String objectID;
     public String methodID;
     private String objectTypeName;
+    private String objectTrueTypeName;
     TerminalNode object;
     TerminalNode method;
     private int nestinglevel;
@@ -86,7 +87,8 @@ public class MethodExpNode implements Node
             System.out.println("Too " + sign + " parameters when calling method " + this.methodID +(this.object!=null?" of object "+this.objectID+" of type "+this.objectTypeName:" on 'this' operator"));
             System.exit(0);
         }
-
+        if(this.object!=null)
+            objectTrueTypeName=this.entry.true_type.toString();
         return methodNode.getType();
     }
 
@@ -131,6 +133,7 @@ public class MethodExpNode implements Node
                 errors.add(new SemanticError("Object "+objectID + " is not defined"));
             else {
                 objectTypeName = temp.getType().toString();
+
                 this.entry=temp;
             }
 
@@ -142,11 +145,20 @@ public class MethodExpNode implements Node
     @Override
     public String codeGeneration() {
         //MapClassNestLevel.setCurrentAnalyzedClass(ProgClassNode.getClassFromList(this.objectTypeName));
+String mLabel;
+        if( this.object!=null && ProgClassNode.getClassFromList(this.objectTrueTypeName).getMethodFromList(this.methodID)!=null){
+            //eseguo il metodo della classe B
+            int index=DispatchTable.getDispatchIndexFromClassName(this.objectTrueTypeName);
+            DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
+             mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
+        }
+        else{
+            //eseguo il metodo della classe A
+            int index=DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
+            DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
+            mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
+        }
 
-
-        int index=DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
-        DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
-        String mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
 
         String code="";
         String parCode="";
