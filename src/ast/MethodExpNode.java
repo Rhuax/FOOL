@@ -6,6 +6,7 @@ import util.*;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by suri9 on 24/06/2017.
@@ -87,7 +88,7 @@ public class MethodExpNode implements Node
             System.out.println("Too " + sign + " parameters when calling method " + this.methodID +(this.object!=null?" of object "+this.objectID+" of type "+this.objectTypeName:" on 'this' operator"));
             System.exit(0);
         }
-        if(this.object!=null)
+        if(this.object!=null && this.entry.true_type!=null)
             objectTrueTypeName=this.entry.true_type.toString();
         return methodNode.getType();
     }
@@ -126,7 +127,7 @@ public class MethodExpNode implements Node
             this.nestinglevel=env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(objectID);
 
-            while (temp==null && j > MapClassNestLevel.getMaxClassNestLevel())
+            while (temp==null && j >= MapClassNestLevel.getMaxClassNestLevel())
                 temp = (env.symTable.get(j--)).get(objectID);
 
             if(temp==null)
@@ -146,7 +147,7 @@ public class MethodExpNode implements Node
     public String codeGeneration() {
         //MapClassNestLevel.setCurrentAnalyzedClass(ProgClassNode.getClassFromList(this.objectTypeName));
 String mLabel;
-        if( this.object!=null && ProgClassNode.getClassFromList(this.objectTrueTypeName).getMethodFromList(this.methodID)!=null){
+        if( this.object!=null && this.objectTrueTypeName!=null && ProgClassNode.getClassFromList(this.objectTrueTypeName).getMethodFromList(this.methodID)!=null){
             //eseguo il metodo della classe B
             int index=DispatchTable.getDispatchIndexFromClassName(this.objectTrueTypeName);
             DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
@@ -175,14 +176,39 @@ String mLabel;
             popParl+="pop\n";
 
         String attCode="";
+        String carica_oggetto="";
+        ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+        if(current!=null && this.entry.getNestinglevel()==MapClassNestLevel.getNestingLevelFromClass(current.getId())){
+            //sono un'attributo e quindi bisogna caricarmi in maniera tamarrissima
+            carica_oggetto+="lfp\n"+
+                    "push -1\n"+
+                    "add\n"+
+                    "lw\n"; //oggetto corrente
+                    ArrayList<VardecNode> totcurrent=current.getTotalAttributes();
+                    int attoffset=1234567;//Lo metto grande cosi se crasha con 1234567 crasha qui
+                    boolean found=false;
+                    for(int i=0;i<totcurrent.size() && !found;i++){
+                        if(Objects.equals(totcurrent.get(i).getId(), this.object.toString())) {
+                            attoffset = i;
+                            found=true;
+                        }
+                    }
+            carica_oggetto+="push "+attoffset+"\n";
+            carica_oggetto+="add\n"+
+                            "lw\n";
+        }
+        else{
+            carica_oggetto="lfp\n" +
+                    "push " + objectOffset+ "\n" +
+                    "add\n" +
+                    "lw\n" ;
+        }
+
 
         code += "lfp\n" +
                 parCode +
                 "lfp\n"+ //CL
-                "lfp\n" +
-                "push " + objectOffset+ "\n" +
-                "add\n" +
-                "lw\n" +
+                carica_oggetto+
                 "push "+mLabel+"\n"+
                 "js\n";
 

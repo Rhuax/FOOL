@@ -50,7 +50,7 @@ public class NewExpNode implements  Node
             }
             else
             {
-                System.out.println("Wrong number of parameters when instantiating class " + cl.getId() + ". Also super classes attributes must be included!");
+                System.out.println("Wrong number of parameters when instantiating class " + cl.getId() + ". If inheriting, also super class' attributes must be included!");
                 System.exit(0);
             }
 
@@ -60,27 +60,35 @@ public class NewExpNode implements  Node
     @Override
     public String codeGeneration() {
         String code="";
-       /*
-       versione da aggiustare con le new delle new delle new
-       code+="lhp\n"+
-                "srv\n";
+        code+="lhp\n";//oggetto
+        code+="lhp\n";//copia di hp
 
         code+="lhp\n"+
                 "push "+expList.size()+"\n"+
-                "shp\n";
+                "add\n"+
+                "shp\n";//aggiorno hp
 
 
-        for (Node anExpList : expList) {
-            code += anExpList.codeGeneration();
-            code += "lrv\n" +
-                    "sw\n" +
-                    "lrv\n" +
-                    "push 1\n" +
-                    "add\n" +
-                    "srv\n";
+        for(int i=0;i<expList.size();i++){
+            code+=expList.get(i).codeGeneration();
+            /**
+             * adesso c'è:
+             * risultato della exp
+             * copiahp
+             */
+            code+="srv\n"+
+                    "sra\n"+
+                    "lrv\n"+
+                    "lra\n"+
+                    "sw\n";
+            if(i!=expList.size()-1) {
+                code+="lra\n" +
+                        "push 1\n" +
+                        "add\n";
+            }
+
         }
-*/
-
+        /*
         code+="lhp\n";
         if(expList.size()>0){
             code+=expList.get(0).codeGeneration();
@@ -100,7 +108,7 @@ public class NewExpNode implements  Node
                 "push 1\n"+
                 "add\n"+
                 "shp\n";
-
+*/
 
         return code;
     }

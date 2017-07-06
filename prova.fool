@@ -138,7 +138,7 @@ let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg
 /*test di alberto
 
     test che danno problemi:
-    49
+    --49 new nelle new fixato ;)
     //poivediamo56: qua da problemi perchè non ci possono essere attributi e metodi con gli stessi nomi. Alberto e dev lo hanno
         fixato sto problema. Sul progetto di laneve da errore anche.
     24: Questo sta da debuggare bene bene ma non dovrebbe essere difficile
@@ -146,14 +146,18 @@ let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg
 
 */
 
-class Numero (int x) {
-        int getXInsideFun()
-            let
-                int f() x;
-            in
-                f();
-    };
+
+
+
+class A (int x) {
+        int value() x;
+    }
+    class B implements A ( A a) {
+        A getA() a;
+    }
+    ;
     let
-        Numero num = new Numero(5);
+        B b = new B(0, new B(1, new A(2)));
+        A a = b.getA();
     in
-        print(num.getXInsideFun());
+        print(b.value() == (a.value() - 1));
