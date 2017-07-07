@@ -155,16 +155,10 @@ public class ClassNode implements Node {
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-
-        checkAttributes(res, env);
-        checkMethods(res, env);
-
         if (extendedClass!=null) {
             totalAttributes.addAll(extendedClass.totalAttributes);
             totalMethodList.addAll(extendedClass.totalMethodList);
         }
-
-
 
         for(VardecNode att:attributeList){
             boolean found=false;
@@ -181,6 +175,10 @@ public class ClassNode implements Node {
         }
 
         totalMethodList.addAll(methodList);
+        checkAttributes(res, env);
+        checkMethods(res, env);
+
+
 
 
 
@@ -242,9 +240,22 @@ public class ClassNode implements Node {
             }
 
             */
+            int temp=env.offset;
+            boolean found=false;
+            if(extendedClass!=null) {
+                for(int i=0;i<extendedClass.getTotalAttributes().size() && !found;i++){
+                    if(Objects.equals(attribute.getId(), extendedClass.getTotalAttributes().get(i).getId())){
+                        env.offset=-i;
+                        found=true;
+                    }
+                }
+            }
+
             if(errorList.isEmpty())
                 errorList.addAll(attribute.checkSemantics(env));
 
+            if(!found)
+                attributeOffset=temp-1;
             if(!errorList.isEmpty())
             {
                 for(SemanticError err: errorList)
@@ -254,7 +265,7 @@ public class ClassNode implements Node {
             }
             res.addAll(errorList);
         }
-        attributeOffset=env.offset;
+
 
         return check;
     }

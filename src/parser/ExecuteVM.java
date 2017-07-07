@@ -37,7 +37,7 @@ public class ExecuteVM {
     public void cpu() {
       while ( true ) {
         int bytecode = code[ip++]; // fetch
-        //printMemory();
+        printMemory();
           int v1,v2;
         int address;
 

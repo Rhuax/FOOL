@@ -79,7 +79,7 @@ public static int getDispatchIndexFromClassName(String className)
                 dispatchTable.add(entry);
             }
 
-            //DispatchTable.printDispatchTable();
+            DispatchTable.printDispatchTable();
         }
     }
 }

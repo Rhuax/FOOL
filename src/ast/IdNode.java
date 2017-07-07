@@ -80,9 +80,9 @@ public class IdNode implements Node {
               int n=MapClassNestLevel.getNestingLevelFromClass(MapClassNestLevel.getCurrentAnalyzedClass().getId());
               if(nestinglevel==n)
                   isAttribute=true;
-              else if (j==n){
+              else if (j<=n){
                   ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
-                  for(VardecNode att:current.getAttributeList()){
+                  for(VardecNode att:current.getTotalAttributes()){
                       if(Objects.equals(att.getId(), this.id))
                           isAttribute=true;
                   }

@@ -126,7 +126,7 @@ lfp
 push -1
 add
 lw
-push 3
+push 1
 add
 lw
 push 1
@@ -138,7 +138,7 @@ lfp
 push -1
 add
 lw
-push 2
+push 0
 add
 lw
 push 15
@@ -158,7 +158,7 @@ lfp
 push -1
 add
 lw
-push 2
+push 0
 add
 lw
 sub
@@ -184,7 +184,7 @@ lfp
 push -1
 add
 lw
-push 5
+push 1
 add
 lw
 push 1
@@ -196,7 +196,7 @@ lfp
 push -1
 add
 lw
-push 4
+push 0
 add
 lw
 push 8
@@ -216,7 +216,7 @@ lfp
 push -1
 add
 lw
-push 4
+push 0
 add
 lw
 sub
