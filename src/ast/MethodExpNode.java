@@ -5,6 +5,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import util.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -177,12 +178,18 @@ String mLabel;
         String attCode="";
         String carica_oggetto="";
         ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
-        if(current!=null && this.entry.getNestinglevel()==MapClassNestLevel.getNestingLevelFromClass(current.getId())){
-            //sono un'attributo e quindi bisogna caricarmi in maniera tamarrissima
-            carica_oggetto+="lfp\n"+
-                    "push -1\n"+
-                    "add\n"+
-                    "lw\n"; //oggetto corrente
+
+        if(current!=null){
+            //sono in una classe
+            if(this.entry!=null ){
+                //sto facendo oggetto.metodo()
+                if(this.entry.getNestinglevel()==MapClassNestLevel.getNestingLevelFromClass(current.getId())){
+
+                    //sono un'attributo e quindi bisogna caricarmi in maniera tamarrissima
+                    carica_oggetto+="lfp\n"+
+                            "push -1\n"+
+                            "add\n"+
+                            "lw\n"; //oggetto corrente
                     ArrayList<VardecNode> totcurrent=current.getTotalAttributes();
                     int attoffset=1234567;//Lo metto grande cosi se crasha con 1234567 crasha qui
                     boolean found=false;
@@ -192,11 +199,28 @@ String mLabel;
                             found=true;
                         }
                     }
-            carica_oggetto+="push "+attoffset+"\n";
-            carica_oggetto+="add\n"+
+                    carica_oggetto+="push "+attoffset+"\n";
+                    carica_oggetto+="add\n"+
                             "lw\n";
+                }
+                else {
+                    //sono un parametro oppure una variabile locale
+                    carica_oggetto = "lfp\n" +
+                            "push " + objectOffset + "\n" +
+                            "add\n" +
+                            "lw\n";
+                }
+            }
+            else{
+                //this.metodo()---> carico solo l'oggetto
+                carica_oggetto+="lfp\n"+
+                        "push -1\n"+
+                        "add\n"+
+                        "lw\n"; //oggetto corrente
+            }
         }
         else{
+            //non sono in una classe e quindi carico l'oggetto normalmente
             carica_oggetto="lfp\n" +
                     "push " + objectOffset+ "\n" +
                     "add\n" +

@@ -67,7 +67,7 @@ public String toPrint(String s) {  //
                     should=false;
                 CurAnalyzedClass=inheritedClassNode;
             }
-            if (temp == null || !should)
+            if (temp == null || should==false)
                 res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
             else{
                 this.entry=temp;
@@ -124,15 +124,11 @@ public String toPrint(String s) {  //
                   code += "lfp\n" +
                           parCode +
                           "lfp\n" ; //CL
-              if(nodo!=null){
+
                           code+="lfp\n" +
                           "push -1\n" +
                           "add\n" +
-                          "lw\n";}
-              else{
-                  code+="lfp\n"+
                           "lw\n";
-              }
 
               if(nodo!=null) {
                   int index = DispatchTable.getDispatchIndexFromClassName(current.getId());

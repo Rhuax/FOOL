@@ -173,7 +173,7 @@ public class FunNode implements Node {
             funl=FOOLlib.freshFunLabel();
         }
         ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
-		if(current==null || current.getMethodFromList(this.id)==null)
+		if(current==null /*|| current.getMethodFromList(this.id)==null*/)
 		{
 			FOOLlib.putCode(funl + ":\n" +
 					"cfp\n"+ //setta $fp a $sp
