@@ -1,0 +1,699 @@
+# Sintassi
+
+# nometest:
+# - codice
+# - risultato (stringa)
+
+test1 - Varasm:
+-   let
+      int y = 5 ;
+    in
+      print( y );
+
+-   "5"
+
+test2 - Sum:
+-   let
+      int y = 5 + 2;
+    in
+      print( y );
+-   "7"
+
+test3 - Nested Functions:
+-   let
+        int x = 5;
+        int f ()
+            let
+              int g()
+                x
+              ;
+            in
+              g()
+        ;
+    in
+        print(f());
+-   "5"
+
+test4 - ITE Incombatible Types:
+-   let
+        int y = 5 + 2 ;
+        bool f (int n, int m)
+            let
+                int x = m;
+            in
+                x == y;
+    in
+        print(if f(y, 8) then {false} else {10});
+-   "Error: \"Incompatible types in then else branches\" at line 1, column 77."
+
+test5 - ITE e Times:
+-   let
+        int geee(int n)
+            n + 1;
+        int foo(int n)
+            if (n == 0) then { 1 } else { n * geee(n-1) };
+    in
+        print(foo(3));
+-   "9"
+
+test6 - Scopes Error:
+-   let
+        int foo(int n)
+            let
+                int gee(int n) 1;
+            in
+                if (n==0) then { 1 } else { n * gee(n-1) };
+    in
+        print(gee(3));
+-   "Id gee not declared"
+
+test7 - Simple Print:
+-   print(1);
+-   "1"
+
+test8 - MethodCall with 0 Arguments:
+-   class Numero {
+        int uno() 1;
+    };
+    let
+        Numero num = new Numero;
+    in
+        print(num.uno());
+-   "1"
+
+test9 - 2 MethodCall with 0 Arguments:
+-   class Numeri {
+        int uno() 1;
+        int due() 2;
+    };
+    let
+        Numeri num = new Numeri;
+    in
+        print(num.uno() + num.due());
+-   "3"
+
+test10 - MethodCall with 1 Argument:
+-   class Numero {
+        int id(int x) x;
+    };
+    let
+        Numero num = new Numero;
+    in
+        print(num.id(1));
+-   "1"
+
+test11 - MethodCall with 2 Arguments:
+-   class Numero {
+        int plus(int x, int y) x + y;
+    };
+    let
+        Numero num = new Numero;
+    in
+        print(num.plus(3, 5));
+-   "8"
+
+test12 - MethodCall with wrong Argument:
+-   class Numero {
+        int plus(int x, int y) x + y;
+    };
+    let
+        Numero num = new Numero;
+    in
+        print(num.plus(false, 5));
+-   "Error: \"Wrong type for 1-th parameter in the invocation of plus\" at line 1, column 90."
+
+test13 - Class Attribute:
+-   class Numero(int x) {
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(2);
+    in
+        print(num.getX());
+-   "2"
+
+test14 - Wrong Type in Constructor Call:
+-   class Numero(int x) {
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(false);
+    in
+        print(num.getX());
+-   "Error: \"Wrong type for 1-th parameter in the invocation of Numero constructor\" at line 1, column 56."
+
+test15 - Name Hell:
+-   class X(int x) {
+        int x() x;
+    };
+    let
+        X x = new X(2);
+    in
+        print(x.x());
+-   "2"
+
+test16 - Name Hell with Function Parameters:
+-   class X(int x) {
+        int x(int x) x;
+    };
+    let
+        X x = new X(2);
+    in
+        print(x.x(1));
+-   "1"
+
+test17 - Dispatch Table:
+-   class Numero(int x) {
+        int getX() x;
+        int getY() x;
+    }
+    class NumeroI implements Numero(int x) {
+        int getY() x;
+    }
+    class NumeroV implements Numero(int x) {
+        int getX() x;
+        int getY() x;
+    }
+    class NumeroX implements NumeroV(int x) {
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(2);
+    in
+        print(num.getX());
+-   "2"
+
+test18 - Let Inside Func Redefines Function Param:
+-   let
+        int foo(int n)
+            let
+                int n = n;
+            in
+                print(n);
+    in
+        print(foo(3));
+-   "multiple definitions of variable: n"
+
+test19 - Superclass object with subtype instance:
+-   class A
+    class B implements A;
+    let
+        A a = new B;
+    in
+        print(1);
+-   "1"
+
+test20 - Method overriding in subclass:
+-   class A {
+        int f() 1;
+    }
+    class B implements A {
+        int f() 2;
+    };
+    let
+        A a = new A;
+        A b = new B;
+    in
+        print(a.f() + b.f());
+-   "3"
+
+test21 - Call method on object returned by method:
+-   class Numero (int x) {
+        Numero uno() new Numero(4);
+        int due() x;
+    };
+    let
+        Numero num = new Numero(2);
+        Numero num2 = num.uno();
+    in
+        print(num2.due());
+-   "4"
+
+test22 - Method calling another method:
+-   class Numero (int x){
+        int uno() x;
+        int due() this.uno();
+    };
+    let
+        Numero num = new Numero(2);
+    in
+        print(num.due());
+-   "2"
+
+test23 - Function returning an object:
+-   class Numero (int x) {
+        int getNum() x;
+    };
+    let
+        Numero uno() new Numero(1);
+        Numero num = uno();
+    in
+        print(num.getNum());
+-   "1"
+
+test24 - Scope Hell inside Class:
+-   class Numero (int x) {
+        int getX()
+            let
+                int y = 3;
+            in
+                x;
+        int getRedefinedX()
+            let
+                int x = 3;
+            in
+                x;
+        int getParamX(int x)
+            x;
+        int getXInsideFun()
+            let
+                int f() x;
+            in
+                f();
+    };
+    let
+        Numero num = new Numero(5);
+    in
+        print(num.getX() + num.getRedefinedX() + num.getParamX(10) + num.getXInsideFun());
+-   "23"
+
+test25 - Using this as expression:
+-   class Numero (int x) {
+        Numero getThis() this;
+        int getX() x;
+    };
+    let
+        Numero num = new Numero(8);
+        Numero num2 = num.getThis();
+    in
+        print(num2.getX());
+-   "8"
+
+test26 - Using this outside a class:
+-   class Numero () {};
+    let
+        Numero getThis() this;
+    in
+        print(getThis());
+-   "undeclared variable this"
+
+test27 - Non-overwritted method call:
+-   class Animale(int Age, bool Alive){
+        int getAge() Age;
+        bool isAlive() Alive;
+    }
+
+    class Cane implements Animale(int Age, bool Alive){
+        int quantoViveAncora()
+            if(Alive) then {
+                if(Age <= 15) then {
+                    (15 - Age)
+                } else {
+                    1
+                }
+            } else {
+                0
+            };
+    }
+
+    class BullDog implements Cane(int Age, bool Alive){
+        int quantoViveAncora()
+            if(Alive) then {
+                if(Age <= 8) then {
+                    (8 - Age)
+                } else {
+                    1
+                }
+            } else {
+                0
+            };
+    };
+
+    let
+        Cane tom = new Cane( 7 , false );
+        Cane roger = new BullDog( 6 , true);
+    in
+        print(roger.getAge() + roger.quantoViveAncora());
+-   "8"
+
+test28 - Overring methods with incompatible types:
+-   class A {
+        int f(int x) x;
+    }
+    class B implements A
+    class C implements B {
+        bool f(bool x) x;
+    };
+    let
+        C c = new C();
+    in
+        print(c.f(false));
+-   "Method 'f' of class 'C' overrided with incompatible type"
+
+test29 - Overriding methods with compatible class subtypes:
+-   class A
+    class B implements A
+    class C {
+        int g(B b) 1;
+    }
+    class D implements C{
+        int g(A a) 2;
+    };
+    let
+        A a = new A();
+        D d = new D();
+    in
+        print(d.g(a));
+-   "2"
+
+test30 - Overriding of attribute with incompatyble type:
+-   class A (int x)
+    class B implements A (bool x);
+    let
+        int a = 1;
+    in
+        a;
+-   "Field 'x' of class 'B' overrided from super class with different type"
+
+
+test31 - Overriding of attribute with :
+-   class A
+    class B implements A
+    class C(A a)
+    class D(B a);
+    let
+        int a = 1;
+    in
+        a;
+-   "No output"
+
+test32 - Heap Hell:
+-   class A (int x);
+    let
+        int alloc(int y)
+            let
+                A a = new A(1);
+                A b = new A(2);
+                A c = new A(3);
+                A d = new A(4);
+                A e = new A(4);
+                A a1 = new A(1);
+                A b1 = new A(2);
+                A c1 = new A(3);
+                A d1 = new A(4);
+                A e1 = new A(4);
+            in
+                y;
+    in
+        print(alloc(777));
+-   "777"
+
+test33 - Garbage collector:
+-   class A (int x);
+    let
+        int alloc(int y)
+            let
+                A a = new A(1);
+                A b = new A(2);
+                A c = new A(3);
+                A d = new A(4);
+                A e = new A(4);
+                A a1 = new A(1);
+                A b1 = new A(2);
+                A c1 = new A(3);
+                A d1 = new A(4);
+                A e1 = new A(4);
+            in
+                y;
+    in
+        print(alloc(777) + alloc(1));
+-   "778"
+
+test34 - Subtyping in function call:
+-   class A
+    class B implements A;
+    let
+        int f(A x) 4;
+        B b = new B;
+    in
+        print(f(b));
+-   "4"
+
+test35 - Subtyping in method call:
+-   class A (int x) {
+        int getX() x;
+    }
+    class B implements A (int x)
+    class C {
+        int get(A x) x.getX();
+    };
+    let
+        A a = new A(3);
+        B b = new B(7);
+        C c = new C();
+    in
+        print(c.get(a) + c.get(b));
+-   "10"
+
+test36 - Subtyping in new call:
+-   class A
+    class B implements A
+    class D (A a) {
+        int f() 777;
+    };
+    let
+        B b = new B();
+        D d = new D(b);
+    in
+        print(d.f());
+-   "777"
+
+test37 - Method visibility inside class scope:
+-   class A {
+        int f() this.g();
+        int g() 1;
+    };
+    let
+      A a = new A();
+    in
+      print(a.f());
+-   "1"
+
+test38 - Class declaration visibility inside global scope:
+-   class B implements A
+    class A {
+      int foo() 8;
+    };
+    let
+      B b = new B();
+    in
+      print(b.foo());
+-   "8"
+
+test39 - Class declaration visibility inside global scope 2:
+-   class B implements A (A a)
+    class A {
+      int foo() 9;
+    };
+    let
+      B b = new B(new A());
+    in
+      print(b.foo());
+-   "9"
+
+test40 - Class declaration visibility inside global scope 3:
+-   class C implements B (A a)
+    class B implements A (A a)
+    class A {
+      int foo(F f) 9;
+    }
+    class F {
+      int foo(F f) 6;
+    };
+    let
+      B b = new B(new A());
+      F f = new F();
+    in
+      print(b.foo(f));
+-   "9"
+
+test41 - Memory allocation independent of code size:
+-   class A {
+      int f(int x) if (x == 0) then {20} else {this.g(x-1)};
+      int g(int x) if (x == 0) then {20} else {this.f(x-1)};
+    };
+    let
+      A a = new A();
+    in
+      print(a.f(10));
+-   "20"
+
+test42 - Function recursion:
+-   let
+      int fib(int x) if(x <= 2) then {1} else { fib(x-1) + fib(x-2) };
+    in
+      print(fib(12));
+-   "144"
+
+test43 - this with subtyping:
+-   class A
+    class B implements A {
+        int get()
+            let
+                int nestedGet(A a) 5;
+            in
+                nestedGet(this)
+        ;
+    };
+    let
+        B b = new B();
+    in
+        print(b.get());
+-    "5"
+
+test44 - Incompatible object types assignment:
+-   class A
+    class N;
+    let
+        A a = new N;
+    in
+        print(4);
+-   "Error: \"incompatible value for variable a\" at line 1, column 27."
+
+test45 - Implicit cast to supertype and method invocation:
+-   class A
+    class B {
+        int get() 2;
+    };
+    let
+        A a = new B;
+    in
+        print(a.get());
+-   "undeclared method: get"
+
+test46 - Subtyping in assignment:
+-   class A
+    class B implements A;
+    let
+        A a = new B;
+    in
+        print(3);
+-   "3"
+
+test47 - Subtying funcall as constructor parameter:
+-   class A
+    class B implements A (A a);
+    let
+        A a = new A;
+        B getA() new B(a);
+        B b2 = new B(getA());
+    in
+        print(4);
+-   "4"
+
+test48 - Subtyping in funccall as funcall parameter:
+-   class A
+    class B implements A (A a);
+    let
+        A a = new A;
+        B getA() new B(a);
+        int f(A a) 2;
+    in
+        print(f(getA()));
+-   "2"
+
+test49 - New inside new:
+-   class A (int x) {
+        int value() x;
+    }
+    class B implements A (int x, A a) {
+        A getA() a;
+    }
+    ;
+    let
+        B b = new B(0, new B(1, new A(2)));
+        A a = b.getA();
+    in
+        print(b.value() == (a.value() - 1));
+-   "1"
+
+test50 - Undefined var in method:
+-   class A {
+        int id(int x) x;
+    };
+    let
+        A a = new A();
+    in
+        print(a.id(i));
+-   "undeclared variable i"
+
+test51 - Subclass inside superclass:
+-   class A (int x) {
+        B createB() new B(x, 2);
+    }
+    class B implements A (int x, int y) {
+        int getX() x;
+        int getY() y;
+    }
+    ;
+    let
+        A a = new A(1);
+        B b = a.createB();
+    in
+        print(b.getY());
+-   "2"
+
+test52 - Subclass inside superclass' constructor:
+-   class A (B b)
+    class B implements A (B b)
+    ;
+    print(1);
+-   "can't use a subclass in superclass' constructor"
+
+test53 - Use of undeclared variable as function parameter:
+-   let
+        int foo(int a)  a;
+        int bar(int a)
+            foo(pippo);
+    in
+        bar(1);
+-   "undeclared variable pippo"
+
+test54 - Use of undeclared variable as constructor parameter:
+-   class A(int a, int b);
+    let
+        int foo(int x)
+                if (true) then { new A(1, pluto) } else { print(x) };
+    in
+        foo(1);
+-   "undeclared variable pluto"
+
+test55 - Subtyping hell in returntype:
+-   class A
+    class B implements A (A a, A b)
+    class X {
+        B get() new B(new A(), new B(new A(), new A()));
+    };
+    let
+        X x = new X();
+        B kek() x.get();
+        B b2 = new B(x.get(), kek());
+    in
+        print(777);
+-   "777"
+
+test56 - Calling method inside a function:
+-   class A (int x) {
+        int x() x;
+        int z()
+            let
+                int f() this.x();
+            in
+                f()
+        ;
+    };
+    let
+        A a = new A(1);
+    in
+        print(a.z());
+-   "1"
