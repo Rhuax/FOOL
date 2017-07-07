@@ -1,7 +1,6 @@
 package ast;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import util.*;
 import lib.FOOLlib;
@@ -68,7 +67,7 @@ public String toPrint(String s) {  //
                     should=false;
                 CurAnalyzedClass=inheritedClassNode;
             }
-            if (temp == null || should==false)
+            if (temp == null || !should)
                 res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
             else{
                 this.entry=temp;

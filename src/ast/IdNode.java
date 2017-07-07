@@ -2,7 +2,6 @@ package ast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 import util.Environment;
@@ -70,7 +69,7 @@ public class IdNode implements Node {
                   should=false;
               CurAnalyzedClass=inheritedClassNode;
           }
-          if (temp == null || should==false)
+          if (temp == null || !should)
               res.add(new SemanticError("Id " + id + " not declared in class "+MapClassNestLevel.getCurrentAnalyzedClass().getId()));
 	      else
           {

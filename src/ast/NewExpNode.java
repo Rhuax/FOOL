@@ -1,8 +1,6 @@
 package ast;
 
 import lib.FOOLlib;
-import org.omg.PortableInterceptor.DISCARDING;
-import util.DispatchTable;
 import util.Environment;
 import util.SemanticError;
 

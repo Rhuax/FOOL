@@ -10,5 +10,5 @@ public class JsNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.JS;
-    };
+    }
 }

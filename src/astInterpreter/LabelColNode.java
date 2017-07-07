@@ -1,7 +1,5 @@
 package astInterpreter;
 
-import parser.SVMParser;
-
 /**
  * Created by adele on 23/06/2017.
  */
@@ -17,5 +15,5 @@ public class LabelColNode implements InterpreterNode {
     {
         InstructionSet.labelAdd.put(label,InstructionSet.ip);
         // l=LABEL COL     {labelAdd.put($l.text,i);}
-    };
+    }
 }

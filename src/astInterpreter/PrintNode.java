@@ -10,5 +10,5 @@ public class PrintNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.PRINT;
-    };
+    }
 }

@@ -1,9 +1,7 @@
 package ast;
 
 import lib.FOOLlib;
-import parser.FoolProvaBisParser;
 import util.Environment;
-import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.*;

@@ -10,5 +10,5 @@ public class LoadfpNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.LOADFP;
-    };
+    }
 }

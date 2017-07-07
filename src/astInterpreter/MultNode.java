@@ -10,5 +10,5 @@ public class MultNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.MULT;
-    };
+    }
 }

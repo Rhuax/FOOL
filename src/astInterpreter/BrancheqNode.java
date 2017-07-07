@@ -18,5 +18,5 @@ public class BrancheqNode implements InterpreterNode
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.BRANCHEQ;
         InstructionSet.labelRef.put(InstructionSet.ip++, label);
-    };
+    }
 }

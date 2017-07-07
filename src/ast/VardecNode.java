@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import util.Environment;
 import util.SemanticError;
-import lib.FOOLlib;
 
 public class VardecNode implements Node {
 

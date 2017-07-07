@@ -1,7 +1,6 @@
 package util;
 
 import ast.ClassNode;
-import ast.Node;
 
 import java.util.HashMap;
 

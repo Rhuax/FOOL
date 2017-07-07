@@ -9,12 +9,10 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import parser.FoolProvaBisParser.DecContext;
-import parser.FoolProvaBisParser.FunContext;
 import parser.FoolProvaBisParser.FunDeclarationContext;
 import parser.FoolProvaBisParser.LetContext;
 import parser.FoolProvaBisParser.LetInExpContext;
 import parser.FoolProvaBisParser.ClassdecContext;
-import parser.FoolProvaBisParser.ProgContext;
 import ast.FoolVisitorImpl;
 import parser.*;
 import ast.Node;
@@ -22,7 +20,6 @@ import util.*;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Test2 {
 	static int count_var(ParseTree t) {

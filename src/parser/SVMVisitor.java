@@ -1,8 +1,6 @@
 // Generated from /home/crow/git/FOOL/src/parser/SVM.g4 by ANTLR 4.7
 package parser;
 
-import java.util.HashMap;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**

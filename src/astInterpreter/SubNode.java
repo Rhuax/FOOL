@@ -10,5 +10,5 @@ public class SubNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.SUB;
-    };
+    }
 }

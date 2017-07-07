@@ -1,9 +1,7 @@
 package ast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import org.stringtemplate.v4.ST;
 import util.Environment;
 import util.SemanticError;
 import lib.FOOLlib;

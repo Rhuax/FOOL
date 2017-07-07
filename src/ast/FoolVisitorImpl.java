@@ -2,7 +2,6 @@ package ast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
 import parser.FoolProvaBisBaseVisitor;
@@ -24,7 +23,6 @@ import parser.FoolProvaBisParser.TypeContext;
 import parser.FoolProvaBisParser.VarExpContext;
 import parser.FoolProvaBisParser.VarasmContext;
 import parser.FoolProvaBisParser.VardecContext;
-import util.MapClassNestLevel;
 
 
 public class FoolVisitorImpl extends FoolProvaBisBaseVisitor<Node> {

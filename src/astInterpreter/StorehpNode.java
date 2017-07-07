@@ -10,5 +10,5 @@ public class StorehpNode implements InterpreterNode {
     public void code()
     {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.STOREHP;
-    };
+    }
 }

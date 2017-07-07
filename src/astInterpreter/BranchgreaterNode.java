@@ -1,6 +1,5 @@
 package astInterpreter;
 
-import ast.Node;
 import parser.SVMParser;
 
 /**
