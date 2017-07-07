@@ -91,10 +91,10 @@ public class Test2 {
 
 
 					System.out.println("Visualizing AST...");
-					//System.out.println(ast.toPrint(""));
+					System.out.println(ast.toPrint(""));
 
 				Node type = ast.typeCheck(); //type-checking bottom-up
-
+				System.out.println("Type checking ok!");
 				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 
 
@@ -116,7 +116,7 @@ public class Test2 {
 
 		        ParseTree svmt = parserASM.start();
 		        SVMVisitorImpl svmVisitor = new SVMVisitorImpl();
-		        InterpreterNode svmTree = svmVisitor.visit(svmt);
+		        /*InterpreterNode svmTree = */svmVisitor.visit(svmt);
 
 
 		        System.out.println("You had: "+lexerASM.lexicalErrors+" lexical errors and "+parserASM.getNumberOfSyntaxErrors()+" syntax errors.");

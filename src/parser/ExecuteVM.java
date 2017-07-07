@@ -19,25 +19,27 @@ public class ExecuteVM {
     private int rv;
     
     public ExecuteVM(int[] code) {this.code=code;}
-    
+    private void printMemory(){
+        ArrayList<Integer> list = new ArrayList<Integer>(memory.length);
+        for (int i = 0; i < 10; i++)
+            list.add(memory[i]);
+        System.out.print("Heap:");
+        System.out.print(list);
+        list.clear();
+        System.out.print("  Stack:");
+        for (int i = MEMSIZE-30; i < MEMSIZE; i++)
+            list.add(memory[i]);
+        System.out.println(list);
+
+        System.out.println("FP = " + fp);
+
+    }
     public void cpu() {
       while ( true ) {
         int bytecode = code[ip++]; // fetch
-
+        //printMemory();
           int v1,v2;
         int address;
-          ArrayList<Integer> list = new ArrayList<Integer>(memory.length);
-          for (int i = 0; i < 10; i++)
-              list.add(Integer.valueOf(memory[i]));
-          System.out.print("Heap:");
-          System.out.print(list);
-          list.clear();
-          System.out.print("  Stack:");
-          for (int i = MEMSIZE-30; i < MEMSIZE; i++)
-              list.add(Integer.valueOf(memory[i]));
-          System.out.println(list);
-
-          System.out.println("FP = " + fp);
 
         switch ( bytecode ) {
           case SVMParser.PUSH:
