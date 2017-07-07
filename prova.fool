@@ -136,35 +136,8 @@ let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg
 
 
 /*test di alberto
-
-    test che danno problemi:
-    --49 new nelle new fixato ;)
-    //poivediamo56: qua da problemi perchè non ci possono essere attributi e metodi con gli stessi nomi. Alberto e dev lo hanno
-        fixato sto problema. Sul progetto di laneve da errore anche.
-    24: Questo sta da debuggare bene bene ma non dovrebbe essere difficile
-    //poivediamo 16: Questo è lo stesso del n56. Secondo me dovremmo fixarlo
-
+---47
+---48
+49
+51
 */
-   class Numero (int x) {
-        int getX()
-            let
-                int y = 3;
-            in
-                x;
-        int getRedefinedX()
-            let
-                int x = 3;
-            in
-                x;
-        int getParamX(int x)
-            x;
-        int getXInsideFun()
-            let
-                int f() x;
-            in
-                f();
-    };
-    let
-        Numero num = new Numero(5);
-    in
-        print(num);

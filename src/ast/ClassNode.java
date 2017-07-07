@@ -1,5 +1,6 @@
 package ast;
 
+import lib.FOOLlib;
 import util.Environment;
 import util.MapClassNestLevel;
 import util.SemanticError;
@@ -110,7 +111,30 @@ public class ClassNode implements Node {
                     }
 
                 }
+                //type checking sugli attributi
+
+                ClassNode extClass=this.extendedClass;
+                if(extClass!=null){
+                    for(VardecNode extAtt:extClass.getTotalAttributes()){
+                        if(Objects.equals(dec.getId(), extAtt.getId())) {
+                            if (!FOOLlib.isSubtype(dec.getType(), extAtt.getType())) {
+                                System.out.println("Overrided attribute "+dec.getId()+" of class "+this.getId()+
+                                        " is not a subtype of its ancestor from class "+extClass.getId());
+                                System.exit(0);
+                            }
+                        }
+                    }
+                }
+
+
+
             }
+
+
+
+
+
+
         if (methodList!=null)
             for (FunNode dec:methodList)
                 dec.typeCheck();
@@ -140,7 +164,22 @@ public class ClassNode implements Node {
             totalMethodList.addAll(extendedClass.totalMethodList);
         }
 
-        totalAttributes.addAll(attributeList);
+
+
+        for(VardecNode att:attributeList){
+            boolean found=false;
+            for(int i=0;i<totalAttributes.size() && !found;i++){
+                if(Objects.equals(totalAttributes.get(i).getId(), att.getId())) {
+                    totalAttributes.set(i, att);
+                    found=true;
+                }
+            }
+
+            if(!found){
+                totalAttributes.add(att);
+            }
+        }
+
         totalMethodList.addAll(methodList);
 
 
@@ -192,7 +231,7 @@ public class ClassNode implements Node {
         for (VardecNode attribute : attributeList)
         {
             ArrayList<SemanticError> errorList = new ArrayList<>();
-            if(extendedClass!=null) {
+            /*if(extendedClass!=null) {
                 boolean found = false;
                 for (int i = 0; i < extendedClass.getTotalAttributes().size() && !found; i++) {
                     if (Objects.equals(extendedClass.getTotalAttributes().get(i).getId(), attribute.getId())) {
@@ -201,6 +240,8 @@ public class ClassNode implements Node {
                     }
                 }
             }
+
+            */
             if(errorList.isEmpty())
                 errorList.addAll(attribute.checkSemantics(env));
 
