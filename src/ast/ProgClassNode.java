@@ -32,12 +32,12 @@ public class ProgClassNode implements Node {
         checkClasses();
         checkMethods();
         checkLet();
-        checkExp();
-        return null;
+
+        return checkExp();
     }
 
-    private void checkExp() {
-        exp.typeCheck();
+    private Node checkExp() {
+        return exp.typeCheck();
     }
 
     private void checkLet() {

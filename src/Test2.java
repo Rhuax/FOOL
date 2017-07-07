@@ -94,8 +94,8 @@ public class Test2 {
 					System.out.println(ast.toPrint(""));
 
 				Node type = ast.typeCheck(); //type-checking bottom-up
-				System.out.println("Type checking ok!");
-				//System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
+				//System.out.println("Type checking ok!");
+				System.out.println(type.toPrint("Type checking ok! Type of the program is: "));
 
 
 				DispatchTable.buildDispatchTable(ProgClassNode.classList);

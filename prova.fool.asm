@@ -19,42 +19,10 @@ sra
 lrv
 lra
 sw
-lfp
-lfp
-lfp
 push -6
+lfp
 add
 lw
-push function0
-js
-lfp
-lfp
-lfp
-push -6
-add
-lw
-push function1
-js
-lfp
-push 10
-lfp
-lfp
-push -6
-add
-lw
-push function2
-js
-lfp
-lfp
-lfp
-push -6
-add
-lw
-push function3
-js
-add
-add
-add
 print
 halt
 

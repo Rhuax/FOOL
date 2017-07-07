@@ -167,4 +167,4 @@ let c ogg = new c(1,2,3); e ogg2 = new e(3,2,1); a ogg3 = new a(7); a temp = ogg
     let
         Numero num = new Numero(5);
     in
-        print(num.getX() + num.getRedefinedX() + num.getParamX(10) + num.getXInsideFun());
+        print(num);
