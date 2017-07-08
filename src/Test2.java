@@ -19,7 +19,13 @@ public class Test2 {
 
     public static void main(String[] args) throws Exception {
 
-        String fileName = "prova.fool";
+        if(args.length==0){
+            System.err.println("Source file not passed!");
+            System.out.println("Exiting...");
+            System.exit(0);
+        }
+
+        String fileName=args[0];
 
         FileInputStream is = new FileInputStream(fileName);
 
