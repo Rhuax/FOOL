@@ -2,6 +2,7 @@ package ast;
 
 import lib.FOOLlib;
 import util.Environment;
+import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.ArrayList;
@@ -62,9 +63,12 @@ public class NewExpNode implements  Node
         code+="lhp\n";//copia di hp
 
         code+="lhp\n"+
-                "push "+expList.size()+"\n"+
+                "push "+(expList.size()+1)+"\n"+
                 "add\n"+
                 "shp\n";//aggiorno hp
+
+        if(expList.isEmpty())
+            code+="pop\n";//elimina copia
 
 
         for(int i=0;i<expList.size();i++){
@@ -86,6 +90,7 @@ public class NewExpNode implements  Node
             }
 
         }
+
         /*
         code+="lhp\n";
         if(expList.size()>0){

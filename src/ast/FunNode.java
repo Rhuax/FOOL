@@ -104,7 +104,7 @@ public class FunNode implements Node {
          }
 	      //close scope
 	      env.symTable.remove(env.nestingLevel--);
-	      
+	 // System.out.println(this.getId()+" offset:"+this.entry.getOffset());
 
       
       return res;

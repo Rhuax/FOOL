@@ -4,6 +4,11 @@ public class STentry {
   private int nl;
   private Node type;
   public Node true_type;
+
+  public void setOffset(int offset) {
+    this.offset = offset;
+  }
+
   private int offset;
   
   public STentry (int n, int os)
