@@ -1,7 +1,6 @@
 package astInterpreter;
 
 
-public interface InterpreterNode
-{
-  void code();
+public interface InterpreterNode {
+    void code();
 }  

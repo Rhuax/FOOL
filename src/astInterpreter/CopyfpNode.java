@@ -7,8 +7,7 @@ import parser.SVMParser;
  */
 public class CopyfpNode implements InterpreterNode {
 
-    public void code()
-    {
+    public void code() {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.COPYFP;
     }
 }

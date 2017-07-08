@@ -5,17 +5,14 @@ import parser.SVMParser;
 /**
  * Created by adele on 23/06/2017.
  */
-public class BranchNode implements InterpreterNode
-{
+public class BranchNode implements InterpreterNode {
     private String label;
 
-    public BranchNode(String l)
-    {
+    public BranchNode(String l) {
         label = l;
     }
 
-    public void code()
-    {
+    public void code() {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.BRANCH;
         InstructionSet.labelRef.put(InstructionSet.ip++, label);
     }

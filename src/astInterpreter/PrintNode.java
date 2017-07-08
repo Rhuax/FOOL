@@ -7,8 +7,7 @@ import parser.SVMParser;
  */
 public class PrintNode implements InterpreterNode {
 
-    public void code()
-    {
+    public void code() {
         InstructionSet.code[InstructionSet.ip++] = SVMParser.PRINT;
     }
 }

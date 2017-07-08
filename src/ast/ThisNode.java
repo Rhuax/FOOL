@@ -17,8 +17,8 @@ public class ThisNode implements Node {
 
     @Override
     public Node typeCheck() {
-        ClassNode c=MapClassNestLevel.getCurrentAnalyzedClass();
-        if(c==null){
+        ClassNode c = MapClassNestLevel.getCurrentAnalyzedClass();
+        if (c == null) {
             System.out.println("Cannot use 'this' operator outside a class context");
             System.exit(0);
         }
@@ -28,10 +28,10 @@ public class ThisNode implements Node {
 
     @Override
     public String codeGeneration() {
-        String code ="";
-        code+=  "lfp\n"+
-                "push -1\n"+
-                "add \n"+
+        String code = "";
+        code += "lfp\n" +
+                "push -1\n" +
+                "add \n" +
                 "lw\n";
         return code;
     }

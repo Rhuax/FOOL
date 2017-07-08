@@ -8,23 +8,27 @@ import java.util.ArrayList;
 /**
  * Created by crow on 26/06/17.
  */
-public class IdTypeNode implements Node{
+public class IdTypeNode implements Node {
     public String getTypeName() {
         return typeName;
     }
 
     private String typeName;
-    public IdTypeNode(String typeName){
-        this.typeName=typeName;
+
+    public IdTypeNode(String typeName) {
+        this.typeName = typeName;
     }
+
     @Override
     public String toPrint(String indent) {
-        return indent+"typeName:"+typeName+"\n";
+        return indent + "typeName:" + typeName + "\n";
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return getTypeName();
     }
+
     @Override
     public Node typeCheck() {
         return null;
@@ -37,6 +41,6 @@ public class IdTypeNode implements Node{
 
     @Override
     public ArrayList<SemanticError> checkSemantics(Environment env) {
-        return  new ArrayList<SemanticError>();
+        return new ArrayList<SemanticError>();
     }
 }

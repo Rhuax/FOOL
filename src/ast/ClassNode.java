@@ -15,7 +15,7 @@ import java.util.Objects;
 public class ClassNode implements Node {
 
     private String id;
-    public ArrayList<ClassNode> extendingClasses=new ArrayList<>();
+    public ArrayList<ClassNode> extendingClasses = new ArrayList<>();
     public int attributeOffset = 0;
 
     public ArrayList<VardecNode> getAttributeList() {
@@ -43,7 +43,7 @@ public class ClassNode implements Node {
         return totalMethodList;
     }
 
-    private ArrayList<FunNode> totalMethodList=new ArrayList<>();
+    private ArrayList<FunNode> totalMethodList = new ArrayList<>();
 
     public String getExtendedClassName() {
         return extendedClassName;
@@ -52,7 +52,6 @@ public class ClassNode implements Node {
     public void setExtendedClass(ClassNode extendedClass) {
         this.extendedClass = extendedClass;
     }
-
 
 
     ClassNode(String i, ArrayList<VardecNode> al, ArrayList<FunNode> ml) {
@@ -76,17 +75,17 @@ public class ClassNode implements Node {
     @Override
     public String toPrint(String s) {
 
-        String attList="";
-        if (attributeList!=null)
-            for (VardecNode dec:attributeList)
-                attList+=dec.toPrint(s+"  ");
+        String attList = "";
+        if (attributeList != null)
+            for (VardecNode dec : attributeList)
+                attList += dec.toPrint(s + "  ");
 
-        String methList="";
-        if (methodList!=null)
-            for (FunNode dec:methodList)
-                methList+=dec.toPrint(s+"  ");
+        String methList = "";
+        if (methodList != null)
+            for (FunNode dec : methodList)
+                methList += dec.toPrint(s + "  ");
 
-        return s+"Class:" + id +"\n"
+        return s + "Class:" + id + "\n"
                 + attList
                 + methList;
     }
@@ -96,16 +95,15 @@ public class ClassNode implements Node {
         MapClassNestLevel.setCurrentAnalyzedClass(this);
 
 
-
-        if (attributeList!=null)
-            for (VardecNode dec:attributeList) {
+        if (attributeList != null)
+            for (VardecNode dec : attributeList) {
                 dec.typeCheck();
-                Node type=dec.getType();
-                if(type instanceof IdTypeNode){
-                    IdTypeNode id_typenode=(IdTypeNode)type;
-                    for (ClassNode extendingClass: extendingClasses){
-                        if(Objects.equals(extendingClass.getId(), id_typenode.getTypeName())){
-                            System.out.println("Cannot use the sublcass "+extendingClass.getId()+" in "+ this.getId()+"'s constructor");
+                Node type = dec.getType();
+                if (type instanceof IdTypeNode) {
+                    IdTypeNode id_typenode = (IdTypeNode) type;
+                    for (ClassNode extendingClass : extendingClasses) {
+                        if (Objects.equals(extendingClass.getId(), id_typenode.getTypeName())) {
+                            System.out.println("Cannot use the sublcass " + extendingClass.getId() + " in " + this.getId() + "'s constructor");
                             System.exit(0);
                         }
                     }
@@ -113,13 +111,13 @@ public class ClassNode implements Node {
                 }
                 //type checking sugli attributi
 
-                ClassNode extClass=this.extendedClass;
-                if(extClass!=null){
-                    for(VardecNode extAtt:extClass.getTotalAttributes()){
-                        if(Objects.equals(dec.getId(), extAtt.getId())) {
+                ClassNode extClass = this.extendedClass;
+                if (extClass != null) {
+                    for (VardecNode extAtt : extClass.getTotalAttributes()) {
+                        if (Objects.equals(dec.getId(), extAtt.getId())) {
                             if (!FOOLlib.isSubtype(dec.getType(), extAtt.getType())) {
-                                System.out.println("Overrided attribute "+dec.getId()+" of class "+this.getId()+
-                                        " is not a subtype of its ancestor from class "+extClass.getId());
+                                System.out.println("Overrided attribute " + dec.getId() + " of class " + this.getId() +
+                                        " is not a subtype of its ancestor from class " + extClass.getId());
                                 System.exit(0);
                             }
                         }
@@ -127,21 +125,15 @@ public class ClassNode implements Node {
                 }
 
 
-
             }
 
 
-
-
-
-
-        if (methodList!=null)
-            for (FunNode dec:methodList)
+        if (methodList != null)
+            for (FunNode dec : methodList)
                 dec.typeCheck();
-    MapClassNestLevel.setCurrentAnalyzedClass(null);
-    return null;
+        MapClassNestLevel.setCurrentAnalyzedClass(null);
+        return null;
     }
-
 
 
     @Override
@@ -149,27 +141,27 @@ public class ClassNode implements Node {
         MapClassNestLevel.setCurrentAnalyzedClass(this);
         //Controllare se ci sono attributi e metodi duplicati
         env.nestingLevel++;
-        MapClassNestLevel.putClassNestingLevel(this.id,env.nestingLevel);
-        HashMap<String,STentry> hm = new HashMap<String,STentry> ();
+        MapClassNestLevel.putClassNestingLevel(this.id, env.nestingLevel);
+        HashMap<String, STentry> hm = new HashMap<String, STentry>();
         env.symTable.add(hm);
 
         //declare resulting list
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
-        if (extendedClass!=null) {
+        if (extendedClass != null) {
             totalAttributes.addAll(extendedClass.totalAttributes);
             totalMethodList.addAll(extendedClass.totalMethodList);
         }
 
-        for(VardecNode att:attributeList){
-            boolean found=false;
-            for(int i=0;i<totalAttributes.size() && !found;i++){
-                if(Objects.equals(totalAttributes.get(i).getId(), att.getId())) {
+        for (VardecNode att : attributeList) {
+            boolean found = false;
+            for (int i = 0; i < totalAttributes.size() && !found; i++) {
+                if (Objects.equals(totalAttributes.get(i).getId(), att.getId())) {
                     totalAttributes.set(i, att);
-                    found=true;
+                    found = true;
                 }
             }
 
-            if(!found){
+            if (!found) {
                 totalAttributes.add(att);
             }
         }
@@ -179,37 +171,28 @@ public class ClassNode implements Node {
         checkMethods(res, env);
 
 
-
-
-
         MapClassNestLevel.setCurrentAnalyzedClass(null);
         return res;
     }
 
-    public ClassNode getExtendedClass()
-    {
+    public ClassNode getExtendedClass() {
         return extendedClass;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
 
-    ArrayList<FunNode> getMethodsList()
-    {
+    ArrayList<FunNode> getMethodsList() {
         return methodList;
     }
 
-    FunNode getMethodFromList(String methodName)
-    {
+    FunNode getMethodFromList(String methodName) {
         FunNode methodNode = null;
 
-        for (FunNode methoddec:methodList)
-        {
-            if(methoddec.getId().equals(methodName))
-            {
-                methodNode =  methoddec;
+        for (FunNode methoddec : methodList) {
+            if (methoddec.getId().equals(methodName)) {
+                methodNode = methoddec;
                 break;
             }
         }
@@ -217,99 +200,78 @@ public class ClassNode implements Node {
         return methodNode;
     }
 
-    private boolean checkAttributes(ArrayList<SemanticError> res, Environment env)
-    {
-        boolean check = true;
-        if(extendedClass != null)
-            attributeOffset = extendedClass.attributeOffset+4;
+    private void checkAttributes(ArrayList<SemanticError> res, Environment env) {
+        if (extendedClass != null)
+            attributeOffset = extendedClass.attributeOffset + 4;
 
         env.offset = attributeOffset;
         //check semantics in the dec list
         //if there are children then check semantics for every child and save the results
-        for (VardecNode attribute : attributeList)
-        {
+        for (VardecNode attribute : attributeList) {
             ArrayList<SemanticError> errorList = new ArrayList<>();
-            /*if(extendedClass!=null) {
-                boolean found = false;
+
+            int temp = env.offset;
+            boolean found = false;
+            if (extendedClass != null) {
                 for (int i = 0; i < extendedClass.getTotalAttributes().size() && !found; i++) {
-                    if (Objects.equals(extendedClass.getTotalAttributes().get(i).getId(), attribute.getId())) {
+                    if (Objects.equals(attribute.getId(), extendedClass.getTotalAttributes().get(i).getId())) {
+                        env.offset = -i;
                         found = true;
-                        errorList.add(new SemanticError("Attribute " + attribute.getId() + " is already defined"));
                     }
                 }
             }
 
-            */
-            int temp=env.offset;
-            boolean found=false;
-            if(extendedClass!=null) {
-                for(int i=0;i<extendedClass.getTotalAttributes().size() && !found;i++){
-                    if(Objects.equals(attribute.getId(), extendedClass.getTotalAttributes().get(i).getId())){
-                        env.offset=-i;
-                        found=true;
-                    }
-                }
-            }
-
-            if(errorList.isEmpty())
+            if (errorList.isEmpty())
                 errorList.addAll(attribute.checkSemantics(env));
 
-            if(!found)
-                attributeOffset=temp-1;
-            if(!errorList.isEmpty())
-            {
-                for(SemanticError err: errorList)
+            if (!found)
+                attributeOffset = temp - 1;
+            if (!errorList.isEmpty()) {
+                for (SemanticError err : errorList)
                     err.msg += " in class " + id;
 
-                check = false;
+
             }
             res.addAll(errorList);
         }
 
 
-        return check;
     }
 
-    private boolean checkMethods(ArrayList<SemanticError> errors, Environment env)
-    {
+    private void checkMethods(ArrayList<SemanticError> errors, Environment env) {
         boolean check = true;
-        env.offset=env.methodOffset;
+        env.offset = env.methodOffset;
 
         HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
         //check methods semantics
-        for(FunNode f:methodList) {
+        for (FunNode f : methodList) {
             STentry entry = new STentry(env.nestingLevel, env.offset--); //separo introducendo "entry"
 
             if (hm.put(f.getId(), entry) != null) {
-                errors.add(new SemanticError("Function id " + f.getId() + " already declared in class "+ this.getId()));
-                check=false;
-            }
-            else
-                f.entry=entry;
+                errors.add(new SemanticError("Function id " + f.getId() + " already declared in class " + this.getId()));
+                check = false;
+            } else
+                f.entry = entry;
         }
-        env.methodOffset=env.offset;
-        attributeOffset+=-4;
-        if(check) {
+        env.methodOffset = env.offset;
+        attributeOffset += -4;
+        if (check) {
 
-                //if there are children then check semantics for every child and save the results
-                for (FunNode method : methodList) {
-                    errors.addAll(method.checkSemantics(env));
+            //if there are children then check semantics for every child and save the results
+            for (FunNode method : methodList) {
+                errors.addAll(method.checkSemantics(env));
 
             }
         }
-        //attributeOffset=env.offset;
-        return check;
     }
 
     @Override
-    public String codeGeneration()
-    {
+    public String codeGeneration() {
 
         MapClassNestLevel.setCurrentAnalyzedClass(this);
-        String classCode="";
-        for(FunNode method:methodList)
-        {
-            classCode+=method.codeGeneration()+'\n';
+        String classCode = "";
+        for (FunNode method : methodList) {
+            classCode += method.codeGeneration() + '\n';
         }
 
         MapClassNestLevel.setCurrentAnalyzedClass(null);

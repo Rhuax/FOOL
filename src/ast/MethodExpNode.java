@@ -5,14 +5,12 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import util.*;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Objects;
 
 /**
  * Created by suri9 on 24/06/2017.
  */
-public class MethodExpNode implements Node
-{
+public class MethodExpNode implements Node {
     public ArrayList<Node> expList;
     public String objectID;
     public String methodID;
@@ -20,19 +18,18 @@ public class MethodExpNode implements Node
     private String objectTrueTypeName;
     TerminalNode object;
     TerminalNode method;
-    private int nestinglevel;
     private STentry entry;
 
-    MethodExpNode(ArrayList<Node> el, TerminalNode o, TerminalNode m)
-    {
+    MethodExpNode(ArrayList<Node> el, TerminalNode o, TerminalNode m) {
         expList = el;
-        if(o!=null)
+        if (o != null)
             objectID = o.getText();
 
         methodID = m.getText();
-        this.object=o;
-        this.method=m;
+        this.object = o;
+        this.method = m;
     }
+
     @Override
     public String toPrint(String indent) {
         return null;
@@ -40,18 +37,15 @@ public class MethodExpNode implements Node
 
     @Override
     public Node typeCheck() {
-        boolean found=false;
-        FunNode methodNode=null;
-        ClassNode c=ProgClassNode.getClassFromList(objectTypeName);
-        while(!found)
-        {
-            if((methodNode=c.getMethodFromList(methodID))!=null)
-                found=true;
-            else
-            {
-                c=c.getExtendedClass();
-                if(c==null)
-                {
+        boolean found = false;
+        FunNode methodNode = null;
+        ClassNode c = ProgClassNode.getClassFromList(objectTypeName);
+        while (!found) {
+            if ((methodNode = c.getMethodFromList(methodID)) != null)
+                found = true;
+            else {
+                c = c.getExtendedClass();
+                if (c == null) {
                     System.out.println("Cannot call method " + methodID + " on object " + objectID);
                     System.exit(0);
                 }
@@ -60,179 +54,162 @@ public class MethodExpNode implements Node
 
 
         ArrayList<Node> al = c.getMethodFromList(methodID).getParlist();
-        if(expList.size() == al.size())
-        {
-            for (int i = 0; i < expList.size(); i++)
-            {
+        if (expList.size() == al.size()) {
+            for (int i = 0; i < expList.size(); i++) {
                 Node subAtt = expList.get(i);
-                ParNode supAtt = (ParNode)al.get(i);
+                ParNode supAtt = (ParNode) al.get(i);
                 Node subType = subAtt.typeCheck();
-                Node supType =  supAtt.getType();
+                Node supType = supAtt.getType();
 
-                if(!FOOLlib.isSubtype(subType, supType))
-                {
-                    System.out.println("Type of parameter in position " + (i+1) + " when calling method " + methodID + " is not compatible with the type of corresponding parameter!");
+                if (!FOOLlib.isSubtype(subType, supType)) {
+                    System.out.println("Type of parameter in position " + (i + 1) + " when calling method " + methodID + " is not compatible with the type of corresponding parameter!");
                     System.exit(0);
                 }
             }
-        }
-        else
-        {
-            String sign ;
+        } else {
+            String sign;
 
-            if(expList.size() > al.size())
-                sign="much";
+            if (expList.size() > al.size())
+                sign = "much";
             else
-                sign="few";
+                sign = "few";
 
-            System.out.println("Too " + sign + " parameters when calling method " + this.methodID +(this.object!=null?" of object "+this.objectID+" of type "+this.objectTypeName:" on 'this' operator"));
+            System.out.println("Too " + sign + " parameters when calling method " + this.methodID + (this.object != null ? " of object " + this.objectID + " of type " + this.objectTypeName : " on 'this' operator"));
             System.exit(0);
         }
-        if(this.object!=null && this.entry.true_type!=null)
-            objectTrueTypeName=this.entry.true_type.toString();
+        if (this.object != null && this.entry.true_type != null)
+            objectTrueTypeName = this.entry.true_type.toString();
         return methodNode.getType();
     }
 
     @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env)
-    {
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
 
-        checkRuleSemantic(res,env);
+        checkRuleSemantic(res, env);
 
-        if(expList != null)
-            for(Node exp: expList)
+        if (expList != null)
+            for (Node exp : expList)
                 res.addAll(exp.checkSemantics(env));
 
         return res;
     }
 
-    private void checkRuleSemantic(ArrayList<SemanticError> errors,Environment env)
-    {
-        if(objectID == null)
-        {
+    private void checkRuleSemantic(ArrayList<SemanticError> errors, Environment env) {
+        if (objectID == null) {
             ClassNode curAnalyzedClass = MapClassNestLevel.getCurrentAnalyzedClass();
-            if(curAnalyzedClass != null)
-            {
+            if (curAnalyzedClass != null) {
                 objectTypeName = curAnalyzedClass.getId();
-            }
-            else
-            {
+            } else {
                 errors.add(new SemanticError("Cannot use this operator outside class context!"));
             }
-        }
-        else
-        {
+        } else {
             int j = env.nestingLevel;
-            this.nestinglevel=env.nestingLevel;
+            int nestinglevel = env.nestingLevel;
             STentry temp = (env.symTable.get(j)).get(objectID);
 
-            while (temp==null && j >= MapClassNestLevel.getMaxClassNestLevel())
+            while (temp == null && j >= MapClassNestLevel.getMaxClassNestLevel())
                 temp = (env.symTable.get(j--)).get(objectID);
 
-            if(temp==null)
-                errors.add(new SemanticError("Object "+objectID + " is not defined"));
+            if (temp == null)
+                errors.add(new SemanticError("Object " + objectID + " is not defined"));
             else {
                 objectTypeName = temp.getType().toString();
 
-                this.entry=temp;
+                this.entry = temp;
             }
 
         }
 
 
-
     }
+
     @Override
     public String codeGeneration() {
         //MapClassNestLevel.setCurrentAnalyzedClass(ProgClassNode.getClassFromList(this.objectTypeName));
-String mLabel;
-        if( this.object!=null && this.objectTrueTypeName!=null && ProgClassNode.getClassFromList(this.objectTrueTypeName).getMethodFromList(this.methodID)!=null){
+        String mLabel;
+        if (this.object != null && this.objectTrueTypeName != null && ProgClassNode.getClassFromList(this.objectTrueTypeName).getMethodFromList(this.methodID) != null) {
             //eseguo il metodo della classe B
-            int index=DispatchTable.getDispatchIndexFromClassName(this.objectTrueTypeName);
-            DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
-             mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
-        }
-        else{
+            int index = DispatchTable.getDispatchIndexFromClassName(this.objectTrueTypeName);
+            DispatchEntry dispentry = DispatchTable.dispatchTable.get(index);
+            mLabel = dispentry.getDispatchMethodTable().methodList.get(this.methodID);
+        } else {
             //eseguo il metodo della classe A
-            int index=DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
-            DispatchEntry dispentry=DispatchTable.dispatchTable.get(index);
-            mLabel=dispentry.getDispatchMethodTable().methodList.get(this.methodID);
+            int index = DispatchTable.getDispatchIndexFromClassName(this.objectTypeName);
+            DispatchEntry dispentry = DispatchTable.dispatchTable.get(index);
+            mLabel = dispentry.getDispatchMethodTable().methodList.get(this.methodID);
         }
 
 
-        String code="";
-        String parCode="";
-        for (int i=expList.size()-1; i>=0; i--)
-            parCode+=expList.get(i).codeGeneration();
+        String code = "";
+        String parCode = "";
+        for (int i = expList.size() - 1; i >= 0; i--)
+            parCode += expList.get(i).codeGeneration();
 
         /*String getAR="";
         for (int i=0; i<nestinglevel-entry.getNestinglevel(); i++)
             getAR+="lw\n";*/
-        int objectOffset = (this.object==null?-1:this.entry.getOffset());
+        int objectOffset = (this.object == null ? -1 : this.entry.getOffset());
 
-        String popParl="";
-        for(int i=0;i<expList.size();i++)
-            popParl+="pop\n";
+        String popParl = "";
+        for (int i = 0; i < expList.size(); i++)
+            popParl += "pop\n";
 
-        String attCode="";
-        String carica_oggetto="";
-        ClassNode current=MapClassNestLevel.getCurrentAnalyzedClass();
+        String attCode = "";
+        String carica_oggetto = "";
+        ClassNode current = MapClassNestLevel.getCurrentAnalyzedClass();
 
-        if(current!=null){
+        if (current != null) {
             //sono in una classe
-            if(this.entry!=null ){
+            if (this.entry != null) {
                 //sto facendo oggetto.metodo()
-                if(this.entry.getNestinglevel()==MapClassNestLevel.getNestingLevelFromClass(current.getId())){
+                if (this.entry.getNestinglevel() == MapClassNestLevel.getNestingLevelFromClass(current.getId())) {
 
                     //sono un'attributo e quindi bisogna caricarmi in maniera tamarrissima
-                    carica_oggetto+="lfp\n"+
-                            "push -1\n"+
-                            "add\n"+
+                    carica_oggetto += "lfp\n" +
+                            "push -1\n" +
+                            "add\n" +
                             "lw\n"; //oggetto corrente
-                    ArrayList<VardecNode> totcurrent=current.getTotalAttributes();
-                    int attoffset=1234567;//Lo metto grande cosi se crasha con 1234567 crasha qui
-                    boolean found=false;
-                    for(int i=0;i<totcurrent.size() && !found;i++){
-                        if(Objects.equals(totcurrent.get(i).getId(), this.object.toString())) {
+                    ArrayList<VardecNode> totcurrent = current.getTotalAttributes();
+                    int attoffset = 1234567;//Lo metto grande cosi se crasha con 1234567 crasha qui
+                    boolean found = false;
+                    for (int i = 0; i < totcurrent.size() && !found; i++) {
+                        if (Objects.equals(totcurrent.get(i).getId(), this.object.toString())) {
                             attoffset = i;
-                            found=true;
+                            found = true;
                         }
                     }
-                    carica_oggetto+="push "+attoffset+"\n";
-                    carica_oggetto+="add\n"+
+                    carica_oggetto += "push " + attoffset + "\n";
+                    carica_oggetto += "add\n" +
                             "lw\n";
-                }
-                else {
+                } else {
                     //sono un parametro oppure una variabile locale
                     carica_oggetto = "lfp\n" +
                             "push " + objectOffset + "\n" +
                             "add\n" +
                             "lw\n";
                 }
-            }
-            else{
+            } else {
                 //this.metodo()---> carico solo l'oggetto
-                carica_oggetto+="lfp\n"+
-                        "push -1\n"+
-                        "add\n"+
+                carica_oggetto += "lfp\n" +
+                        "push -1\n" +
+                        "add\n" +
                         "lw\n"; //oggetto corrente
             }
-        }
-        else{
+        } else {
             //non sono in una classe e quindi carico l'oggetto normalmente
-            carica_oggetto="lfp\n" +
-                    "push " + objectOffset+ "\n" +
+            carica_oggetto = "lfp\n" +
+                    "push " + objectOffset + "\n" +
                     "add\n" +
-                    "lw\n" ;
+                    "lw\n";
         }
 
 
         code += "lfp\n" +
                 parCode +
-                "lfp\n"+ //CL
-                carica_oggetto+
-                "push "+mLabel+"\n"+
+                "lfp\n" + //CL
+                carica_oggetto +
+                "push " + mLabel + "\n" +
                 "js\n";
 
         //MapClassNestLevel.setCurrentAnalyzedClass(null);

@@ -2,7 +2,6 @@ package ast;
 
 import lib.FOOLlib;
 import util.Environment;
-import util.MapClassNestLevel;
 import util.SemanticError;
 
 import java.util.ArrayList;
@@ -10,83 +9,76 @@ import java.util.ArrayList;
 /**
  * Created by suri9 on 24/06/2017.
  */
-public class NewExpNode implements  Node
-{
+public class NewExpNode implements Node {
     String classId;
     public ArrayList<Node> expList;
-    private static int fakehp=0;
-    public NewExpNode(String id, ArrayList<Node> el)
-    {
-        classId = id; expList = el;
+
+    public NewExpNode(String id, ArrayList<Node> el) {
+        classId = id;
+        expList = el;
     }
 
     @Override
     public String toPrint(String indent) {
 
 
-        return indent+"Instance:"+this.classId+"\n\t";
+        return indent + "Instance:" + this.classId + "\n\t";
     }
 
     @Override
-    public Node typeCheck()
-    {
+    public Node typeCheck() {
         ClassNode cl = ProgClassNode.getClassFromList(classId);
-            ArrayList<VardecNode> totalAttributes = cl.getTotalAttributes();
+        ArrayList<VardecNode> totalAttributes = cl.getTotalAttributes();
 
-            if(expList.size() == totalAttributes.size())
-            {
-                for (int i = 0; i < totalAttributes.size(); i++)
-                {
-                    Node subAtt = expList.get(i);
-                    Node supAtt = totalAttributes.get(i);
-                    Node subType = subAtt.typeCheck();
-                    Node supType = ((VardecNode) supAtt).getType();
+        if (expList.size() == totalAttributes.size()) {
+            for (int i = 0; i < totalAttributes.size(); i++) {
+                Node subAtt = expList.get(i);
+                Node supAtt = totalAttributes.get(i);
+                Node subType = subAtt.typeCheck();
+                Node supType = ((VardecNode) supAtt).getType();
 
-                    if(!FOOLlib.isSubtype(subType, supType))
-                    {
-                        System.out.println("Type of parameter in position " + (i+1) + " in instantiation of class " + cl.getId() + " is not compatible with the type of corresponding attribute!");
-                        System.exit(0);
-                    }
+                if (!FOOLlib.isSubtype(subType, supType)) {
+                    System.out.println("Type of parameter in position " + (i + 1) + " in instantiation of class " + cl.getId() + " is not compatible with the type of corresponding attribute!");
+                    System.exit(0);
                 }
             }
-            else
-            {
-                System.out.println("Wrong number of parameters when instantiating class " + cl.getId() + ". If inheriting, also super class' attributes must be included!");
-                System.exit(0);
-            }
+        } else {
+            System.out.println("Wrong number of parameters when instantiating class " + cl.getId() + ". If inheriting, also super class' attributes must be included!");
+            System.exit(0);
+        }
 
         return new IdTypeNode(classId);
-}
+    }
 
     @Override
     public String codeGeneration() {
-        String code="";
-        code+="lhp\n";//oggetto
-        code+="lhp\n";//copia di hp
+        String code = "";
+        code += "lhp\n";//oggetto
+        code += "lhp\n";//copia di hp
 
-        code+="lhp\n"+
-                "push "+(expList.size()+1)+"\n"+
-                "add\n"+
+        code += "lhp\n" +
+                "push " + (expList.size() + 1) + "\n" +
+                "add\n" +
                 "shp\n";//aggiorno hp
 
-        if(expList.isEmpty())
-            code+="pop\n";//elimina copia
+        if (expList.isEmpty())
+            code += "pop\n";//elimina copia
 
 
-        for(int i=0;i<expList.size();i++){
-            code+=expList.get(i).codeGeneration();
+        for (int i = 0; i < expList.size(); i++) {
+            code += expList.get(i).codeGeneration();
             /**
              * adesso c'è:
              * risultato della exp
              * copiahp
              */
-            code+="srv\n"+
-                    "sra\n"+
-                    "lrv\n"+
-                    "lra\n"+
+            code += "srv\n" +
+                    "sra\n" +
+                    "lrv\n" +
+                    "lra\n" +
                     "sw\n";
-            if(i!=expList.size()-1) {
-                code+="lra\n" +
+            if (i != expList.size() - 1) {
+                code += "lra\n" +
                         "push 1\n" +
                         "add\n";
             }
@@ -119,18 +111,14 @@ public class NewExpNode implements  Node
     }
 
     @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env)
-    {
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
         ArrayList<SemanticError> res = new ArrayList<>();
 
         ClassNode cl = ProgClassNode.getClassFromList(classId);
-        if(cl == null)
-        {
+        if (cl == null) {
             res.add(new SemanticError("Cannot instantiate a class that does not exist!"));
-        }
-        else
-        {
-            for(Node exp: expList)
+        } else {
+            for (Node exp : expList)
                 res.addAll(exp.checkSemantics(env));
         }
 

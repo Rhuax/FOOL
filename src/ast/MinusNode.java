@@ -6,41 +6,31 @@ import util.SemanticError;
 
 import java.util.ArrayList;
 
-public class MinusNode implements Node
-{
+public class MinusNode implements Node {
     private Node left;
     private Node right;
 
-    public MinusNode(Node l, Node r)
-    {
-        left=l;
-        right=r;
+    public MinusNode(Node l, Node r) {
+        left = l;
+        right = r;
     }
 
     @Override
-    public String toPrint(String s)
-    {
-        return s+"Minus\n" + left.toPrint(s+"  ")
-                + right.toPrint(s+"  ") ;
+    public String toPrint(String s) {
+        return s + "Minus\n" + left.toPrint(s + "  ")
+                + right.toPrint(s + "  ");
     }
 
     @Override
-    public Node typeCheck()
-    {
-        if( FOOLlib.isSubtype(left.typeCheck(),new IntTypeNode()) )
-        {
-            if (FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode()))
-            {
+    public Node typeCheck() {
+        if (FOOLlib.isSubtype(left.typeCheck(), new IntTypeNode())) {
+            if (FOOLlib.isSubtype(right.typeCheck(), new IntTypeNode())) {
                 return new IntTypeNode();
-            }
-            else
-            {
+            } else {
                 System.out.println("First type is not subtype of the second in sub!");
                 System.exit(0);
             }
-        }
-        else
-        {
+        } else {
             System.out.println("Boolean cannot be subtracted!");
             System.exit(0);
         }
@@ -48,16 +38,14 @@ public class MinusNode implements Node
     }
 
     @Override
-    public String codeGeneration()
-    {
-        return left.codeGeneration()+
-                right.codeGeneration()+
+    public String codeGeneration() {
+        return left.codeGeneration() +
+                right.codeGeneration() +
                 "sub\n";
     }
 
     @Override
-    public ArrayList<SemanticError> checkSemantics(Environment env)
-    {
+    public ArrayList<SemanticError> checkSemantics(Environment env) {
         //create the result
         ArrayList<SemanticError> res = new ArrayList<SemanticError>();
 
