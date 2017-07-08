@@ -1,8 +1,11 @@
 class A
-    class B implements A (A a);
+    class B implements A (A a, A b)
+    class X {
+        B get() new B(new A, new B(new A, new A));
+    };
     let
-        A a = new A;
-        B getA() new B(a);
-        int f(A a) 2;
+        X x = new X;
+        B kek() x.get();
+        B b2 = new B(x.get(), kek());
     in
-        print(f(getA()));
+        print(777);

@@ -25,6 +25,11 @@ public class ProgClassNode implements Node {
             classstr+=classdec.toPrint(s+"  ");
         return s+"ClassLetIn\n" + classstr ;
     }
+    public String toString(){
+        String s="";
+        s=this.toPrint(s);
+        return s;
+    }
 
     @Override
     public Node typeCheck()

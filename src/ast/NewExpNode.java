@@ -22,7 +22,9 @@ public class NewExpNode implements  Node
 
     @Override
     public String toPrint(String indent) {
-        return null;
+
+
+        return indent+"Instance:"+this.classId+"\n\t";
     }
 
     @Override

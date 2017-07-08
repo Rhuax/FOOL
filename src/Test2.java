@@ -85,7 +85,7 @@ public class Test2 {
 				if (err.size() > 0) {
 					System.out.println("You had: " + err.size() + " semantic errors:");
 					for (SemanticError e : err)
-						System.out.println("\t" + e);
+						System.err.println("\t" + e);
 				} else
 					{
 

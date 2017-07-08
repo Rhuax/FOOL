@@ -36,6 +36,11 @@ public class ExecuteVM {
     }
     public void cpu() {
       while ( true ) {
+          if(hp==sp) {
+              System.err.println("Error: out of memory. Exiting... ");
+              System.exit(44);
+          }
+
         int bytecode = code[ip++]; // fetch
         //printMemory();
           int v1,v2;
