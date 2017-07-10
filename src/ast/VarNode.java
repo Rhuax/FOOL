@@ -36,7 +36,6 @@ public class VarNode implements Node {
             }
         }
         if (!error) {
-
             //env.offset = -2;
           /*HashMap<String, STentry> hm = env.symTable.get(env.nestingLevel);
           STentry entry = new STentry(env.nestingLevel, type, env.offset--); //separo introducendo "entry"
@@ -63,7 +62,7 @@ public class VarNode implements Node {
             System.out.println("Incompatible value for variable " + id);
             System.exit(0);
         }
-        this.entry.true_type = expType;
+        //this.entry.true_type = expType;
         return null;
     }
 

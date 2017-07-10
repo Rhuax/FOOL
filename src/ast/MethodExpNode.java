@@ -79,6 +79,8 @@ public class MethodExpNode implements Node {
         }
         if (this.object != null && this.entry.true_type != null)
             objectTrueTypeName = this.entry.true_type.toString();
+
+
         return methodNode.getType();
     }
 

@@ -19,7 +19,7 @@ public class VardecNode implements Node {
     }
 
     private Node type;
-
+    public STentry entry;
     public VardecNode(String i, Node t) {
         id = i;
         type = t;
@@ -36,7 +36,7 @@ public class VardecNode implements Node {
 
         if (hm.put(id, entry) != null)
             res.add(new SemanticError("Var id " + id + " already declared"));
-
+        this.entry=entry;
         return res;
     }
 

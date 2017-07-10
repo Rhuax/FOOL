@@ -1,11 +1,14 @@
-class A
-    class B implements A (A a, A b)
-    class X {
-        B get() new B(new A, new B(new A, new A));
-    };
-    let
-        X x = new X;
-        B kek() x.get();
-        B b2 = new B(x.get(), kek());
-    in
-        print(777);
+class a{
+int get() 44;
+}
+
+class b implements a{
+int get() 555;
+}
+
+class c(a ogg )
+{
+int ooo() ogg.get();
+}
+;
+let b ii=new b; c y=new c(ii); c asdasd=new c(new a));in print(y.ooo());

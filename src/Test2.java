@@ -18,15 +18,15 @@ import java.util.ArrayList;
 public class Test2 {
 
     public static void main(String[] args) throws Exception {
-
+/*
         if(args.length==0){
             System.err.println("Source file not passed!");
             System.out.println("Exiting...");
             System.exit(0);
         }
 
-        String fileName=args[0];
-
+        String fileName=args[0];*/
+        String fileName="prova.fool";
         FileInputStream is = new FileInputStream(fileName);
 
         ANTLRInputStream input = new ANTLRInputStream(is);
