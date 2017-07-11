@@ -29,7 +29,7 @@ public class BoolNode implements Node {
     }
 
     public String codeGeneration() {
-        return "push " + (val ? 1 : 0) + "\n";
+        return "push " + (val ? 1 : 0) + "\n"; //true è 1 false è 0
     }
 
 }  

@@ -3,8 +3,6 @@ push function0
 
 push function1
 
-push function2
-
 lhp
 lhp
 lhp
@@ -12,28 +10,14 @@ push 1
 add
 shp
 pop
-lhp
-lhp
-lhp
-push 2
-add
-shp
-push -5
 lfp
+push 999
+lfp
+lfp
+push -4
 add
 lw
-srv
-sra
-lrv
-lra
-sw
-lfp
-lfp
-lfp
-push -6
-add
-lw
-push function2
+push function1
 js
 print
 halt
@@ -45,9 +29,40 @@ lfp
 add
 sfp
 lra
-push 44
+push 1
+lfp
+add
+lw
+push 0
+beq label2
+push 0
+b label3
+label2:
+push 1
+label3:
+push 1
+beq label0
+lfp
+push 1
+lfp
+add
+lw
+push 1
+sub
+lfp
+lfp
+push -1
+add
+lw
+push function1
+js
+b label1
+label0:
+push 1
+label1:
 srv
 sra
+pop
 pop
 pop
 sfp
@@ -62,36 +77,40 @@ lfp
 add
 sfp
 lra
-push 555
-srv
-sra
-pop
-pop
-sfp
-lrv
-lra
-js
-
-function2:
-cfp
 push 1
 lfp
 add
-sfp
-lra
+lw
+push 0
+beq label6
+push 0
+b label7
+label6:
+push 1
+label7:
+push 1
+beq label4
 lfp
+push 1
+lfp
+add
+lw
+push 1
+sub
 lfp
 lfp
 push -1
 add
 lw
-push 0
-add
-lw
 push function0
 js
+b label5
+label4:
+push 0
+label5:
 srv
 sra
+pop
 pop
 pop
 sfp

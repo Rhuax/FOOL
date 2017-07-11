@@ -1,14 +1,20 @@
-class a{
-int get() 44;
-}
 
-class b implements a{
-int get() 555;
-}
+class c {
+bool iseven(int n)
+    if(n==0)
+    then{true}
+    else{
+    isodd(n-1)
+    }
+    ;
+    bool isodd(int n)
+        if(n==0)
+        then{false}
+        else{
+        iseven(n-1)
+        };
+};
 
-class c(a ogg )
-{
-int ooo() ogg.get();
-}
-;
-let b ii=new b; c y=new c(ii); c asdasd=new c(new a));in print(y.ooo());
+let
+    c oggetto=new c;
+    in print(oggetto.isodd(999));
