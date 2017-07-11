@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$">
+		<excludeFolder url="file://$MODULE_DIR$/out"/>
+	</contentEntry>
+	<lib name="antlr-4.7-complete.jar" scope="COMPILE">
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/antlr4-maven-plugin/src/main/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/antlr4-maven-plugin/src/test/java"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/runtime-testsuite/annotations/src"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/runtime-testsuite/processors/src"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/runtime-testsuite/test"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/runtime/Java/src"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/tool-testsuite/test"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/tool/playground"/>
+		<srcroot url="jar://$USER_HOME$/Downloads/antlr4-master.zip!/antlr4-master/tool/src"/>
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/src/lib/antlr-4.7-complete.jar!/"/>
+	</lib>
+</component>
